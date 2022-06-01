@@ -41,6 +41,7 @@ import Properties from '@/components/Properties.vue'
 import { useGraph } from '@/stores/graph'
 import { nanoid } from 'nanoid'
 import { options } from '@/stores/options'
+import { drawCycle } from '@/utils/ctx'
 
 const editMode = ref(false)
 const magnetMode = ref(false)
@@ -101,12 +102,27 @@ onMounted(() => {
 		})
 		magnetMode.value = false
 	})
+
+	network.on('beforeDrawing', function (ctx) {
+		var nodeId = 4
+		const bb = network.getBoundingBox(nodeId)
+		const color = 'blue'
+		drawCycle(ctx, bb, color)
+	})
 })
 
 const refresh = () => {
 	network.destroy()
 	const container = document.getElementById('mynetwork')!
 	network = new Network(container, data, options)
+
+	network.on('beforeDrawing', function (ctx) {
+		var nodeId = 4
+		const bb = network.getBoundingBox(nodeId)
+		const color = 'blue'
+		drawCycle(ctx, bb, color)
+	})
+
 	network.once('afterDrawing', function () {
 		network.setOptions({
 			layout: { hierarchical: { enabled: false } },

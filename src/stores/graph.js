@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { nod, edg } from '@/stores/dataGraph'
+import { nod, edg } from '@/stores/dataGraph.ts'
 
 export const useGraph = defineStore({
 	id: 'graph',

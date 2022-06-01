@@ -46,14 +46,14 @@ const initNetwork = (network: Network, magnetMode: boolean, showRadial: boolean)
 	network.on('deselectNode', function (params) {
 		net.nodeSelection = params.nodes
 	})
-	network.on('oncontext', (params) => {
-		params.event.preventDefault()
-		let coordClick = params.pointer.DOM
-		showRadial = true
-		let radial = document.getElementById('radial')!
-		radial.style.left = coordClick.x - 60 + 'px'
-		radial.style.top = coordClick.y - 60 + 'px'
-	})
+	// network.on('oncontext', (params) => {
+	// 	params.event.preventDefault()
+	// 	let coordClick = params.pointer.DOM
+	// 	showRadial = true
+	// 	let radial = document.getElementById('radial')!
+	// 	radial.style.left = coordClick.x - 60 + 'px'
+	// 	radial.style.top = coordClick.y - 60 + 'px'
+	// })
 
 	return { magnetMode, showRadial }
 }

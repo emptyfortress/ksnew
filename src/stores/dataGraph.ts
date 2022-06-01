@@ -1,26 +1,32 @@
-const tooltip = (id: number) => {
-	let temp
-	if (id === 0) {
-		temp = `<h4>test</h4>`
-	} else temp = ''
-	return temp
+function divInfo(list: number[]) {
+	const div = document.createElement('div')
+	div.classList.add('fio-pic')
+	let images = list.map((item) => {
+		return `<img src="/img/users/user${item}.svg" />
+		`
+	})
+	let imglist = images.join('')
+	div.innerHTML = imglist
+	return div
 }
 
-const element = document.createElement('div')
-element.style.backgroundColor = 'red'
-element.innerHTML = tooltip(0)
-
 const nod = [
-	{ id: 0, label: 'Старт', group: 'start', level: 0, title: element },
-	{ id: 1, label: 'Согласование с производством', group: 'box', level: 1 },
-	{ id: 2, label: 'Проверка у юристов', group: 'box', level: 2 },
-	{ id: 3, label: 'Финансовый отдел', group: 'box', level: 2 },
-	{ id: 4, label: 'Плановый отдел', group: 'finished', level: 2 },
-	{ id: 5, label: 'Консолидация', group: 'box', level: 3 },
-	{ id: 6, label: 'Сумма больше 1 млн ?', group: 'ext', level: 4, font: { align: 'left' } },
-	{ id: 7, label: 'Согласование с акционерами', group: 'box', level: 4 },
-	{ id: 8, label: 'Подписание', group: 'box', level: 5 },
-	{ id: 9, label: 'Регистрация в реестре', group: 'box', level: 6 },
+	{ id: 0, label: 'Старт', group: 'start', level: 0, title: divInfo([0]) },
+	{ id: 1, label: 'Согласование с производством', group: 'box', level: 1, title: divInfo([1, 2]) },
+	{ id: 2, label: 'Проверка у юристов', group: 'box', level: 2, title: divInfo([1, 2, 3]) },
+	{ id: 3, label: 'Финансовый отдел', group: 'box', level: 2, title: divInfo([4, 5]) },
+	{ id: 4, label: 'Плановый отдел', group: 'finished', level: 2, title: divInfo([1, 6, 2, 4]) },
+	{ id: 5, label: 'Консолидация', group: 'box', level: 3, title: divInfo([5]) },
+	{
+		id: 6,
+		label: 'Сумма больше 1 млн ?',
+		group: 'ext',
+		level: 4,
+		font: { align: 'left' },
+	},
+	{ id: 7, label: 'Согласование с акционерами', group: 'box', level: 4, title: divInfo([5, 4, 3]) },
+	{ id: 8, label: 'Подписание', group: 'box', level: 5, title: divInfo([6, 2]) },
+	{ id: 9, label: 'Регистрация в реестре', group: 'box', level: 6, title: divInfo([1]) },
 	{ id: 10, label: 'Завершение', group: 'stop', level: 7 },
 ]
 const edg = [

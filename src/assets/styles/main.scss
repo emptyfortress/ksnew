@@ -310,3 +310,12 @@ a:hover:not(.q-link) {
 .q-splitter__before {
 	overflow: visible;
 }
+
+.fio-pic {
+	img {
+		width: 36px;
+		border-radius: 64px;
+		border: 1px solid #808075;
+		background: #cce6f9;
+	}
+}

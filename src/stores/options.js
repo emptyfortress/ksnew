@@ -1,5 +1,6 @@
 const DIR = 'img/'
-const color = '#0096dc'
+// const color = '#0096dc'
+const color = 'blue'
 const green = '#95E3A4'
 const darkgreen = '#0A711E'
 

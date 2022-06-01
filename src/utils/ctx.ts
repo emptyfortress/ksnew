@@ -5,8 +5,6 @@ interface BoundingBox {
 	bottom: number
 }
 const drawCycle = (ctx: any, bb: BoundingBox, color: string) => {
-	// const color = 'blue'
-
 	ctx.lineWidth = 1
 	ctx.beginPath()
 	ctx.arc(bb.right, bb.top, 12, (Math.PI / 180) * 180, (Math.PI / 180) * 90, false)

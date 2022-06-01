@@ -42,6 +42,7 @@ import { useGraph } from '@/stores/graph'
 import { nanoid } from 'nanoid'
 import { options } from '@/stores/options'
 import { drawCycle } from '@/utils/ctx'
+import { initNetwork } from '@/utils/init'
 
 const editMode = ref(false)
 const magnetMode = ref(false)
@@ -62,53 +63,9 @@ const data = {
 
 onMounted(() => {
 	const container = document.getElementById('mynetwork')!
-
 	network = new Network(container, data, options)
 
-	network.on('selectNode', function (params) {
-		showRadial.value = false
-		net.nodeSelection = params.nodes
-		net.edgeSelection = params.edges
-		let temp = network.getSelection()
-		console.log(temp)
-	})
-	network.on('deselectNode', function (params) {
-		net.nodeSelection = params.nodes
-	})
-	network.on('oncontext', (params) => {
-		params.event.preventDefault()
-		let coordClick = params.pointer.DOM
-		showRadial.value = true
-		let radial = document.getElementById('radial')!
-		radial.style.left = coordClick.x - 60 + 'px'
-		radial.style.top = coordClick.y - 60 + 'px'
-	})
-
-	network.once('beforeDrawing', function () {
-		network.focus(5, {
-			scale: 5,
-		})
-		network.setOptions({
-			layout: { hierarchical: { enabled: true } },
-		})
-	})
-
-	network.once('afterDrawing', function () {
-		network.fit({
-			animation: true,
-		})
-		network.setOptions({
-			layout: { hierarchical: { enabled: false } },
-		})
-		magnetMode.value = false
-	})
-
-	network.on('beforeDrawing', function (ctx) {
-		var nodeId = 4
-		const bb = network.getBoundingBox(nodeId)
-		const color = 'blue'
-		drawCycle(ctx, bb, color)
-	})
+	initNetwork(network, magnetMode.value, showRadial.value)
 })
 
 const refresh = () => {
@@ -129,7 +86,6 @@ const refresh = () => {
 		})
 		magnetMode.value = false
 	})
-	console.log('change')
 }
 
 const toggleMagnet = () => {

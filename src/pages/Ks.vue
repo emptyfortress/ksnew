@@ -25,7 +25,8 @@
 					.toolbar(v-show="editMode")
 
 		template(v-slot:after)
-			Properties
+			.props
+				Panel
 
 	.save(v-if="editMode")
 		q-btn(color="primary" unelevated disabled) Сохранить маршрут
@@ -37,7 +38,7 @@ import { ref, onMounted } from 'vue'
 import { Network, DataSet } from 'vis-network/standalone' //this import supports types
 import SvgIcon from '@/components/SvgIcon.vue'
 import SvgRadial from '@/components/SvgRadial.vue'
-import Properties from '@/components/Properties.vue'
+import Panel from '@/components/Panel.vue'
 import { useGraph } from '@/stores/graph'
 import { nanoid } from 'nanoid'
 import { options } from '@/stores/options'
@@ -132,6 +133,7 @@ const closeRadial = () => {
 	width: 100%;
 	height: 100%;
 	position: relative;
+	padding-right: 0.25rem;
 	#mynetwork {
 		overflow: visible;
 		border: 1px solid var(--my-border-color);
@@ -147,6 +149,10 @@ const closeRadial = () => {
 				repeat;
 		}
 	}
+}
+.props {
+	padding-left: 0.25rem;
+	height: 100%;
 }
 #radial {
 	position: absolute;

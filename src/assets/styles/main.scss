@@ -202,6 +202,14 @@ a:hover:not(.q-link) {
 		text-transform: inherit;
 	}
 }
+.custom-expansions-item.flat .q-expansion-item--expanded {
+	margin: 0;
+	box-shadow: none;
+	border: none;
+	// .q-expansion-item__container {
+	// 	border-bottom: 1px solid var(--my-border-color);
+	// }
+}
 .q-btn svg {
 	margin: auto;
 }
@@ -318,4 +326,11 @@ a:hover:not(.q-link) {
 		border: 1px solid #808075;
 		background: #cce6f9;
 	}
+}
+
+.q-field--dense .q-field__append {
+	transform: translateY(5px); //triangle in select move down in dense
+}
+.fieldset {
+	border: 1px solid green;
 }

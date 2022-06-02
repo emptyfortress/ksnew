@@ -9,7 +9,11 @@ export const useGraph = defineStore({
 		nodes: nod,
 		edges: edg,
 	}),
-	getters: {},
+	getters: {
+		selected() {
+			return this.nodeSelection.length > 0
+		},
+	},
 
 	actions: {},
 })

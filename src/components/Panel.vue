@@ -7,14 +7,26 @@
 			q-tab(name="links" label="Переходы")
 		q-tab-panels(v-model="tab" animated)
 			q-tab-panel(name="props")
-					component(:is="Props")
+				component(:is="Props")
 			q-tab-panel(name="logs")
 				h2 logs
 			q-tab-panel(name="links")
 				h2 links
 	template(v-else)
+		q-card(flat)
+			q-card-section
+				.text-h6
+					q-icon(name="mdi-map-marker-outline" size="md").q-mr-md
+					span Информация по маршруту
+			q-card-section
+				q-markup-table(flat dense)
+					tbody
+						tr(v-for="row in table")
+							td {{ row.label }}
+							td(:class="{'text-bold' : row.bold}") {{ row.value }}
+			q-card-section
+				p Маршрут используется для согласования общих договоров с подписанием.
 		.empty Выберите узел или переход,<br>чтобы редактировать его свойства.
-		.info
 
 </template>
 
@@ -26,6 +38,13 @@ import Props from '@/components/Props.vue'
 const net = useGraph()
 
 const tab = ref('props')
+
+const table = [
+	{ label: 'Название', value: 'Согласование договоров общее (делопроизводство)', bold: true },
+	{ label: 'Создано', value: '2021-10-15' },
+	{ label: 'Автор', value: 'Орлов П.С.' },
+	{ label: 'Утверждено', value: 'Птичкина А.П.' },
+]
 </script>
 
 <style scoped lang="scss">
@@ -51,6 +70,8 @@ const tab = ref('props')
 	text-align: center;
 	margin-top: 1rem;
 	border-bottom: 1px solid var(--my-border-color);
+	border-top: 1px solid var(--my-border-color);
 	padding-bottom: 1rem;
+	padding-top: 1rem;
 }
 </style>

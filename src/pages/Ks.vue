@@ -66,6 +66,15 @@ onMounted(() => {
 	network = new Network(container, data, options)
 
 	initNetwork(network, magnetMode.value, showRadial.value)
+
+	network.on('oncontext', (params) => {
+		params.event.preventDefault()
+		let coordClick = params.pointer.DOM
+		showRadial.value = true
+		let radial = document.getElementById('radial')!
+		radial.style.left = coordClick.x - 60 + 'px'
+		radial.style.top = coordClick.y - 60 + 'px'
+	})
 })
 
 const refresh = () => {
@@ -220,6 +229,5 @@ const closeRadial = () => {
 	.q-btn {
 		margin-right: 4px;
 	}
-	// padding: 0.5rem;
 }
 </style>

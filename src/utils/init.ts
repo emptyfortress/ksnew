@@ -1,7 +1,6 @@
 import { Network, DataSet } from 'vis-network/standalone'
 import { drawCycle } from '@/utils/ctx'
 import { useGraph } from '@/stores/graph'
-import { options } from '@/stores/options'
 
 const initNetwork = (network: Network, magnetMode: boolean, showRadial: boolean) => {
 	const net = useGraph()
@@ -32,9 +31,9 @@ const initNetwork = (network: Network, magnetMode: boolean, showRadial: boolean)
 		drawCycle(ctx, bb, color)
 	})
 
-	network.on('hoverNode', function (params) {
-		console.log(params.node)
-	})
+	// network.on('hoverNode', function (params) {
+	// 	console.log(params.node)
+	// })
 
 	network.on('selectNode', function (params) {
 		showRadial = false
@@ -46,16 +45,8 @@ const initNetwork = (network: Network, magnetMode: boolean, showRadial: boolean)
 	network.on('deselectNode', function (params) {
 		net.nodeSelection = params.nodes
 	})
-	// network.on('oncontext', (params) => {
-	// 	params.event.preventDefault()
-	// 	let coordClick = params.pointer.DOM
-	// 	showRadial = true
-	// 	let radial = document.getElementById('radial')!
-	// 	radial.style.left = coordClick.x - 60 + 'px'
-	// 	radial.style.top = coordClick.y - 60 + 'px'
-	// })
 
-	return { magnetMode, showRadial }
+	return { magnetMode }
 }
 
 export { initNetwork }

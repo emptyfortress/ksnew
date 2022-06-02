@@ -11,7 +11,19 @@ q-list
 							q-img(src="@/assets/img/bt-condition.svg" v-if="tip === 'Условие'" height="32px" width="32px" fit="scale-down")
 							q-img(src="@/assets/img/bt-start.svg" v-if="tip === 'Старт'" height="32px" width="32px" fit="scale-down")
 							q-img(src="@/assets/img/bt-stop.svg" v-if="tip === 'Завершение'" height="32px" width="32px" fit="scale-down")
-						q-select(filled v-model="shablon" dense label="Шаблон этапа")
+						q-select(filled v-model="shablon" :options="shablonOptions" dense label="Шаблон этапа")
+				q-card-section
+					.grid
+						div
+							.label Отображаемое название
+							.editable(contenteditable) Плановый отдел
+						div
+							.label Полное название
+							.editable(contenteditable) Плановый отдел параллельный
+					q-card-section.q-px-none.column
+						q-checkbox(dense label="Разрешить исключать этап из маршрута" v-model="check1")
+						q-checkbox(dense label="Разрешить редактирование инициатору" v-model="check2" disable)
+						q-checkbox(dense label="Требуется конслолидация после завершения" v-model="check3")
 		.actionBt
 			q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="toggle")
 	.custom-expansions-item.flat
@@ -38,9 +50,21 @@ const toggle = () => {
 		: (panels.value = panels.value.map((item) => (item = false)))
 }
 
+const check1 = ref(false)
+const check2 = ref(true)
+const check3 = ref(false)
 const tip = ref('Этап')
+const name = ref('name')
 const shablon = ref('Простой')
 const tipOptions = ['Этап', 'Условие', 'Старт', 'Завершение']
+const shablonOptions = [
+	'Простой',
+	'Бухгалтерия',
+	'Плановый отдел',
+	'Шаблон 1',
+	'Шаблон 2',
+	'Шаблон 3',
+]
 
 const calcClass = computed(() => {
 	switch (tip.value) {
@@ -71,5 +95,24 @@ const calcClass = computed(() => {
 }
 .q-select {
 	min-width: 150px;
+}
+.label {
+	font-size: 0.7rem;
+	color: grey;
+}
+.editable {
+	border-bottom: 1px dotted var(--q-link);
+	border-radius: 2px;
+	&:focus {
+		outline: 2px solid orange;
+		outline-offset: 2px;
+		border: none;
+	}
+	// cursor: pointer;
+}
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 2rem;
 }
 </style>

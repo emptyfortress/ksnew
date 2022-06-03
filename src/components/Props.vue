@@ -4,22 +4,17 @@ q-list
 		q-expansion-item(v-model="panels[0]" expand-separator label="Общие" switch-toggle-side)
 			q-card(flat)
 				q-card-section
-					.row.justify-start
-						.tip
-							q-select(filled v-model="tip" dense :options="tipOptions" label="Тип")
-							.etap(v-if="tip === 'Этап'") этап
-							q-img(src="@/assets/img/bt-condition.svg" v-if="tip === 'Условие'" height="32px" width="32px" fit="scale-down")
-							q-img(src="@/assets/img/bt-start.svg" v-if="tip === 'Старт'" height="32px" width="32px" fit="scale-down")
-							q-img(src="@/assets/img/bt-stop.svg" v-if="tip === 'Завершение'" height="32px" width="32px" fit="scale-down")
-						q-select(filled v-model="shablon" :options="shablonOptions" dense label="Шаблон этапа")
+					.rowgap
+						component(:is="Selector" :val="tip" label="Тип этапа" :options="tipOptions" @click="setTip")
+						component(:is="Selector" :val="shablon" label="Шаблон этапа" :options="shablonOptions" @click="setShablon")
 				q-card-section
 					.grid
 						div
 							.label Отображаемое название
-							.editable(contenteditable) Плановый отдел
+							.editable.text-body1(contenteditable) Плановый отдел
 						div
 							.label Полное название
-							.editable(contenteditable) Плановый отдел параллельный
+							.editable.text-body1(contenteditable) Плановый отдел параллельный
 					q-card-section.q-px-none.column
 						q-checkbox(dense label="Разрешить исключать этап из маршрута" v-model="check1")
 						q-checkbox(dense label="Разрешить редактирование инициатору" v-model="check2" disable)
@@ -40,11 +35,12 @@ q-list
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { ref, computed } from 'vue'
+import Selector from '@/components/common/Selector.vue'
 
 let panels = ref([true, true, false, false])
 const toggle = () => {
-	const fal = (item) => item === false
+	const fal = (item: boolean) => item === false
 	panels.value.some(fal)
 		? (panels.value = panels.value.map((item) => (item = true)))
 		: (panels.value = panels.value.map((item) => (item = false)))
@@ -54,7 +50,6 @@ const check1 = ref(false)
 const check2 = ref(true)
 const check3 = ref(false)
 const tip = ref('Этап')
-const name = ref('name')
 const shablon = ref('Простой')
 const tipOptions = ['Этап', 'Условие', 'Старт', 'Завершение']
 const shablonOptions = [
@@ -66,14 +61,12 @@ const shablonOptions = [
 	'Шаблон 3',
 ]
 
-const calcClass = computed(() => {
-	switch (tip.value) {
-		case 'Этап':
-			return 'etap'
-		default:
-			return ''
-	}
-})
+const setTip = (e: string) => {
+	tip.value = e
+}
+const setShablon = (e: string) => {
+	shablon.value = e
+}
 </script>
 
 <style scoped lang="scss">
@@ -93,16 +86,13 @@ const calcClass = computed(() => {
 	border-radius: 4px;
 	cursor: pointer;
 }
-.q-select {
-	min-width: 150px;
-}
 .label {
 	font-size: 0.7rem;
 	color: grey;
 }
 .editable {
 	border-bottom: 1px dotted var(--q-link);
-	border-radius: 2px;
+	border-radius: 1px;
 	&:focus {
 		outline: 2px solid orange;
 		outline-offset: 2px;
@@ -113,6 +103,12 @@ const calcClass = computed(() => {
 .grid {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
+	gap: 2rem;
+}
+.rowgap {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 	gap: 2rem;
 }
 </style>

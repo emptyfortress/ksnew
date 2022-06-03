@@ -343,3 +343,8 @@ a:hover:not(.q-link) {
 	align-items: center;
 	text-align: center;
 }
+
+// editable selectors
+.q-menu.selector {
+	min-width: 150px;
+}

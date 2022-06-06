@@ -13,6 +13,12 @@ export const useGraph = defineStore({
 		selected() {
 			return this.nodeSelection.length > 0
 		},
+		number() {
+			return this.nodeSelection[0]
+		},
+		current() {
+			return this.nodes[this.number]
+		},
 	},
 
 	actions: {

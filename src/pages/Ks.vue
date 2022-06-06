@@ -6,15 +6,8 @@
 				#mynetwork(:class="{ 'edit' : editMode }")
 				#radial(v-show="showRadial" v-click-away="closeRadial")
 					SvgRadial
-				#rectmenu(v-show="showRect")
-					q-card(v-click-away="closeMenu")
-						q-list
-							q-item(clickable)
-								q-item-section {{net.nodeSelection}}
-							q-item(clickable)
-								q-item-section Показать доработки
-							q-item(clickable)
-								q-item-section Отрицательный исход
+				#rectmenu(v-show="showRect" v-click-away="closeMenu")
+					ContextMenu
 				.icons.top
 					q-btn(round unelevated @click="editMode = !editMode")
 						q-icon(name="mdi-pencil")
@@ -48,6 +41,8 @@ import { Network } from 'vis-network/standalone' //this import supports types
 import SvgIcon from '@/components/SvgIcon.vue'
 import SvgRadial from '@/components/SvgRadial.vue'
 import Panel from '@/components/Panel.vue'
+import ContextMenu from '@/components/ContextMenu.vue'
+
 import { useGraph } from '@/stores/graph'
 import { nanoid } from 'nanoid'
 import { options } from '@/stores/options'
@@ -86,7 +81,9 @@ onMounted(() => {
 		} else {
 			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
 			if (currentNode !== undefined) {
+				// 	const selection = []
 				net.setCurrentNode(currentNode)
+				// 	selection.push(currentNode)
 				let rect = document.getElementById('rectmenu')!
 				rect.style.left = coordClick.x + 5 + 'px'
 				rect.style.top = coordClick.y + 5 + 'px'
@@ -95,6 +92,13 @@ onMounted(() => {
 		}
 	})
 })
+
+const closeMenu = () => {
+	if (showRect.value === true) {
+		showRect.value = false
+		net.nodeSelection = []
+	}
+}
 
 const refresh = () => {
 	network.destroy()
@@ -139,11 +143,6 @@ const closeRadial = () => {
 		showRadial.value = false
 	}
 }
-const closeMenu = () => {
-	if (showRect.value === true) {
-		showRect.value = false
-	}
-}
 </script>
 
 <style scoped lang="scss">
@@ -157,6 +156,7 @@ const closeMenu = () => {
 	height: 100%;
 	position: relative;
 	padding-right: 0.25rem;
+	z-index: 1000;
 	#mynetwork {
 		position: relative;
 		overflow: visible;
@@ -177,6 +177,7 @@ const closeMenu = () => {
 .props {
 	padding-left: 0.25rem;
 	height: 100%;
+	z-index: -20;
 }
 #radial {
 	position: absolute;
@@ -264,6 +265,5 @@ const closeMenu = () => {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 100;
 }
 </style>

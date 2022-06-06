@@ -9,3 +9,10 @@ interface Edge {
 	from: number
 	to: number
 }
+
+interface MyNode {
+	id: number
+	label: string
+	group: string
+	level?: number
+}

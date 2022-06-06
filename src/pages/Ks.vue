@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { Network, DataSet } from 'vis-network/standalone' //this import supports types
+import { Network } from 'vis-network/standalone' //this import supports types
 import SvgIcon from '@/components/SvgIcon.vue'
 import SvgRadial from '@/components/SvgRadial.vue'
 import Panel from '@/components/Panel.vue'
@@ -52,14 +52,11 @@ const showRadial = ref(false)
 
 const net = useGraph()
 
-const nodes: DataSet<{ id: string | number; label: string; group: string }> = new DataSet(net.nodes)
-const edges = new DataSet(net.edges)
-
 let network: Network
 
 const data = {
-	nodes: nodes,
-	edges: edges,
+	nodes: net.nodes,
+	edges: net.edges,
 }
 
 onMounted(() => {

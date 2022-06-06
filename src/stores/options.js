@@ -23,7 +23,7 @@ const options = {
 		},
 	},
 	edges: {
-		smooth: { type: 'continuous', forceDirection: 'none' },
+		// smooth: { enabled: true, type: 'continuous', forceDirection: 'none' },
 		arrows: {
 			to: { enabled: true, scaleFactor: 1, type: 'arrow' },
 		},

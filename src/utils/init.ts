@@ -1,4 +1,4 @@
-import { Network, DataSet } from 'vis-network/standalone'
+import { Network } from 'vis-network/standalone'
 import { drawCycle } from '@/utils/ctx'
 import { useGraph } from '@/stores/graph'
 
@@ -7,7 +7,7 @@ const initNetwork = (network: Network, magnetMode: boolean, showRadial: boolean)
 
 	network.once('beforeDrawing', function () {
 		network.focus(5, {
-			scale: 5,
+			scale: 0.1,
 		})
 		network.setOptions({
 			layout: { hierarchical: { enabled: true } },

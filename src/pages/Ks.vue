@@ -4,8 +4,17 @@
 		template(v-slot:before)
 			.editor
 				#mynetwork(:class="{ 'edit' : editMode }")
-				#radial(v-show="editMode && showRadial" v-click-away="closeRadial")
+				#radial(v-show="showRadial" v-click-away="closeRadial")
 					SvgRadial
+				#rectmenu(v-show="showRect")
+					q-card(v-click-away="closeMenu")
+						q-list
+							q-item(clickable)
+								q-item-section {{net.nodeSelection}}
+							q-item(clickable)
+								q-item-section Показать доработки
+							q-item(clickable)
+								q-item-section Отрицательный исход
 				.icons.top
 					q-btn(round unelevated @click="editMode = !editMode")
 						q-icon(name="mdi-pencil")
@@ -49,6 +58,7 @@ const editMode = ref(false)
 const magnetMode = ref(false)
 const fullScreenMode = ref(false)
 const showRadial = ref(false)
+const showRect = ref(false)
 
 const net = useGraph()
 
@@ -63,15 +73,26 @@ onMounted(() => {
 	const container = document.getElementById('mynetwork')!
 	network = new Network(container, data, options)
 
-	initNetwork(network, magnetMode.value, showRadial.value)
+	initNetwork(network, magnetMode.value)
 
 	network.on('oncontext', (params) => {
 		params.event.preventDefault()
 		let coordClick = params.pointer.DOM
-		showRadial.value = true
-		let radial = document.getElementById('radial')!
-		radial.style.left = coordClick.x - 60 + 'px'
-		radial.style.top = coordClick.y - 60 + 'px'
+		if (editMode.value === true) {
+			showRadial.value = true
+			let radial = document.getElementById('radial')!
+			radial.style.left = coordClick.x - 60 + 'px'
+			radial.style.top = coordClick.y - 60 + 'px'
+		} else {
+			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
+			if (currentNode !== undefined) {
+				net.setCurrentNode(currentNode)
+				let rect = document.getElementById('rectmenu')!
+				rect.style.left = coordClick.x + 5 + 'px'
+				rect.style.top = coordClick.y + 5 + 'px'
+				showRect.value = true
+			}
+		}
 	})
 })
 
@@ -118,6 +139,11 @@ const closeRadial = () => {
 		showRadial.value = false
 	}
 }
+const closeMenu = () => {
+	if (showRect.value === true) {
+		showRect.value = false
+	}
+}
 </script>
 
 <style scoped lang="scss">
@@ -132,6 +158,7 @@ const closeRadial = () => {
 	position: relative;
 	padding-right: 0.25rem;
 	#mynetwork {
+		position: relative;
 		overflow: visible;
 		border: 1px solid var(--my-border-color);
 		width: 100%;
@@ -232,5 +259,11 @@ const closeRadial = () => {
 	.q-btn {
 		margin-right: 4px;
 	}
+}
+#rectmenu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
 }
 </style>

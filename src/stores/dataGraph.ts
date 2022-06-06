@@ -11,12 +11,18 @@ function divInfo(list: number[]) {
 }
 
 const nod = [
-	{ id: 0, label: 'Старт', group: 'start', level: 0, title: divInfo([0]) },
-	{ id: 1, label: 'Согласование с производством', group: 'box', level: 1, title: divInfo([1, 2]) },
-	{ id: 2, label: 'Проверка у юристов', group: 'box', level: 2, title: divInfo([1, 2, 3]) },
-	{ id: 3, label: 'Финансовый отдел', group: 'box', level: 2, title: divInfo([4, 5]) },
-	{ id: 4, label: 'Плановый отдел', group: 'finished', level: 2, title: divInfo([1, 6, 2, 4]) },
-	{ id: 5, label: 'Консолидация', group: 'box', level: 3, title: divInfo([5]) },
+	{ id: 0, label: 'Старт', group: 'start', level: 0, ttle: divInfo([0]) },
+	{ id: 1, label: 'Согласование с производством', group: 'box', level: 1, ttle: divInfo([1, 2]) },
+	{ id: 2, label: 'Проверка у юристов', group: 'box', level: 2, ttle: divInfo([1, 2, 3]) },
+	{ id: 3, label: 'Финансовый отдел', group: 'box', level: 2, ttle: divInfo([4, 5]) },
+	{
+		id: 4,
+		label: 'Плановый отдел',
+		group: 'finished',
+		level: 2,
+		ttle: divInfo([1, 6, 2, 4]),
+	},
+	{ id: 5, label: 'Консолидация', group: 'box', level: 3, ttle: divInfo([5]) },
 	{
 		id: 6,
 		label: 'Сумма больше 1 млн ?',
@@ -24,10 +30,13 @@ const nod = [
 		level: 4,
 		font: { align: 'left' },
 	},
-	{ id: 7, label: 'Согласование с акционерами', group: 'box', level: 4, title: divInfo([5, 4, 3]) },
-	{ id: 8, label: 'Подписание', group: 'box', level: 5, title: divInfo([6, 2]) },
-	{ id: 9, label: 'Регистрация в реестре', group: 'box', level: 6, title: divInfo([1]) },
+	{ id: 7, label: 'Согласование с акционерами', group: 'box', level: 4, ttle: divInfo([5, 4, 3]) },
+	{ id: 8, label: 'Подписание', group: 'box', level: 5, ttle: divInfo([6, 2]) },
+	{ id: 9, label: 'Регистрация в реестре', group: 'box', level: 6, ttle: divInfo([1]) },
 	{ id: 10, label: 'Завершение', group: 'stop', level: 7 },
+	{ id: 11, label: 'one', cid: 1, level: 3 },
+	{ id: 12, label: 'two', cid: 1, level: 3 },
+	{ id: 13, label: 'three', cid: 1, level: 3 },
 ]
 const edg = [
 	{ id: undefined, from: 0, to: 1 },
@@ -39,10 +48,14 @@ const edg = [
 	{ from: 4, to: 5 },
 	{ from: 5, to: 6 },
 	{ from: 7, to: 8 },
-	{ from: 6, to: 7, label: 'да', title: 'да' },
-	{ from: 6, to: 8, label: 'нет', title: 'нет' },
+	{ from: 6, to: 7, label: 'да', ttle: 'да' },
+	{ from: 6, to: 8, label: 'нет', ttle: 'нет' },
 	{ from: 8, to: 9 },
 	{ from: 9, to: 10 },
+	{ from: 4, to: 11 },
+	{ from: 11, to: 12 },
+	{ from: 12, to: 13 },
+	{ from: 13, to: 4 },
 ]
 
 export { nod, edg }

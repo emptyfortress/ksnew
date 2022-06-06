@@ -15,5 +15,10 @@ export const useGraph = defineStore({
 		},
 	},
 
-	actions: {},
+	actions: {
+		setCurrentNode(e) {
+			this.nodeSelection = []
+			this.nodeSelection.push(e)
+		},
+	},
 })

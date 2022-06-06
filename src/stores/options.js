@@ -5,13 +5,13 @@ const green = '#95E3A4'
 const darkgreen = '#0A711E'
 
 const options = {
-	interaction: { hover: true, tooltipDelay: 0 },
+	interaction: { hover: true, tooltipDelay: 500 },
 	physics: { enabled: false },
 	layout: {
-		improvedLayout: true,
+		improvedLayout: false,
 		hierarchical: {
 			enabled: true,
-			levelSeparation: 90,
+			levelSeparation: 70,
 			nodeSpacing: 170,
 			treeSpacing: 200,
 			blockShifting: true,
@@ -23,7 +23,7 @@ const options = {
 		},
 	},
 	edges: {
-		// smooth: { enabled: true, type: 'continuous', forceDirection: 'none' },
+		smooth: { enabled: true, type: 'continuous', forceDirection: 'none' },
 		arrows: {
 			to: { enabled: true, scaleFactor: 1, type: 'arrow' },
 		},
@@ -82,6 +82,11 @@ const options = {
 				border: darkgreen,
 				background: green,
 			},
+		},
+		cluster: {
+			shape: 'image',
+			image: DIR + 'cluster.svg',
+			size: 4,
 		},
 	},
 }

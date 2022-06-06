@@ -2,7 +2,7 @@ import { Network } from 'vis-network/standalone'
 import { drawCycle } from '@/utils/ctx'
 import { useGraph } from '@/stores/graph'
 
-const initNetwork = (network: Network, magnetMode: boolean, showRadial: boolean) => {
+const initNetwork = (network: Network, magnetMode: boolean) => {
 	const net = useGraph()
 
 	network.once('beforeDrawing', function () {
@@ -22,6 +22,19 @@ const initNetwork = (network: Network, magnetMode: boolean, showRadial: boolean)
 			layout: { hierarchical: { enabled: false } },
 		})
 		magnetMode = false
+
+		// var clusterOptions = {
+		// 	joinCondition: function (nodeOptions: any) {
+		// 		return nodeOptions.cid === 1
+		// 	},
+		// 	clusterNodeProperties: {
+		// 		id: 'cidCluster',
+		// 		borderWidth: 1,
+		// 		group: 'cluster',
+		// 		level: 2,
+		// 	},
+		// }
+		// network.cluster(clusterOptions)
 	})
 
 	network.on('beforeDrawing', function (ctx) {
@@ -36,14 +49,13 @@ const initNetwork = (network: Network, magnetMode: boolean, showRadial: boolean)
 	// })
 
 	network.on('selectNode', function (params) {
-		showRadial = false
 		net.nodeSelection = params.nodes
 		net.edgeSelection = params.edges
-		let temp = network.getSelection()
-		console.log(temp)
 	})
+
 	network.on('deselectNode', function (params) {
-		net.nodeSelection = params.nodes
+		console.log(params.nodes)
+		net.nodeSelection = []
 	})
 
 	return { magnetMode }

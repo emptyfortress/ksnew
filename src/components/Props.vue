@@ -22,14 +22,22 @@ q-list
 		.actionBt
 			q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="toggle")
 	.custom-expansions-item.flat
-		q-expansion-item(v-model="panels[1]" expand-separator label="Список согласующих" switch-toggle-side)
+		q-expansion-item(v-model="panels[1]" expand-separator label="Условие старта" switch-toggle-side)
+			q-card
+				q-list(dense)
+					q-item And: { Этап 3 } завершился положительно
+					q-item And: { Этап 2 } завершился нейтрально
+					q-item Or: { Этап 2 } завершился отрицательно
+					q-item Not: { Этап 2 } завершился отрицательно
+	.custom-expansions-item.flat
+		q-expansion-item(v-model="panels[2]" expand-separator label="Список согласующих" switch-toggle-side)
 			q-card
 				q-card-section Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique. Augue neque, gravida in fermentum et, sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor.
 	.custom-expansions-item.flat
-		q-expansion-item(v-model="panels[2]" expand-separator label="Служебные" switch-toggle-side)
+		q-expansion-item(v-model="panels[3]" expand-separator label="Служебные" switch-toggle-side)
 			q-card
 				q-card-section Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique. Augue neque, gravida in fermentum et, sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor.
-		q-expansion-item(v-model="panels[3]" expand-separator label="Связанные маршруты" switch-toggle-side)
+		q-expansion-item(v-model="panels[4]" expand-separator label="Связанные маршруты" switch-toggle-side)
 			q-card
 				q-card-section Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique. Augue neque, gravida in fermentum et, sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor.
 </template>
@@ -38,7 +46,7 @@ q-list
 import { ref, computed } from 'vue'
 import Selector from '@/components/common/Selector.vue'
 
-let panels = ref([true, true, false, false])
+let panels = ref([true, true, false, false, false])
 const toggle = () => {
 	const fal = (item: boolean) => item === false
 	panels.value.some(fal)
@@ -109,6 +117,7 @@ const setShablon = (e: string) => {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	flex-wrap: wrap;
 	gap: 2rem;
 }
 </style>

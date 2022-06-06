@@ -30,6 +30,10 @@ export const router = createRouter({
 			component: Ks,
 			meta: { transition: 'slide-left', title: 'Конструктор', requiresAuth: false },
 		},
+		{
+			path: '/:pathMatch(.*)*',
+			redirect: '/ks',
+		},
 	],
 })
 

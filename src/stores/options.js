@@ -23,7 +23,7 @@ const options = {
 		},
 	},
 	edges: {
-		smooth: { enabled: true, type: 'continuous', forceDirection: 'none' },
+		smooth: false,
 		arrows: {
 			to: { enabled: true, scaleFactor: 1, type: 'arrow' },
 		},
@@ -35,13 +35,14 @@ const options = {
 			x: 2,
 			y: 2,
 		},
-		chosen: {
-			edge: function (values) {
-				values.shadowSize = 6
-				values.width = 3
-				values.shadowColor = 'rgba(0,0,0,.3)'
-			},
-		},
+		// chosen: true,
+		// chosen: {
+		// 	edge: function (values) {
+		// 		values.shadowSize = 6
+		// 		values.width = 3
+		// 		values.shadowColor = 'rgba(0,0,0,.3)'
+		// 	},
+		// },
 	},
 	nodes: {
 		shadow: {

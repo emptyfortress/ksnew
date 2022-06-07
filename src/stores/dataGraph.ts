@@ -1,13 +1,26 @@
-function divInfo(list: number[]) {
-	const div = document.createElement('div')
-	div.classList.add('fio-pic')
-	let images = list.map((item) => {
-		return `<img src="/img/users/user${item}.svg" />
-		`
-	})
-	let imglist = images.join('')
-	div.innerHTML = imglist
-	return div
+// import { level } from '@/utils/node'
+
+import { useGraph } from '@/stores/graph'
+
+const mystore = () => {
+	return useGraph()
+}
+
+// function divInfo(list: number[]) {
+// 	const div = document.createElement('div')
+// 	div.classList.add('fio-pic')
+// 	let images = list.map((item) => {
+// 		return `<img src="/img/users/user${item}.svg" />
+// 		`
+// 	})
+// 	let imglist = images.join('')
+// 	div.innerHTML = imglist
+// 	return div
+// }
+function hid(node: number) {
+	if (mystore.nodeSelection[0] === node) {
+		return false
+	} else return true
 }
 
 const nod = [
@@ -33,9 +46,9 @@ const nod = [
 	{ id: 8, label: 'Подписание', group: 'box', level: 5 },
 	{ id: 9, label: 'Регистрация в реестре', group: 'box', level: 6 },
 	{ id: 10, label: 'Завершение', group: 'stop', level: 7 },
-	{ id: 11, label: 'one', cid: 1, level: 3 },
-	{ id: 12, label: 'two', cid: 1, level: 3 },
-	{ id: 13, label: 'three', cid: 1, level: 3 },
+	{ id: 11, label: 'one', level: 3, hidden: hid(4) },
+	{ id: 12, label: 'two', level: 3, hidden: hid(4) },
+	{ id: 13, label: 'three', level: 3, hidden: hid(4) },
 ]
 const edg = [
 	{ id: undefined, from: 0, to: 1 },

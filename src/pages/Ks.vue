@@ -42,6 +42,7 @@ import SvgIcon from '@/components/SvgIcon.vue'
 import SvgRadial from '@/components/SvgRadial.vue'
 import Panel from '@/components/Panel.vue'
 import ContextMenu from '@/components/ContextMenu.vue'
+import { nod, edg } from '@/stores/dataGraph'
 
 import { useGraph } from '@/stores/graph'
 import { nanoid } from 'nanoid'
@@ -60,8 +61,8 @@ const net = useGraph()
 let network: Network
 
 const data = {
-	nodes: net.nodes,
-	edges: net.edges,
+	nodes: nod,
+	edges: edg,
 }
 
 onMounted(() => {

@@ -2,7 +2,7 @@
 q-card
 	q-list
 		q-item(clickable)
-			q-item-section {{net.current}}
+			q-item-section {{net.nodeSelection}}
 		q-item(clickable)
 			q-item-section Показать доработки
 		q-item(clickable)
@@ -13,7 +13,7 @@ q-card
 import { useGraph } from '@/stores/graph'
 
 const net = useGraph()
-const nodes = net.nodes
+// const nodes = net.nodes
 
 // const current = computed(() => {
 // 	return nodes[net.nodeSelection].label

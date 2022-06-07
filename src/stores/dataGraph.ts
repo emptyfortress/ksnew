@@ -18,9 +18,7 @@ const mystore = () => {
 // 	return div
 // }
 function hid(node: number) {
-	if (mystore.nodeSelection[0] === node) {
-		return false
-	} else return true
+	return false
 }
 
 const nod = [

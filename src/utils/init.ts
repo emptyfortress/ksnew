@@ -49,13 +49,16 @@ const initNetwork = (network: Network, magnetMode: boolean) => {
 	// })
 
 	network.on('selectNode', function (params) {
-		net.nodeSelection = params.nodes
+		// console.log(typeof params.nodes[0])
+		// console.log(network.getSelection())
+		net.nodeSelection = params.nodes[0]
 		net.edgeSelection = params.edges
 	})
 
 	network.on('deselectNode', function (params) {
-		console.log(params.nodes)
-		net.nodeSelection = []
+		// console.log(params.nodes)
+		net.nodeSelection = 1000
+		console.log(net.nodeSelection)
 	})
 
 	return { magnetMode }

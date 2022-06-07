@@ -4,18 +4,18 @@ import { defineStore } from 'pinia'
 export const useGraph = defineStore({
 	id: 'graph',
 	state: () => ({
-		nodeSelection: [],
+		nodeSelection: 1000,
 		edgeSelection: [],
 		// nodes: nod,
 		// edges: edg,
 	}),
 	getters: {
 		selected() {
-			return this.nodeSelection.length > 0
+			return this.nodeSelection !== 1000
 		},
-		number() {
-			return this.nodeSelection[0]
-		},
+		// number() {
+		// 	return this.nodeSelection[0]
+		// },
 		// current() {
 		// 	return this.nodes[this.number]
 		// },
@@ -23,8 +23,8 @@ export const useGraph = defineStore({
 
 	actions: {
 		setCurrentNode(e) {
-			this.nodeSelection = []
-			this.nodeSelection.push(e)
+			this.nodeSelection = e
+			// this.nodeSelection.push(e)
 		},
 	},
 })

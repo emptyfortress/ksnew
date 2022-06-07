@@ -23,7 +23,7 @@
 				.icons.cog
 					q-btn(round unelevated )
 						SvgIcon(name="sliders-vertical")
-				transition(name="slide-left")
+			transition(name="slide-left")
 					.toolbar(v-show="editMode")
 
 		template(v-slot:after)
@@ -82,6 +82,7 @@ onMounted(() => {
 		} else {
 			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
 			if (currentNode !== undefined) {
+				console.log(currentNode)
 				// 	const selection = []
 				net.setCurrentNode(currentNode)
 				// 	selection.push(currentNode)
@@ -97,7 +98,7 @@ onMounted(() => {
 const closeMenu = () => {
 	if (showRect.value === true) {
 		showRect.value = false
-		net.nodeSelection = []
+		net.nodeSelection = 1000
 	}
 }
 

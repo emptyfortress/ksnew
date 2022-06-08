@@ -108,7 +108,7 @@ const nodes = [
 		repeatMode: 0,
 		startConditionType: 3,
 		group: 'and',
-		level: 1.7,
+		level: 2,
 	},
 	{
 		id: 10,
@@ -120,7 +120,7 @@ const nodes = [
 		repeatMode: 0,
 		startConditionType: 3,
 		group: 'ori',
-		level: 1.7,
+		level: 2,
 	},
 	{
 		id: 11,

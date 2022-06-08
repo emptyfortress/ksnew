@@ -56,6 +56,7 @@ const options = {
 				values.shadowSize = 8
 				values.borderWidth = 2
 			},
+			label: true,
 		},
 	},
 	groups: {

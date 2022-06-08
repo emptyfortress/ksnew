@@ -6,13 +6,14 @@ const darkgreen = '#0A711E'
 
 const options = {
 	interaction: { hover: true, tooltipDelay: 0 },
-	physics: { barnesHut: { gravitationalConstant: 0, centralGravity: 0, springConstant: 0 } },
+	// physics: { enabled: true },
 	physics: {
 		barnesHut: {
 			centralGravity: 0,
-			springLength: 175,
+			springLength: 75,
 			springConstant: 0.03,
-			damping: 0.3,
+			damping: 0.5,
+			gravitationalConstant: -4000,
 		},
 		minVelocity: 0.75,
 	},
@@ -45,21 +46,15 @@ const options = {
 			y: 2,
 		},
 		chosen: true,
-		// chosen: {
-		// 	edge: function (values) {
-		// 		values.shadowSize = 6
-		// 		values.width = 3
-		// 		values.shadowColor = 'rgba(0,0,0,.3)'
-		// 	},
-		// },
 	},
 	nodes: {
 		shadow: {
 			enabled: false,
 		},
 		chosen: {
-			node: function (values) {
-				;(values.shadowSize = 8), (values.borderWidth = 2)
+			node: (values) => {
+				values.shadowSize = 8
+				values.borderWidth = 2
 			},
 		},
 	},

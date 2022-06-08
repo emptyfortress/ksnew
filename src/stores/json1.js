@@ -2,7 +2,6 @@ const nodes = [
 	{
 		id: 0,
 		label: 'Старт',
-		fixed: true,
 		first: true,
 		last: false,
 		taskSendingMode: 1,
@@ -81,7 +80,6 @@ const nodes = [
 		id: 7,
 		label: 'Доработка',
 		hidden: true,
-		fixed: true,
 		first: false,
 		last: false,
 		taskSendingMode: 0,
@@ -93,7 +91,6 @@ const nodes = [
 	{
 		id: 8,
 		label: 'Завершение',
-		fixed: true,
 		first: false,
 		last: true,
 		taskSendingMode: 0,

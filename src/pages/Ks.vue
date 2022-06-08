@@ -7,7 +7,7 @@
 				#radial(v-show="showRadial" v-click-away="closeRadial")
 					SvgRadial
 				#rectmenu(v-show="showRect" v-click-away="closeMenu")
-					ContextMenu(@neutral="showNeutral")
+					ContextMenu(@toggle="toggleDetails")
 				.icons.legend
 					q-btn(round unelevated @click="showInfo = !showInfo")
 						q-icon(name="mdi-close" v-if="showInfo")
@@ -43,14 +43,14 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { Network, DataSet } from 'vis-network/standalone' //this import supports types
+import { Network } from 'vis-network/standalone' //this import supports types
+
 import SvgIcon from '@/components/SvgIcon.vue'
 import SvgRadial from '@/components/SvgRadial.vue'
 import Panel from '@/components/Panel.vue'
 import ContextMenu from '@/components/ContextMenu.vue'
 import Legend from '@/components/Legend.vue'
 
-// import { nod, edg } from '@/stores/dataGraph'
 import { nodes as nod1, edges as edg1 } from '@/stores/json1'
 import { nodes as nod, edges as edg } from '@/stores/json'
 
@@ -58,11 +58,11 @@ import { useGraph } from '@/stores/graph'
 import { useInfo } from '@/stores/info'
 import { nanoid } from 'nanoid'
 import { options } from '@/stores/options'
-import { drawCycle } from '@/utils/ctx'
+// import { drawCycle } from '@/utils/ctx'
 import { initNetwork } from '@/utils/init'
 
 const editMode = ref(false)
-const magnetMode = ref(false)
+const magnetMode = ref(true)
 const fullScreenMode = ref(false)
 const showRadial = ref(false)
 const showRect = ref(false)
@@ -73,22 +73,22 @@ const info = useInfo()
 
 let network: Network
 
-let nodes = new DataSet(nod1)
-let edges = new DataSet(edg1)
+const detail = ref(true)
 
+const data1 = {
+	nodes: nod1,
+	edges: edg1,
+}
 const data = {
-	nodes: nodes,
-	edges: edges,
+	nodes: nod,
+	edges: edg,
 }
 
 onMounted(() => {
 	const container = document.getElementById('mynetwork')!
 	network = new Network(container, data, options)
 
-	initNetwork(network, magnetMode.value)
-
-	toggleMagnet()
-	toggleMagnet()
+	initNetwork(network)
 
 	network.on('oncontext', (params) => {
 		params.event.preventDefault()
@@ -126,25 +126,35 @@ const closeMenu = () => {
 const refresh = () => {
 	network.destroy()
 	const container = document.getElementById('mynetwork')!
-	network = new Network(container, data, options)
-	toggleMagnet()
-	toggleMagnet()
+	network = new Network(container, data1, options)
+	if (detail.value === true) {
+		network.setData(data)
+	}
 
-	// network.on('beforeDrawing', function (ctx) {
-	// 	var nodeId = 4
-	// 	const bb = network.getBoundingBox(nodeId)
-	// 	const color = 'blue'
-	// 	drawCycle(ctx, bb, color)
-	// })
-
-	// network.once('afterDrawing', () => {
-	// 	network.setOptions({
-	// 		layout: { hierarchical: { enabled: false } },
-	// 		physics: { barnesHut: { gravitationalConstant: 0, centralGravity: 0, springConstant: 0 } },
-	// 	})
-	// 	console.log('set')
-	// })
-	// magnetMode.value = false
+	network.on('oncontext', (params) => {
+		params.event.preventDefault()
+		let coordClick = params.pointer.DOM
+		if (editMode.value === true) {
+			showRadial.value = true
+			let radial = document.getElementById('radial')!
+			radial.style.left = coordClick.x - 60 + 'px'
+			radial.style.top = coordClick.y - 60 + 'px'
+		} else {
+			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
+			if (currentNode !== undefined) {
+				net.setCurrentNode(currentNode)
+				let rect = document.getElementById('rectmenu')!
+				rect.style.left = coordClick.x + 5 + 'px'
+				rect.style.top = coordClick.y + 5 + 'px'
+				showRect.value = true
+			} else {
+				let rect = document.getElementById('rectmenu')!
+				rect.style.left = coordClick.x + 5 + 'px'
+				rect.style.top = coordClick.y + 5 + 'px'
+				showRect.value = true
+			}
+		}
+	})
 }
 
 const toggleMagnet = () => {
@@ -153,13 +163,13 @@ const toggleMagnet = () => {
 			physics: { enabled: false },
 			layout: { hierarchical: { enabled: false } },
 		})
-		magnetMode.value = false
+		return (magnetMode.value = false)
 	} else {
 		network.setOptions({
 			physics: { enabled: true },
 			layout: { hierarchical: { enabled: false } },
 		})
-		magnetMode.value = true
+		return (magnetMode.value = true)
 	}
 }
 
@@ -170,36 +180,16 @@ const closeRadial = () => {
 		showRadial.value = false
 	}
 }
-// const marshrut = computed(() => {
-// 	if()
-// })
 
-const showNeutral = () => {
-	// nodes.clear()
-	// edges.clear()
+const toggleDetails = () => {
 	showRect.value = false
-	network.setOptions({
-		physics: {
-			enabled: false,
-		},
-		layout: {
-			hierarchical: {
-				enabled: true,
-			},
-		},
-	})
-	nodes.add([
-		{ id: 101, label: 'one', group: 'box', level: 3 },
-		{ id: 111, label: 'two', group: 'box', level: 3 },
-		{ id: 121, label: 'two', group: 'box', level: 2 },
-	])
-	edges.add([
-		{ id: undefined, from: 4, to: 101 },
-		{ from: 101, to: 111 },
-		{ from: 111, to: 121 },
-		{ from: 121, to: 4 },
-	])
-	toggleMagnet()
+	if (detail.value === true) {
+		network.setData(data1)
+		detail.value = false
+	} else {
+		network.setData(data)
+		detail.value = true
+	}
 }
 </script>
 

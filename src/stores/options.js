@@ -6,13 +6,22 @@ const darkgreen = '#0A711E'
 
 const options = {
 	interaction: { hover: true, tooltipDelay: 0 },
-	physics: { enabled: true },
+	physics: { barnesHut: { gravitationalConstant: 0, centralGravity: 0, springConstant: 0 } },
+	physics: {
+		barnesHut: {
+			centralGravity: 0,
+			springLength: 175,
+			springConstant: 0.03,
+			damping: 0.3,
+		},
+		minVelocity: 0.75,
+	},
 	layout: {
-		improvedLayout: false,
+		improvedLayout: true,
 		hierarchical: {
 			enabled: true,
-			levelSeparation: 80,
-			nodeSpacing: 120,
+			levelSeparation: 70,
+			nodeSpacing: 90,
 			treeSpacing: 100,
 			blockShifting: true,
 			edgeMinimization: true,

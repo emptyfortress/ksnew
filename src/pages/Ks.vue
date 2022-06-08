@@ -129,12 +129,14 @@ const refresh = () => {
 	// 	drawCycle(ctx, bb, color)
 	// })
 
-	network.once('afterDrawing', function () {
-		network.setOptions({
-			layout: { hierarchical: { enabled: false } },
-		})
-		magnetMode.value = false
-	})
+	// network.once('afterDrawing', () => {
+	// 	network.setOptions({
+	// 		layout: { hierarchical: { enabled: false } },
+	// 		physics: { barnesHut: { gravitationalConstant: 0, centralGravity: 0, springConstant: 0 } },
+	// 	})
+	// 	console.log('set')
+	// })
+	// magnetMode.value = false
 }
 
 const toggleMagnet = () => {

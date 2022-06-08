@@ -44,7 +44,7 @@ const options = {
 			x: 2,
 			y: 2,
 		},
-		// chosen: true,
+		chosen: true,
 		// chosen: {
 		// 	edge: function (values) {
 		// 		values.shadowSize = 6
@@ -57,11 +57,11 @@ const options = {
 		shadow: {
 			enabled: false,
 		},
-		// chosen: {
-		// 	node: function (values) {
-		// 		;(values.shadowSize = 8), (values.borderWidth = 2)
-		// 	},
-		// },
+		chosen: {
+			node: function (values) {
+				;(values.shadowSize = 8), (values.borderWidth = 2)
+			},
+		},
 	},
 	groups: {
 		box: {

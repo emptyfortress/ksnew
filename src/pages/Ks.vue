@@ -51,6 +51,7 @@ import ContextMenu from '@/components/ContextMenu.vue'
 import Legend from '@/components/Legend.vue'
 
 // import { nod, edg } from '@/stores/dataGraph'
+import { nodes as nod1, edges as edg1 } from '@/stores/json1'
 import { nodes as nod, edges as edg } from '@/stores/json'
 
 import { useGraph } from '@/stores/graph'
@@ -72,8 +73,8 @@ const info = useInfo()
 
 let network: Network
 
-let nodes = new DataSet(nod)
-let edges = new DataSet(edg)
+let nodes = new DataSet(nod1)
+let edges = new DataSet(edg1)
 
 const data = {
 	nodes: nodes,
@@ -86,6 +87,9 @@ onMounted(() => {
 
 	initNetwork(network, magnetMode.value)
 
+	toggleMagnet()
+	toggleMagnet()
+
 	network.on('oncontext', (params) => {
 		params.event.preventDefault()
 		let coordClick = params.pointer.DOM
@@ -97,10 +101,12 @@ onMounted(() => {
 		} else {
 			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
 			if (currentNode !== undefined) {
-				console.log(currentNode)
-				// 	const selection = []
 				net.setCurrentNode(currentNode)
-				// 	selection.push(currentNode)
+				let rect = document.getElementById('rectmenu')!
+				rect.style.left = coordClick.x + 5 + 'px'
+				rect.style.top = coordClick.y + 5 + 'px'
+				showRect.value = true
+			} else {
 				let rect = document.getElementById('rectmenu')!
 				rect.style.left = coordClick.x + 5 + 'px'
 				rect.style.top = coordClick.y + 5 + 'px'
@@ -121,6 +127,8 @@ const refresh = () => {
 	network.destroy()
 	const container = document.getElementById('mynetwork')!
 	network = new Network(container, data, options)
+	toggleMagnet()
+	toggleMagnet()
 
 	// network.on('beforeDrawing', function (ctx) {
 	// 	var nodeId = 4

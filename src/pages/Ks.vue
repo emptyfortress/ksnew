@@ -7,7 +7,11 @@
 				#radial(v-show="showRadial" v-click-away="closeRadial")
 					SvgRadial
 				#rectmenu(v-show="showRect" v-click-away="closeMenu")
-					ContextMenu
+					ContextMenu(@neutral="showNeutral")
+				.icons.legend
+					q-btn(round unelevated @click="showInfo = !showInfo")
+						q-icon(name="mdi-close" v-if="showInfo")
+						q-icon(name="mdi-help-circle-outline" v-else)
 				.icons.top
 					q-btn(round unelevated @click="editMode = !editMode")
 						q-icon(name="mdi-pencil")
@@ -21,10 +25,12 @@
 					q-btn(round unelevated @click="refresh")
 						SvgIcon(name="refresh")
 				.icons.cog
-					q-btn(round unelevated )
+					q-btn(round unelevated @click="info.toggle")
 						SvgIcon(name="sliders-vertical")
-			transition(name="slide-left")
+				transition(name="slide-left")
 					.toolbar(v-show="editMode")
+				transition(name="slide-left")
+					Legend(v-show="showInfo").legend
 
 		template(v-slot:after)
 			.props
@@ -37,14 +43,18 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { Network } from 'vis-network/standalone' //this import supports types
+import { Network, DataSet } from 'vis-network/standalone' //this import supports types
 import SvgIcon from '@/components/SvgIcon.vue'
 import SvgRadial from '@/components/SvgRadial.vue'
 import Panel from '@/components/Panel.vue'
 import ContextMenu from '@/components/ContextMenu.vue'
-import { nod, edg } from '@/stores/dataGraph'
+import Legend from '@/components/Legend.vue'
+
+// import { nod, edg } from '@/stores/dataGraph'
+import { nodes as nod, edges as edg } from '@/stores/json'
 
 import { useGraph } from '@/stores/graph'
+import { useInfo } from '@/stores/info'
 import { nanoid } from 'nanoid'
 import { options } from '@/stores/options'
 import { drawCycle } from '@/utils/ctx'
@@ -55,14 +65,19 @@ const magnetMode = ref(false)
 const fullScreenMode = ref(false)
 const showRadial = ref(false)
 const showRect = ref(false)
+const showInfo = ref(false)
 
 const net = useGraph()
+const info = useInfo()
 
 let network: Network
 
+let nodes = new DataSet(nod)
+let edges = new DataSet(edg)
+
 const data = {
-	nodes: nod,
-	edges: edg,
+	nodes: nodes,
+	edges: edges,
 }
 
 onMounted(() => {
@@ -107,12 +122,12 @@ const refresh = () => {
 	const container = document.getElementById('mynetwork')!
 	network = new Network(container, data, options)
 
-	network.on('beforeDrawing', function (ctx) {
-		var nodeId = 4
-		const bb = network.getBoundingBox(nodeId)
-		const color = 'blue'
-		drawCycle(ctx, bb, color)
-	})
+	// network.on('beforeDrawing', function (ctx) {
+	// 	var nodeId = 4
+	// 	const bb = network.getBoundingBox(nodeId)
+	// 	const color = 'blue'
+	// 	drawCycle(ctx, bb, color)
+	// })
 
 	network.once('afterDrawing', function () {
 		network.setOptions({
@@ -125,13 +140,13 @@ const refresh = () => {
 const toggleMagnet = () => {
 	if (magnetMode.value == true) {
 		network.setOptions({
-			physics: false,
+			physics: { enabled: false },
 			layout: { hierarchical: { enabled: false } },
 		})
 		magnetMode.value = false
 	} else {
 		network.setOptions({
-			physics: true,
+			physics: { enabled: true },
 			layout: { hierarchical: { enabled: false } },
 		})
 		magnetMode.value = true
@@ -144,6 +159,37 @@ const closeRadial = () => {
 	if (showRadial.value === true) {
 		showRadial.value = false
 	}
+}
+// const marshrut = computed(() => {
+// 	if()
+// })
+
+const showNeutral = () => {
+	// nodes.clear()
+	// edges.clear()
+	showRect.value = false
+	network.setOptions({
+		physics: {
+			enabled: false,
+		},
+		layout: {
+			hierarchical: {
+				enabled: true,
+			},
+		},
+	})
+	nodes.add([
+		{ id: 101, label: 'one', group: 'box', level: 3 },
+		{ id: 111, label: 'two', group: 'box', level: 3 },
+		{ id: 121, label: 'two', group: 'box', level: 2 },
+	])
+	edges.add([
+		{ id: undefined, from: 4, to: 101 },
+		{ from: 101, to: 111 },
+		{ from: 111, to: 121 },
+		{ from: 121, to: 4 },
+	])
+	toggleMagnet()
 }
 </script>
 
@@ -158,7 +204,6 @@ const closeRadial = () => {
 	height: 100%;
 	position: relative;
 	padding-right: 0.25rem;
-	z-index: 1000;
 	#mynetwork {
 		position: relative;
 		overflow: visible;
@@ -193,6 +238,10 @@ const closeRadial = () => {
 	padding-left: 0;
 	padding-top: 0;
 	padding-bottom: 0;
+	&.legend {
+		top: 0;
+		left: 0;
+	}
 	&.top {
 		top: 0;
 		right: 0.5rem;
@@ -254,6 +303,11 @@ const closeRadial = () => {
 		z-index: 3000;
 		padding: 0;
 	}
+}
+.legend {
+	position: absolute;
+	top: 36px;
+	left: 4px;
 }
 .save {
 	display: flex;

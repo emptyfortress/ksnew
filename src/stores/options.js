@@ -5,15 +5,15 @@ const green = '#95E3A4'
 const darkgreen = '#0A711E'
 
 const options = {
-	interaction: { hover: true, tooltipDelay: 500 },
-	physics: { enabled: false },
+	interaction: { hover: true, tooltipDelay: 0 },
+	physics: { enabled: true },
 	layout: {
 		improvedLayout: false,
 		hierarchical: {
 			enabled: true,
-			levelSeparation: 70,
-			nodeSpacing: 170,
-			treeSpacing: 200,
+			levelSeparation: 80,
+			nodeSpacing: 120,
+			treeSpacing: 100,
 			blockShifting: true,
 			edgeMinimization: true,
 			parentCentralization: true,
@@ -23,11 +23,11 @@ const options = {
 		},
 	},
 	edges: {
-		smooth: false,
+		smooth: true,
 		arrows: {
 			to: { enabled: true, scaleFactor: 1, type: 'arrow' },
 		},
-		color: color,
+		color: 'rgba(0, 0, 0, 1)',
 		shadow: {
 			enabled: false,
 			color: 'rgba(0,0,0,0)',
@@ -48,11 +48,11 @@ const options = {
 		shadow: {
 			enabled: false,
 		},
-		chosen: {
-			node: function (values) {
-				;(values.shadowSize = 8), (values.borderWidth = 2)
-			},
-		},
+		// chosen: {
+		// 	node: function (values) {
+		// 		;(values.shadowSize = 8), (values.borderWidth = 2)
+		// 	},
+		// },
 	},
 	groups: {
 		box: {
@@ -64,18 +64,33 @@ const options = {
 		},
 		start: {
 			shape: 'image',
-			image: DIR + 'bt-start.svg',
+			image: DIR + 'start.svg',
 			size: 15,
 		},
 		stop: {
 			shape: 'image',
-			image: DIR + 'bt-stop.svg',
+			image: DIR + 'stop.svg',
 			size: 15,
 		},
-		ext: {
+		complex: {
 			shape: 'image',
-			image: DIR + 'bt-condition.svg',
-			size: 25,
+			image: DIR + 'complex.svg',
+			size: 15,
+		},
+		ori: {
+			shape: 'image',
+			image: DIR + 'ori.svg',
+			size: 15,
+		},
+		ore: {
+			shape: 'image',
+			image: DIR + 'ore.svg',
+			size: 15,
+		},
+		and: {
+			shape: 'image',
+			image: DIR + 'and.svg',
+			size: 15,
 		},
 		finished: {
 			shape: 'box',

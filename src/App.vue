@@ -2,12 +2,15 @@
 import { ref, computed } from 'vue'
 import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
+// import IDrawer from '@/components/IDrawer.vue'
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 const leftDrawer = ref(true)
 const rightDrawer = ref(false)
+
+// const infoDrawer = ref(false)
 const toggleLeftDrawer = () => {
 	leftDrawer.value = !leftDrawer.value
 }
@@ -36,18 +39,19 @@ const calcClass = computed(() => {
 	} else return ''
 })
 
-const iconColor = computed(() => {
-	if (colors.toolbar) {
-		return 'white'
-	} else return '#666'
-})
+// const iconColor = computed(() => {
+// 	if (colors.toolbar) {
+// 		return 'white'
+// 	} else return '#666'
+// })
+
 const timeStamp = Date.now()
 const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 </script>
 
 <template lang="pug">
 #col(:class="mycolor")
-	q-layout(view="hHh LpR fFf")
+	q-layout(view="hHh lpR fFf")
 		q-header(:reveal="colors.reveal" :class="calcHeader")
 			q-toolbar
 				q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer")
@@ -75,8 +79,8 @@ const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 						SvgIcon(name="search-scan")
 
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
+		//- IDrawer(:show="info.infoDrawer")
 		RDrawer(:show="rightDrawer")
-		//- AggDrawer(:show="aggdr")
 
 		q-page-container
 			router-view

@@ -3,21 +3,26 @@ q-card
 	q-list
 		q-item(clickable)
 			q-item-section {{net.nodeSelection}}
-		q-item(clickable)
+		q-item(clickable @click="neutral")
 			q-item-section Показать доработки
-		q-item(clickable)
+		q-item(clickable @click="negative")
 			q-item-section Отрицательный исход
 </template>
 
 <script setup lang="ts">
 import { useGraph } from '@/stores/graph'
 
+const emit = defineEmits(['neutral', 'negative'])
+
 const net = useGraph()
 // const nodes = net.nodes
 
-// const current = computed(() => {
-// 	return nodes[net.nodeSelection].label
-// })
+const neutral = () => {
+	emit('neutral')
+}
+const negative = () => {
+	emit('negative')
+}
 </script>
 
 <style scoped lang="scss">

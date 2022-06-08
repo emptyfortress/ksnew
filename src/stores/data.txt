@@ -1,0 +1,289 @@
+// Приходит с бэка
+{
+    "data": {
+        "stageNodes": [
+            {
+                "id": "bc847522-33d3-45d4-8f7f-9766e5d2ca21",
+                "name": "Этап 1",
+                "first": true,
+                "taskSendingMode": 1,
+                "repeatMode": 0,
+                "startConditionType": 0
+            },
+            {
+                "id": "6fb43558-6254-47cb-b214-cd97479e5c37",
+                "name": "Этап 2",
+                "first": true,
+                "taskSendingMode": 1,
+                "repeatMode": 0,
+                "startConditionType": 0
+            },
+            {
+                "id": "3dadefda-714b-4101-8fc7-619d5a2719bb",
+                "name": "Этап 3",
+                "first": false,
+                "taskSendingMode": 1,
+                "repeatMode": 0,
+                "startConditionType": 3
+            },
+            {
+                "id": "cdb0e0e4-0784-4ab6-9d1c-4694e1b6898d",
+                "name": "Этап 4",
+                "first": false,
+                "taskSendingMode": 1,
+                "repeatMode": 0,
+                "startConditionType": 0
+            },
+            {
+                "id": "df0e54c2-ef9e-41ad-ae0e-e3364e43885a",
+                "name": "Этап 5",
+                "first": false,
+                "taskSendingMode": 1,
+                "repeatMode": 0,
+                "startConditionType": 0
+            },
+            {
+                "id": "7d88cc3f-dd8e-4354-8d07-54185035711d",
+                "name": "Этап 6",
+                "first": false,
+                "taskSendingMode": 1,
+                "repeatMode": 0,
+                "startConditionType": 1
+            },
+            {
+                "id": "b5bd3b66-b36c-4620-8fca-111ff03c5f49",
+                "name": "Доработка",
+                "first": false,
+                "taskSendingMode": 0,
+                "repeatMode": 0,
+                "startConditionType": 3
+            },
+            {
+                "id": "cd895739-33ab-44d3-8fa9-033c2850904d",
+                "name": "Завершение",
+                "first": false,
+                "taskSendingMode": 0,
+                "repeatMode": 0,
+                "startConditionType": 1
+            }
+        ],
+        "arrows": [
+            {
+                "decisionSemantics": 8,
+                "sourceNode": {
+                    "id": "bc847522-33d3-45d4-8f7f-9766e5d2ca21",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "3dadefda-714b-4101-8fc7-619d5a2719bb",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 2,
+                "sourceNode": {
+                    "id": "7d88cc3f-dd8e-4354-8d07-54185035711d",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "3dadefda-714b-4101-8fc7-619d5a2719bb",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 7,
+                "sourceNode": {
+                    "id": "6fb43558-6254-47cb-b214-cd97479e5c37",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "cdb0e0e4-0784-4ab6-9d1c-4694e1b6898d",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 8,
+                "sourceNode": {
+                    "id": "3dadefda-714b-4101-8fc7-619d5a2719bb",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "df0e54c2-ef9e-41ad-ae0e-e3364e43885a",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 1,
+                "sourceNode": {
+                    "id": "cdb0e0e4-0784-4ab6-9d1c-4694e1b6898d",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "7d88cc3f-dd8e-4354-8d07-54185035711d",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 3,
+                "sourceNode": {
+                    "id": "6fb43558-6254-47cb-b214-cd97479e5c37",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "7d88cc3f-dd8e-4354-8d07-54185035711d",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 2,
+                "sourceNode": {
+                    "id": "cdb0e0e4-0784-4ab6-9d1c-4694e1b6898d",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "b5bd3b66-b36c-4620-8fca-111ff03c5f49",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 2,
+                "sourceNode": {
+                    "id": "6fb43558-6254-47cb-b214-cd97479e5c37",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "b5bd3b66-b36c-4620-8fca-111ff03c5f49",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 200,
+                "sourceNode": {
+                    "id": "b5bd3b66-b36c-4620-8fca-111ff03c5f49",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "cdb0e0e4-0784-4ab6-9d1c-4694e1b6898d",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 200,
+                "sourceNode": {
+                    "id": "b5bd3b66-b36c-4620-8fca-111ff03c5f49",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "6fb43558-6254-47cb-b214-cd97479e5c37",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 1,
+                "sourceNode": {
+                    "id": "7d88cc3f-dd8e-4354-8d07-54185035711d",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "cd895739-33ab-44d3-8fa9-033c2850904d",
+                    "nodeType": 0
+                }
+            },
+            {
+                "decisionSemantics": 1,
+                "sourceNode": {
+                    "id": "df0e54c2-ef9e-41ad-ae0e-e3364e43885a",
+                    "nodeType": 0
+                },
+                "targetNode": {
+                    "id": "cd895739-33ab-44d3-8fa9-033c2850904d",
+                    "nodeType": 0
+                }
+            }
+        ]
+    },
+    "success": true,
+    "timestamp": null,
+    "timestampCardId": null,
+    "timestampRowId": null,
+    "message": "",
+    "serverName": "109PC0107",
+    "time": "2022-06-03T13:50:11.7902304+03:00",
+    "extendedDataSourceInfos": null
+}
+
+// Модели приходящих данных
+export namespace GenModels {
+    export interface SettingsGraph {
+        stageNodes: Array<GenModels.StageNode>;
+        arrows: Array<GenModels.Arrow>;
+    }
+}
+
+export namespace GenModels {
+    export interface StageNode {
+        id: string;
+        name: string;
+        first: boolean;
+        taskSendingMode: GenModels.StageTaskSendingMode;
+        repeatMode: GenModels.StageRepeatMode;
+        startConditionType: GenModels.ConditionType;
+    }
+}
+
+export namespace GenModels {
+    export interface Arrow {
+        decisionSemantics: GenModels.DecisionSemantics;
+        sourceNode: GenModels.NodeReference;
+        targetNode: GenModels.NodeReference;
+    }
+}
+
+
+export namespace GenModels {
+    export enum DecisionSemantics {
+        None = 0,
+        Positive = 1,
+        Negative = 2,
+        Neutral = 3,
+        Cancellation = 4,
+        NewCycle = 5,
+        ApproversAddition = 6,
+        NonNegative = 7,
+        Any = 8,
+        Completion = 100,
+        Return = 200,
+    }
+}
+
+export namespace GenModels {
+    export enum StageTaskSendingMode {
+        Sequential = 0,
+        Parallel = 1,
+    }
+}
+
+export namespace GenModels {
+    export enum StageRepeatMode {
+        Always = 0,
+        Never = 1,
+        ForNotApproved = 2,
+        OnNegativeDecision = 3,
+        WhenRejectedOrFileChanged = 4,
+    }
+}
+
+export namespace GenModels {
+    export enum ConditionType {
+        None = 0,
+        And = 1,
+        Or = 2,
+        Complex = 3,
+    }
+}
+
+export namespace GenModels {
+    export enum NodeType {
+        Stage = 0,
+    }
+}

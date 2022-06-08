@@ -1,5 +1,5 @@
 import { Network } from 'vis-network/standalone'
-import { drawCycle } from '@/utils/ctx'
+// import { drawCycle } from '@/utils/ctx'
 import { useGraph } from '@/stores/graph'
 
 const initNetwork = (network: Network, magnetMode: boolean) => {
@@ -37,12 +37,12 @@ const initNetwork = (network: Network, magnetMode: boolean) => {
 	// 	// network.cluster(clusterOptions)
 	// })
 
-	network.on('beforeDrawing', function (ctx) {
-		var nodeId = 4
-		const bb = network.getBoundingBox(nodeId)
-		const color = 'blue'
-		drawCycle(ctx, bb, color)
-	})
+	// network.on('beforeDrawing', function (ctx) {
+	// 	var nodeId = 4
+	// 	const bb = network.getBoundingBox(nodeId)
+	// 	const color = 'blue'
+	// 	drawCycle(ctx, bb, color)
+	// })
 
 	// network.on('hoverNode', function (params) {
 	// 	console.log(params.node)
@@ -53,6 +53,7 @@ const initNetwork = (network: Network, magnetMode: boolean) => {
 		// console.log(network.getSelection())
 		net.nodeSelection = params.nodes[0]
 		net.edgeSelection = params.edges
+		console.log('selection: ' + net.nodeSelection)
 	})
 
 	network.on('deselectNode', function (params) {

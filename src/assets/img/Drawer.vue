@@ -7,6 +7,45 @@ q-drawer(:model-value="show" side="left" :mini="colors.mini" :width="width" bord
 			q-item-section {{ page.title }}
 
 	q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini.gt-sm
+
+	br
+	br
+	br
+	q-card(flat transparent)
+		q-card-section
+			.text-overline Семантика решений
+			.row.justify-between.items-center
+				div Любой исход
+				.line.black
+			.row.justify-between.items-center
+				div Негативно
+				.line.red
+			.row.justify-between.items-center
+				div Не негативно
+				.line.blue
+			.row.justify-between.items-center
+				div Позитивно
+				.line.green
+			.row.justify-between.items-center
+				div Нейтрально
+				.line.grey
+			.row.justify-between.items-center
+				div Возврат
+				.line1
+		q-card-section
+			.text-overline Этапы и развилки
+			.row.justify-between.items-center
+				div Старт
+				.start
+			.row.justify-between.items-center
+				div Завершение
+				.start.stop
+			.row.justify-between.items-center
+				div Этап
+				.etap Название
+			.row.justify-between.items-center
+				div Исключающиее Или
+				.etap Название
 </template>
 
 <script>
@@ -80,5 +119,45 @@ export default {
 .q-item.q-router-link--active {
 	background: var(--q-selection);
 	color: var(--q-primary-darken-2);
+}
+.line {
+	height: 3px;
+	width: 50%;
+	background: grey;
+	&.black {
+		background: black;
+	}
+	&.red {
+		background: red;
+	}
+	&.blue {
+		background: blue;
+	}
+	&.green {
+		background: green;
+	}
+	&.grey {
+		background: grey;
+	}
+}
+.line1 {
+	width: 50%;
+	height: 2px;
+	border-bottom: 3px dashed black;
+}
+.start {
+	width: 30px;
+	height: 30px;
+	border: 2px solid blue;
+	border-radius: 50%;
+	&.stop {
+		border-width: 6px;
+	}
+}
+.etap {
+	font-size: 0.8rem;
+	border: 1px solid blue;
+	padding: 3px 8px;
+	border-radius: 6px;
 }
 </style>

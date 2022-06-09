@@ -1,5 +1,10 @@
 <template lang="pug">
-q-drawer(v-model="props.show" side="left" :width="width" bordered)
+q-drawer(v-model="props.show"
+	overlay
+	side="right"
+	:width="500"
+	behavior="mobile"
+	bordered)
 	h2 fuck
 
 </template>

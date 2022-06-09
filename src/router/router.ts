@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Ks from '@/pages/Ks.vue'
+// import Ks from '@/pages/Ks.vue'
+import Card from '@/pages/Card.vue'
 // import Home from '@/pages/Home.vue'
 
 declare module 'vue-router' {
@@ -18,21 +19,21 @@ export const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/ks',
+			redirect: '/card',
+		},
+		{
+			path: '/card',
+			component: Card,
+			meta: { transition: 'slide-left', title: 'Карточка', requiresAuth: false },
 		},
 		// {
-		// 	path: '/',
-		// 	component: Home,
+		// 	path: '/ks',
+		// 	component: Ks,
 		// 	meta: { transition: 'slide-left', title: 'Конструктор', requiresAuth: false },
 		// },
 		{
-			path: '/ks',
-			component: Ks,
-			meta: { transition: 'slide-left', title: 'Конструктор', requiresAuth: false },
-		},
-		{
 			path: '/:pathMatch(.*)*',
-			redirect: '/ks',
+			redirect: '/card',
 		},
 	],
 })

@@ -2,15 +2,17 @@
 import { ref, computed } from 'vue'
 import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
-// import IDrawer from '@/components/IDrawer.vue'
+import IDrawer from '@/components/IDrawer.vue'
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
 import SvgIcon from '@/components/SvgIcon.vue'
+import { useInfo } from '@/stores/info'
+
+const info = useInfo()
 
 const leftDrawer = ref(true)
 const rightDrawer = ref(false)
 
-// const infoDrawer = ref(false)
 const toggleLeftDrawer = () => {
 	leftDrawer.value = !leftDrawer.value
 }
@@ -79,8 +81,8 @@ const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 						SvgIcon(name="search-scan")
 
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
-		//- IDrawer(:show="info.infoDrawer")
 		RDrawer(:show="rightDrawer")
+		IDrawer(:show="info.infoDrawer")
 
 		q-page-container
 			router-view

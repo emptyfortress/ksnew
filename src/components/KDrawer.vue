@@ -5,18 +5,16 @@ q-drawer(v-model="props.show"
 	elevated
 	:width="expand"
 	behavior="mobile"
+	no-swipe-close
 	)
-	q-btn(round flat icon="mdi-close" @click="info.toggleks").close
 	Ks
+	//- component(:is="Ks")
 
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useInfo } from '@/stores/info'
 import Ks from '@/pages/Ks.vue'
-
-const info = useInfo()
 
 const props = defineProps({
 	show: {
@@ -32,12 +30,4 @@ const expand = computed(() => {
 
 <style scoped lang="scss">
 // @import '@/assets/styles/theme.scss';
-.q-drawer {
-	position: relative;
-}
-.close {
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-}
 </style>

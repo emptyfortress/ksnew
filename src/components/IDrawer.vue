@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="props.show"
+q-drawer(v-model="info.infoDrawer"
 	overlay
 	side="right"
 	:width="420"
@@ -9,7 +9,9 @@ q-drawer(v-model="props.show"
 	q-card-section
 		.row.justify-between.items-center
 			.text-h6 Маршрут согласования
-			q-btn(round flat icon="mdi-close" @click="info.toggle")
+			q-btn(round flat  @click="info.closeInfo")
+				q-icon(name="mdi-close" v-if="!info.ksDrawer")
+				q-icon(name="mdi-arrow-right" v-else)
 		component(:is="Selector" val="Длинный маршрут для договоров" :options="options").q-mt-md
 	br
 	q-list
@@ -25,10 +27,11 @@ q-drawer(v-model="props.show"
 						q-item-section.text-caption {{n}} Иванов
 
 	q-card-actions.q-mt-lg
-		q-btn(unelevated label="Отмена" @click="info.toggle")
 		q-btn(unelevated label="Просмотр" @click="toggleks")
+		q-btn(unelevated label="Отмена" @click="closeAll")
 		q-space
 		q-btn(unelevated color="primary" label="Старт согласования" )
+
 </template>
 
 <script setup lang="ts">
@@ -60,11 +63,20 @@ const selection = ref(start)
 const toggleks = () => {
 	info.toggleks()
 }
+const closeAll = () => {
+	info.closeAll()
+}
 </script>
 
 <style scoped lang="scss">
 // @import '@/assets/styles/theme.scss';
 .q-list {
 	font-size: 1.1rem;
+}
+.close {
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+	z-index: 1000;
 }
 </style>

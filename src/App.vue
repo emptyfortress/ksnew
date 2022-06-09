@@ -84,7 +84,8 @@ const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
 		RDrawer(:show="rightDrawer")
 		KDrawer(:show="info.ksDrawer")
-		IDrawer(:show="info.infoDrawer")
+		IDrawer
+		//- IDrawer(:show="info.infoDrawer")
 
 		q-page-container
 			router-view

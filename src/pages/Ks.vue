@@ -1,6 +1,6 @@
 <template lang="pug">
 .ks(:class="{ 'full' : fullScreenMode }")
-	q-splitter(v-model="splitterModel" unit="px" :limits="[0, 100]" :class="{'edit' : editMode, 'full' : fullScreenMode}" reverse).separator
+	q-splitter(v-model="splitterModel" unit="px" :limits="[0, Infinity]" :class="{'edit' : editMode, 'full' : fullScreenMode}" reverse).separator
 		template(v-slot:before)
 			.editor
 				#mynetwork(:class="{ 'edit' : editMode }")
@@ -39,6 +39,9 @@
 	.save(v-if="editMode")
 		q-btn(color="primary" unelevated disabled) Сохранить маршрут
 		q-btn(color="primary" unelevated disabled) Сохранить этап
+
+	q-btn(round color="accent" icon="mdi-arrow-left" @click="info.toggle").back
+
 </template>
 
 <script setup lang="ts">
@@ -198,6 +201,7 @@ const toggleDetails = () => {
 
 .ks {
 	background: var(--bg-light);
+	position: relative;
 }
 .editor {
 	width: 100%;
@@ -225,6 +229,7 @@ const toggleDetails = () => {
 	padding-left: 0.25rem;
 	height: 100%;
 	z-index: -20;
+	position: relative;
 }
 #radial {
 	position: absolute;
@@ -321,5 +326,11 @@ const toggleDetails = () => {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+.back {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	z-index: 10;
 }
 </style>

@@ -4,7 +4,7 @@ export const useInfo = defineStore({
 	id: 'info',
 	state: () => ({
 		infoDrawer: true,
-		ksDrawer: false,
+		ksDrawer: true,
 	}),
 	getters: {},
 	actions: {

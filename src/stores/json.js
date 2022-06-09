@@ -164,7 +164,7 @@ const edges = [
 	{ from: 7, to: 4, semantic: 8, dashes: true, title: 'Возврат' },
 	// { from: 6, to: 3, semantic: 8, color: 'red' },
 	{ from: 6, to: 11, semantic: 8, color: 'green', title: 'Позитивный исход' },
-	{ from: 3, to: 5, semantic: 8, title: 'Любой исход' },
+	{ from: 3, to: 5, semantic: 8, title: 'Любой исход', endPointOffset: { to: 20 } },
 	{ from: 5, to: 11, semantic: 8, color: 'green', title: 'Позитивный исход' },
 	{ from: 10, to: 7, semantic: 8, color: 'blue', title: 'Кроме негативного' },
 	{ from: 11, to: 8, semantic: 8, title: 'Любой исход' },

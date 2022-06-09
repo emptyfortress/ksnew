@@ -109,6 +109,9 @@ const options = {
 			image: DIR + 'cluster.svg',
 			size: 4,
 		},
+		text: {
+			shape: 'text',
+		},
 	},
 }
 

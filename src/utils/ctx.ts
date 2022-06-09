@@ -21,4 +21,15 @@ const drawCycle = (ctx: any, bb: BoundingBox, color: string) => {
 	ctx.fillText('2', bb.right - 3, bb.top + 3)
 }
 
-export { drawCycle }
+const drawRec = (ctx: any, bb: BoundingBox) => {
+	const width = bb.right - bb.left
+	const centerX = bb.left + width / 2
+	const centerY = bb.top
+	ctx.translate(centerX, centerY)
+	ctx.rotate((Math.PI / 180) * 45) // rotate
+	ctx.translate(-centerX, -centerY) // translate back
+	ctx.fillStyle = 'blue'
+	ctx.fillRect(centerX - 8, bb.top - 8, 16, 16)
+}
+
+export { drawCycle, drawRec }

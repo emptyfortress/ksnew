@@ -107,6 +107,7 @@ const edges = [
 	{ from: 1, to: 3, semantic: 8, title: 'Любой исход' },
 	{ from: 3, to: 5, semantic: 8, title: 'Любой исход' },
 	{ from: 2, to: 4, semantic: 8, color: 'blue', title: 'Кроме негативного' },
+	{ from: 2, to: 6, semantic: 8, color: 'grey', title: 'Нейтральный исход' },
 	{ from: 5, to: 8, semantic: 8, color: 'green', title: 'Позитивный исход' },
 	{ from: 4, to: 6, semantic: 8, color: 'green', title: 'Позитивный исход' },
 	{ from: 6, to: 8, semantic: 8, color: 'green', title: 'Позитивный исход' },

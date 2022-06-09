@@ -1,6 +1,6 @@
 <template lang="pug">
 .center
-	q-btn(color="primary" label="На согласование" size="lg" @click="info.toggle")
+	q-btn(color="primary" label="На согласование" @click="info.toggle")
 </template>
 
 <script setup lang="ts">

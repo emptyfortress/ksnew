@@ -82,12 +82,12 @@ let network: Network
 const detail = ref(true)
 
 const data1 = {
-	nodes: nod1,
-	edges: edg1,
-}
-const data = {
 	nodes: nod,
 	edges: edg,
+}
+const data = {
+	nodes: nod1,
+	edges: edg1,
 }
 
 onMounted(() => {

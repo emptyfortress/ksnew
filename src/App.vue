@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
 import IDrawer from '@/components/IDrawer.vue'
+import KDrawer from '@/components/KDrawer.vue'
 import { date } from 'quasar'
 import { useColor } from '@/stores/colors'
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -82,6 +83,7 @@ const formattedString = date.formatDate(timeStamp, 'dddd, D MMMM')
 
 		Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
 		RDrawer(:show="rightDrawer")
+		KDrawer(:show="info.ksDrawer")
 		IDrawer(:show="info.infoDrawer")
 
 		q-page-container

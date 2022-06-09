@@ -1,6 +1,6 @@
 <template lang="pug">
 .ks(:class="{ 'full' : fullScreenMode }")
-	q-splitter(v-model="splitterModel" :limits="[0, 100]" :class="{'edit' : editMode, 'full' : fullScreenMode}").separator
+	q-splitter(v-model="splitterModel" unit="px" :limits="[0, 100]" :class="{'edit' : editMode, 'full' : fullScreenMode}" reverse).separator
 		template(v-slot:before)
 			.editor
 				#mynetwork(:class="{ 'edit' : editMode }")
@@ -173,7 +173,7 @@ const toggleMagnet = () => {
 	}
 }
 
-const splitterModel = ref(50)
+const splitterModel = ref(400)
 
 const closeRadial = () => {
 	if (showRadial.value === true) {

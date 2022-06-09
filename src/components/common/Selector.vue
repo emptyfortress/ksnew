@@ -13,7 +13,7 @@ import { ref, computed } from 'vue'
 
 const props = defineProps<{
 	val: string
-	label: string
+	label?: string
 	options: string[]
 }>()
 const emit = defineEmits(['click'])

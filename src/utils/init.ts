@@ -1,5 +1,5 @@
 import { Network } from 'vis-network/standalone'
-import { drawCycle, drawRec } from '@/utils/ctx'
+import { drawCycle, drawOr, drawAnd } from '@/utils/ctx'
 import { useGraph } from '@/stores/graph'
 
 const initNetwork = (network: Network) => {
@@ -23,7 +23,7 @@ const initNetwork = (network: Network) => {
 		const bb = network.getBoundingBox(nodeId)
 		const color = 'blue'
 		// drawCycle(ctx, bb, color)
-		drawRec(ctx, bb)
+		drawAnd(ctx, bb, color)
 		// console.log(bb)
 	})
 

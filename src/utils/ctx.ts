@@ -21,15 +21,52 @@ const drawCycle = (ctx: any, bb: BoundingBox, color: string) => {
 	ctx.fillText('2', bb.right - 3, bb.top + 3)
 }
 
-const drawRec = (ctx: any, bb: BoundingBox) => {
+const drawOr = (ctx: any, bb: BoundingBox, color: string) => {
 	const width = bb.right - bb.left
 	const centerX = bb.left + width / 2
 	const centerY = bb.top
 	ctx.translate(centerX, centerY)
 	ctx.rotate((Math.PI / 180) * 45) // rotate
 	ctx.translate(-centerX, -centerY) // translate back
-	ctx.fillStyle = 'blue'
-	ctx.fillRect(centerX - 8, bb.top - 8, 16, 16)
+	ctx.fillStyle = 'white'
+	ctx.fillRect(centerX - 7, bb.top - 7, 14, 14)
+	ctx.strokeStyle = color
+	ctx.strokeRect(centerX - 7, bb.top - 7, 14, 14)
+	ctx.beginPath()
+	ctx.arc(centerX, centerY, 4, 0, Math.PI * 2, true)
+	ctx.strokeStyle = color
+	ctx.stroke()
 }
 
-export { drawCycle, drawRec }
+const drawAnd = (ctx: any, bb: BoundingBox, color: string) => {
+	const width = bb.right - bb.left
+	const centerX = bb.left + width / 2
+	const centerY = bb.top
+	ctx.translate(centerX, centerY)
+	ctx.rotate((Math.PI / 180) * 45) // rotate
+	ctx.translate(-centerX, -centerY) // translate back
+	ctx.fillStyle = 'white'
+	ctx.fillRect(centerX - 7, bb.top - 7, 14, 14)
+	ctx.strokeStyle = 'blue'
+	ctx.strokeRect(centerX - 7, bb.top - 7, 14, 14)
+	ctx.translate(centerX, centerY)
+	ctx.rotate((Math.PI / 180) * -45) // rotate
+	ctx.translate(-centerX, -centerY) // translate back
+
+	ctx.beginPath()
+	ctx.moveTo(centerX - 4, centerY)
+	ctx.lineTo(centerX + 4, centerY)
+	ctx.strokeStyle = 'blue'
+	ctx.stroke()
+
+	ctx.beginPath()
+	ctx.moveTo(centerX, centerY - 4)
+	ctx.lineTo(centerX, centerY + 4)
+	ctx.strokeStyle = 'blue'
+	ctx.stroke()
+
+	// ctx.arc(centerX, centerY, 4, 0, Math.PI * 2, true)
+	// ctx.strokeStyle = 'blue'
+	// ctx.stroke()
+}
+export { drawCycle, drawOr, drawAnd }

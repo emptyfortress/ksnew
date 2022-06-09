@@ -56,7 +56,7 @@ const nodes = [
 	},
 	{
 		id: 5,
-		label: 'Этап 5',
+		label: 'Плановый отдел',
 		first: false,
 		last: false,
 		taskSendingMode: 1,

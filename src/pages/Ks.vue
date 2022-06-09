@@ -36,11 +36,14 @@
 			.props
 				Panel
 
+	.send
+		q-btn(flat color="primary" unelevated  @click="info.closeAll") Отмена
+		q-btn(color="primary" unelevated @click="info.closeAll") Старт согласования
 	.save(v-if="editMode")
 		q-btn(color="primary" unelevated disabled) Сохранить маршрут
 		q-btn(color="primary" unelevated disabled) Сохранить этап
 
-	q-btn(round color="accent" icon="mdi-arrow-left" @click="info.toggle").back
+	q-btn(round color="primary" icon="mdi-arrow-left" @click="info.toggle").back
 
 </template>
 
@@ -292,8 +295,8 @@ const toggleDetails = () => {
 .separator {
 	box-sizing: border-box;
 	padding: 1rem;
-	background: var(--bg-light);
-	height: calc(100vh - 110px);
+	// background: var(--bg-light);
+	height: calc(100vh - 60px);
 	&.edit {
 		height: calc(100vh - 160px);
 	}
@@ -321,6 +324,12 @@ const toggleDetails = () => {
 	.q-btn {
 		margin-right: 4px;
 	}
+}
+.send {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-right: 1rem;
 }
 #rectmenu {
 	position: absolute;

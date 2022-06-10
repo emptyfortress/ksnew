@@ -73,26 +73,18 @@ const drawAnd = (ctx: any, bb: BoundingBox, color: string) => {
 	ctx.stroke()
 }
 
-const drawDisable = (ctx: any, bb: BoundingBox, color: string) => {
-	const { width, centerX, centerY } = setCoord(bb)
+const drawDisable = (ctx: any, bb: BoundingBox, color?: string) => {
+	const { width } = setCoord(bb)
+	// main bg
 	ctx.fillStyle = 'rgba(0,255,0,.5)'
 	ctx.fillRect(bb.left, bb.top, width, 36)
+	// draw left arrow
 	ctx.beginPath()
 	ctx.moveTo(bb.left - 10, bb.top)
 	ctx.lineTo(bb.left - 10, bb.bottom - 3)
 	ctx.strokeStyle = 'green'
 	ctx.stroke()
-
-	ctx.beginPath()
-	ctx.moveTo(bb.left, bb.top)
-	ctx.lineTo(bb.right, bb.bottom)
-	ctx.stroke()
-
-	ctx.beginPath()
-	ctx.moveTo(bb.right, bb.top)
-	ctx.lineTo(bb.left, bb.bottom)
-	ctx.stroke()
-
+	// draw triangle
 	ctx.beginPath()
 	ctx.moveTo(bb.left - 10, bb.bottom)
 	ctx.lineTo(bb.left - 5, bb.bottom - 8)
@@ -100,6 +92,49 @@ const drawDisable = (ctx: any, bb: BoundingBox, color: string) => {
 	ctx.closePath()
 	ctx.fillStyle = 'green'
 	ctx.fill()
+	// draw crest
+	ctx.beginPath()
+	ctx.moveTo(bb.left, bb.top)
+	ctx.lineTo(bb.right, bb.bottom)
+	ctx.stroke()
+	ctx.beginPath()
+	ctx.moveTo(bb.right, bb.top)
+	ctx.lineTo(bb.left, bb.bottom)
+	ctx.stroke()
 }
 
-export { drawDisable, drawOr, drawAnd }
+const drawComplex = (ctx: any, bb: BoundingBox, color?: string) => {
+	const { centerX, centerY } = setCoord(bb)
+	ctx.translate(centerX, centerY)
+	ctx.rotate((Math.PI / 180) * 45) // rotate
+	ctx.translate(-centerX, -centerY) // translate back
+	ctx.fillStyle = 'white'
+	ctx.fillRect(centerX - 7, bb.top - 7, 14, 14)
+	ctx.strokeStyle = 'blue'
+	ctx.strokeRect(centerX - 7, bb.top - 7, 14, 14)
+	ctx.translate(centerX, centerY)
+	ctx.rotate((Math.PI / 180) * -45) // rotate
+	ctx.translate(-centerX, -centerY) // translate back
+
+	ctx.beginPath()
+	ctx.moveTo(centerX - 4, centerY)
+	ctx.lineTo(centerX + 4, centerY)
+	ctx.stroke()
+
+	ctx.beginPath()
+	ctx.moveTo(centerX, centerY - 4)
+	ctx.lineTo(centerX, centerY + 4)
+	ctx.stroke()
+
+	ctx.beginPath()
+	ctx.moveTo(centerX - 3, centerY - 3)
+	ctx.lineTo(centerX + 3, centerY + 3)
+	ctx.stroke()
+
+	ctx.beginPath()
+	ctx.moveTo(centerX + 3, centerY - 3)
+	ctx.lineTo(centerX - 3, centerY + 3)
+	ctx.stroke()
+}
+
+export { drawDisable, drawOr, drawAnd, drawComplex }

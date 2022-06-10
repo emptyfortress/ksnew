@@ -1,5 +1,5 @@
 import { Network } from 'vis-network/standalone'
-import { drawCycle, drawOr, drawAnd } from '@/utils/ctx'
+import { drawDisable, drawOr, drawAnd } from '@/utils/ctx'
 import { useGraph } from '@/stores/graph'
 
 const initNetwork = (network: Network) => {
@@ -26,8 +26,9 @@ const initNetwork = (network: Network) => {
 			const color = 'blue'
 			// drawCycle(ctx, bb, color)
 			drawOr(ctx, bb, color)
-			bb = { left: 0, right: 0, top: 0, bottom: 0 }
 		})
+		let bb = network.getBoundingBox(1)
+		drawDisable(ctx, bb)
 	})
 
 	return network

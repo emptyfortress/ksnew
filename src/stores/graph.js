@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
-// import { nod, edg } from '@/stores/dataGraph.ts'
+import { nodes, edges } from '@/stores/json1'
 
 export const useGraph = defineStore({
 	id: 'graph',
 	state: () => ({
 		nodeSelection: 1000,
 		edgeSelection: [],
-		// nodes: nod,
-		// edges: edg,
+		nodes: nodes,
+		edges: edges,
 	}),
 	getters: {
 		selected() {

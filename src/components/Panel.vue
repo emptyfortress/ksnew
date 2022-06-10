@@ -1,6 +1,6 @@
 <template lang="pug">
 .proper
-	template(v-if="net.selected")
+	template(v-if="info.selected")
 		q-tabs(v-model="tab" inline-label indicator-color="primary" align="left").tab
 			q-tab(name="props" label="Свойства")
 			q-tab(name="logs" label="Журнал")
@@ -32,10 +32,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useGraph } from '@/stores/graph'
+import { useInfo } from '@/stores/info'
 import Props from '@/components/Props.vue'
 
-const net = useGraph()
+const info = useInfo()
 
 const tab = ref('props')
 

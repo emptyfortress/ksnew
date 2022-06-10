@@ -1,12 +1,12 @@
 <template lang="pug">
 q-card
 	q-list
-		template(v-if="net.nodeSelection === 1000")
+		template(v-if="info.nodeSelection === 1000")
 			q-item(clickable @click="toggle")
 				q-item-section Переключить детализацию
 		template(v-else)
 			q-item(clickable)
-				q-item-section {{net.nodeSelection}}
+				q-item-section {{info.nodeSelection}}
 			q-item(clickable )
 				q-item-section Показать доработки
 			q-item(clickable )
@@ -14,11 +14,11 @@ q-card
 </template>
 
 <script setup lang="ts">
-import { useGraph } from '@/stores/graph'
+import { useInfo } from '@/stores/info'
 
 const emit = defineEmits(['toggle'])
 
-const net = useGraph()
+const info = useInfo()
 // const nodes = net.nodes
 
 const toggle = () => {

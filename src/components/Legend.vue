@@ -26,11 +26,11 @@ q-card
 	.row.justify-between.items-center.q-mb-xs
 		div Завершение
 		q-img(src="@/assets/img/stop.svg" fit="contain")
+	//- .row.justify-between.items-center.q-mb-xs
+	//- 	div Исключающиее ИЛИ
+	//- 	q-img(src="@/assets/img/ore.svg" fit="contain")
 	.row.justify-between.items-center.q-mb-xs
-		div Исключающиее ИЛИ
-		q-img(src="@/assets/img/ore.svg" fit="contain")
-	.row.justify-between.items-center.q-mb-xs
-		div Включающее ИЛИ
+		div Оператор ИЛИ
 		q-img(src="@/assets/img/ori.svg" fit="contain")
 	.row.justify-between.items-center.q-mb-xs
 		div Оператор И

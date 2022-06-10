@@ -1,36 +1,77 @@
+import { watch } from 'vue'
 import { Network } from 'vis-network/standalone'
 import { drawDisable, drawOr, drawAnd, drawComplex } from '@/utils/ctx'
-import { useGraph } from '@/stores/graph'
+import { useInfo } from '@/stores/info'
+import { nodes } from '@/stores/json1'
+
+enum StartCondition {
+	'None' = 0,
+	'And',
+	'Or',
+	'Complex',
+}
 
 const initNetwork = (network: Network) => {
-	const net = useGraph()
+	const info = useInfo()
 
 	network.on('selectNode', function (params) {
-		net.nodeSelection = params.nodes[0]
-		net.edgeSelection = params.edges
-		console.log(params)
-		const temp = network.getSelectedNodes()
-		const bb = network.getBoundingBox(temp[0])
-		console.log(bb)
+		info.nodeSelection = params.nodes[0]
+		info.edgeSelection = params.edges
 	})
 
 	network.on('deselectNode', function () {
-		net.nodeSelection = 1000
+		info.nodeSelection = 1000
 	})
 
 	network.on('afterDrawing', function (ctx) {
-		let and = [3, 5, 6]
+		let and = nodes
+			.filter((e) => e.StartCondition === 1)
+			.map((item) => {
+				return item.id
+			})
 		and.forEach((e) => {
-			var nodeId = e
-			let bb = network.getBoundingBox(nodeId)
+			let bb = network.getBoundingBox(e)
 			const color = 'blue'
-			// drawCycle(ctx, bb, color)
 			drawAnd(ctx, bb, color)
 		})
-		let bb = network.getBoundingBox(1)
-		drawDisable(ctx, bb)
-		bb = network.getBoundingBox(2)
-		drawComplex(ctx, bb)
+
+		let or = nodes
+			.filter((e) => e.StartCondition === 2)
+			.map((item) => {
+				return item.id
+			})
+		or.forEach((e) => {
+			let bb = network.getBoundingBox(e)
+			const color = 'blue'
+			drawOr(ctx, bb, color)
+		})
+
+		let complex = nodes
+			.filter((e) => e.StartCondition === 3)
+			.map((item) => {
+				return item.id
+			})
+		complex.forEach((e) => {
+			let bb = network.getBoundingBox(e)
+			const color = 'blue'
+			drawComplex(ctx, bb, color)
+		})
+
+		let exclude = nodes
+			.filter((e) => e.include === false)
+			.map((item) => {
+				return item.id
+			})
+
+		exclude.forEach((e) => {
+			let bb = network.getBoundingBox(e)
+			drawDisable(ctx, bb)
+		})
+	})
+	watch(info.nodes, (value, oldvalue) => {
+		if (value) {
+			network.redraw()
+		}
 	})
 
 	return network

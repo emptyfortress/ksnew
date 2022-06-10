@@ -73,7 +73,7 @@ const drawAnd = (ctx: any, bb: BoundingBox, color: string) => {
 	ctx.stroke()
 }
 
-const drawDisable = (ctx: any, bb: BoundingBox, color?: string) => {
+const drawDisable = (ctx: any, bb: BoundingBox, color: string = 'green') => {
 	const { width } = setCoord(bb)
 	// main bg
 	ctx.fillStyle = 'rgba(0,255,0,.5)'
@@ -82,7 +82,7 @@ const drawDisable = (ctx: any, bb: BoundingBox, color?: string) => {
 	ctx.beginPath()
 	ctx.moveTo(bb.left - 10, bb.top)
 	ctx.lineTo(bb.left - 10, bb.bottom - 3)
-	ctx.strokeStyle = 'green'
+	ctx.strokeStyle = color
 	ctx.stroke()
 	// draw triangle
 	ctx.beginPath()
@@ -90,7 +90,7 @@ const drawDisable = (ctx: any, bb: BoundingBox, color?: string) => {
 	ctx.lineTo(bb.left - 5, bb.bottom - 8)
 	ctx.lineTo(bb.left - 15, bb.bottom - 8)
 	ctx.closePath()
-	ctx.fillStyle = 'green'
+	ctx.fillStyle = color
 	ctx.fill()
 	// draw crest
 	ctx.beginPath()

@@ -25,7 +25,7 @@
 					q-btn(round unelevated @click="refresh")
 						SvgIcon(name="refresh")
 				.icons.cog
-					q-btn(round unelevated @click="info.toggle")
+					q-btn(round unelevated)
 						SvgIcon(name="sliders-vertical")
 				transition(name="slide-left")
 					.toolbar(v-show="editMode")
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watchEffect, watch } from 'vue'
 import { Network } from 'vis-network/standalone' //this import supports types
 
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -60,11 +60,10 @@ import Legend from '@/components/Legend.vue'
 import { nodes as nod1, edges as edg1 } from '@/stores/json1'
 import { nodes as nod, edges as edg } from '@/stores/json'
 
-import { useGraph } from '@/stores/graph'
+// import { useGraph } from '@/stores/graph'
 import { useInfo } from '@/stores/info'
 import { nanoid } from 'nanoid'
 import { options } from '@/stores/options'
-// import { drawCycle } from '@/utils/ctx'
 import { initNetwork } from '@/utils/init'
 
 const editMode = ref(false)
@@ -74,18 +73,18 @@ const showRadial = ref(false)
 const showRect = ref(false)
 const showInfo = ref(false)
 
-const net = useGraph()
+// const net = useGraph()
 const info = useInfo()
 
 let network: Network
 
 const detail = ref(true)
 
-const data1 = {
+const data = {
 	nodes: nod1,
 	edges: edg1,
 }
-const data = {
+const data1 = {
 	nodes: nod,
 	edges: edg,
 }
@@ -107,7 +106,7 @@ onMounted(() => {
 		} else {
 			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
 			if (currentNode !== undefined) {
-				net.setCurrentNode(currentNode)
+				info.setCurrentNode(currentNode)
 				let rect = document.getElementById('rectmenu')!
 				rect.style.left = coordClick.x + 5 + 'px'
 				rect.style.top = coordClick.y + 5 + 'px'
@@ -125,7 +124,7 @@ onMounted(() => {
 const closeMenu = () => {
 	if (showRect.value === true) {
 		showRect.value = false
-		net.nodeSelection = 1000
+		info.nodeSelection = 1000
 	}
 }
 
@@ -148,7 +147,7 @@ const refresh = () => {
 		} else {
 			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
 			if (currentNode !== undefined) {
-				net.setCurrentNode(currentNode)
+				info.setCurrentNode(currentNode)
 				let rect = document.getElementById('rectmenu')!
 				rect.style.left = coordClick.x + 5 + 'px'
 				rect.style.top = coordClick.y + 5 + 'px'

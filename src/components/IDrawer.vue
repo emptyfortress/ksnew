@@ -31,35 +31,43 @@ q-drawer(v-model="info.infoDrawer"
 		q-btn(unelevated label="Отмена" @click="closeAll")
 		q-space
 		q-btn(unelevated color="primary" label="Старт согласования" )
-
+	p {{ selection }}
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useInfo } from '@/stores/info'
+// import { useGraph } from '@/stores/graph'
 import Selector from '@/components/common/Selector.vue'
-import { nodes } from '@/stores/json1'
+// import { nodes } from '@/stores/json1'
 
 const info = useInfo()
-
-const props = defineProps({
-	show: {
-		type: Boolean,
-		default: false,
-	},
-})
+// const graph = useGraph()
 
 const options = ['Длинный маршрут для договоров', 'Маршрут 1', 'Маршрут 2']
 
 const items = computed(() => {
-	const filt = (e: any) => e.first === false && e.last === false && e.repeat !== true
-	return nodes.filter(filt)
+	const filt = (e: any) => e.first !== true && e.last !== true
+	return info.nodes.filter(filt)
+	// return nodes.filter(filt)
 })
 
-let start = items.value.map((item) => {
-	return item.id
-})
+let start = items.value
+	.filter((e) => e.include === true)
+	.map((item) => {
+		return item.id
+	})
+
 const selection = ref(start)
+
+watchEffect(() => {
+	info.nodes.forEach((item) => {
+		if (selection.value.includes(item.id)) {
+			item.include = true
+		} else item.include = false
+	})
+})
+
 const toggleks = () => {
 	info.toggleks()
 }

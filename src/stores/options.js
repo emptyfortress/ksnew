@@ -46,6 +46,10 @@ const options = {
 			y: 2,
 		},
 		chosen: true,
+		selfReference: {
+			size: 18,
+			angle: 6.2,
+		},
 	},
 	nodes: {
 		shadow: {

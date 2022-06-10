@@ -4,6 +4,14 @@ interface BoundingBox {
 	top: number
 	bottom: number
 }
+
+function setCoord(e: BoundingBox) {
+	const width = e.right - e.left
+	const centerX = e.left + width / 2
+	const centerY = e.top
+	return { width, centerX, centerY }
+}
+
 const drawCycle = (ctx: any, bb: BoundingBox, color: string) => {
 	ctx.lineWidth = 1
 	ctx.beginPath()
@@ -22,9 +30,7 @@ const drawCycle = (ctx: any, bb: BoundingBox, color: string) => {
 }
 
 const drawOr = (ctx: any, bb: BoundingBox, color: string) => {
-	const width = bb.right - bb.left
-	const centerX = bb.left + width / 2
-	const centerY = bb.top
+	const { centerX, centerY } = setCoord(bb)
 	ctx.translate(centerX, centerY)
 	ctx.rotate((Math.PI / 180) * 45) // rotate
 	ctx.translate(-centerX, -centerY) // translate back
@@ -32,6 +38,9 @@ const drawOr = (ctx: any, bb: BoundingBox, color: string) => {
 	ctx.fillRect(centerX - 7, bb.top - 7, 14, 14)
 	ctx.strokeStyle = color
 	ctx.strokeRect(centerX - 7, bb.top - 7, 14, 14)
+	ctx.translate(centerX, centerY)
+	ctx.rotate((Math.PI / 180) * -45) // rotate
+	ctx.translate(-centerX, -centerY) // translate back
 	ctx.beginPath()
 	ctx.arc(centerX, centerY, 4, 0, Math.PI * 2, true)
 	ctx.strokeStyle = color
@@ -39,9 +48,7 @@ const drawOr = (ctx: any, bb: BoundingBox, color: string) => {
 }
 
 const drawAnd = (ctx: any, bb: BoundingBox, color: string) => {
-	const width = bb.right - bb.left
-	const centerX = bb.left + width / 2
-	const centerY = bb.top
+	const { centerX, centerY } = setCoord(bb)
 	ctx.translate(centerX, centerY)
 	ctx.rotate((Math.PI / 180) * 45) // rotate
 	ctx.translate(-centerX, -centerY) // translate back
@@ -64,9 +71,10 @@ const drawAnd = (ctx: any, bb: BoundingBox, color: string) => {
 	ctx.lineTo(centerX, centerY + 4)
 	ctx.strokeStyle = 'blue'
 	ctx.stroke()
-
-	// ctx.arc(centerX, centerY, 4, 0, Math.PI * 2, true)
-	// ctx.strokeStyle = 'blue'
-	// ctx.stroke()
 }
+
+const drawDisable = (ctx: any, bb: BoundinbBox, color: string) => {
+	const { width, centerX, centerY } = setCoord(bb)
+}
+
 export { drawCycle, drawOr, drawAnd }

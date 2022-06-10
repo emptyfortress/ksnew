@@ -19,12 +19,15 @@ const initNetwork = (network: Network) => {
 	})
 
 	network.on('afterDrawing', function (ctx) {
-		var nodeId = 5
-		const bb = network.getBoundingBox(nodeId)
-		const color = 'blue'
-		// drawCycle(ctx, bb, color)
-		drawAnd(ctx, bb, color)
-		// console.log(bb)
+		let and = [3, 5, 6]
+		and.forEach((e) => {
+			var nodeId = e
+			let bb = network.getBoundingBox(nodeId)
+			const color = 'blue'
+			// drawCycle(ctx, bb, color)
+			drawOr(ctx, bb, color)
+			bb = { left: 0, right: 0, top: 0, bottom: 0 }
+		})
 	})
 
 	return network

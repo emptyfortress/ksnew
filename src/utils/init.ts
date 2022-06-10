@@ -58,7 +58,7 @@ const initNetwork = (network: Network) => {
 		})
 
 		let exclude = nodes
-			.filter((e) => e.include === false)
+			.filter((e) => e.include === false && e.first !== true && e.last !== true)
 			.map((item) => {
 				return item.id
 			})

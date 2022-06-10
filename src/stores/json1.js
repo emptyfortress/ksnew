@@ -8,7 +8,7 @@ const nodes = [
 		StartCondition: 0,
 		group: 'start',
 		level: 0,
-		include: true,
+		include: false,
 	},
 	{
 		id: 1,

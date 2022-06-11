@@ -7,6 +7,12 @@ q-card
 		template(v-else)
 			q-item(clickable)
 				q-item-section {{info.nodeSelection}}
+			template(v-if="info.nodeSelection !== 0 && info.nodeSelection !== 8")
+				q-item(clickable  @click="toggleNode")
+					q-item-section Активен
+					q-item-section(side)
+						q-toggle(:model-value="currentNode"  @click="toggleNode")
+				q-separator
 			q-item(clickable )
 				q-item-section Показать доработки
 			q-item(clickable )
@@ -14,12 +20,20 @@ q-card
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useInfo } from '@/stores/info'
 
-const emit = defineEmits(['toggle'])
+const emit = defineEmits(['toggle', 'close'])
 
 const info = useInfo()
-// const nodes = net.nodes
+
+const currentNode = computed(() => {
+	return info.nodes[info.nodeSelection].active
+})
+const toggleNode = () => {
+	info.toggleNode()
+	emit('close')
+}
 
 const toggle = () => {
 	emit('toggle')

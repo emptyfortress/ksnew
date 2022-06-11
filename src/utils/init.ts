@@ -42,13 +42,13 @@ const initNetwork = (
 			radial.style.left = coordClick.x - 60 + 'px'
 			radial.style.top = coordClick.y - 60 + 'px'
 		} else {
-			rect.style.left = coordClick.x + 5 + 'px'
-			rect.style.top = coordClick.y + 5 + 'px'
-			showRect.value = true
 			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
 			if (currentNode !== undefined) {
 				info.setCurrentNode(currentNode)
 			}
+			rect.style.left = coordClick.x + 5 + 'px'
+			rect.style.top = coordClick.y + 5 + 'px'
+			showRect.value = true
 		}
 		})
 

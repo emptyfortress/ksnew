@@ -78,30 +78,39 @@ const drawDisable = (ctx: any, bb: BoundingBox, color: string = 'green') => {
 	// main bg
 	ctx.fillStyle = 'rgba(0,255,0,.5)'
 	ctx.fillRect(bb.left, bb.top, width, 36)
-	// draw left arrow
-	ctx.beginPath()
-	ctx.moveTo(centerX, bb.top - 5)
-	ctx.lineTo(centerX, bb.bottom)
-	ctx.strokeStyle = color
-	ctx.lineWidth = 4
-	ctx.stroke()
-	// draw triangle
-	ctx.beginPath()
-	ctx.moveTo(centerX, bb.bottom + 7)
-	ctx.lineTo(centerX + 7, bb.bottom - 8)
-	ctx.lineTo(centerX - 7, bb.bottom - 8)
-	ctx.closePath()
-	ctx.fillStyle = color
-	ctx.fill()
 	// draw crest
-	// ctx.beginPath()
-	// ctx.moveTo(bb.left, bb.top)
-	// ctx.lineTo(bb.right, bb.bottom)
-	// ctx.stroke()
+	ctx.beginPath()
+	ctx.moveTo(bb.left, bb.top)
+	ctx.lineTo(bb.right, bb.bottom)
+	ctx.strokeStyle = color
+	ctx.lineWidth = 2
+	ctx.stroke()
 	// ctx.beginPath()
 	// ctx.moveTo(bb.right, bb.top)
 	// ctx.lineTo(bb.left, bb.bottom)
+	// ctx.strokeStyle = color
+	// ctx.lineWidth = 2
 	// ctx.stroke()
+
+	ctx.fillStyle = 'green'
+	ctx.font = '11px Arial'
+	ctx.fillText('Исключен', bb.left, bb.bottom + 7)
+	// // draw arrow
+	// ctx.beginPath()
+	// ctx.moveTo(centerX, bb.top - 5)
+	// ctx.lineTo(centerX, bb.bottom)
+	// ctx.strokeStyle = color
+	// ctx.lineWidth = 4
+	// ctx.stroke()
+
+	// // draw triangle
+	// ctx.beginPath()
+	// ctx.moveTo(centerX, bb.bottom + 7)
+	// ctx.lineTo(centerX + 7, bb.bottom - 8)
+	// ctx.lineTo(centerX - 7, bb.bottom - 8)
+	// ctx.closePath()
+	// ctx.fillStyle = color
+	// ctx.fill()
 }
 
 const drawComplex = (ctx: any, bb: BoundingBox, color?: string) => {

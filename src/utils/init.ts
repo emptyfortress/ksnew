@@ -1,17 +1,27 @@
 import { watch } from 'vue'
-import { Network } from 'vis-network/standalone'
+import { Network, DataSet } from 'vis-network/standalone'
 import { drawDisable, drawOr, drawAnd, drawComplex } from '@/utils/ctx'
 import { useInfo } from '@/stores/info'
-import { nodes } from '@/stores/json1'
+import type { Ref } from 'vue'
 
-enum StartCondition {
-	'None' = 0,
-	'And',
-	'Or',
-	'Complex',
-}
+// import { nodes } from '@/stores/json1'
 
-const initNetwork = (network: Network) => {
+// enum StartCondition {
+// 	'None' = 0,
+// 	'And',
+// 	'Or',
+// 	'Complex',
+// }
+
+const initNetwork = (
+	network: Network,
+	nodes: DataSet<MyNode>,
+	editMode: Ref<boolean>,
+	showRadial: Ref<boolean>,
+	radial: HTMLElement,
+	showRect: Ref<boolean>,
+	rect: HTMLElement
+) => {
 	const info = useInfo()
 
 	network.on('selectNode', function (params) {
@@ -23,58 +33,53 @@ const initNetwork = (network: Network) => {
 		info.nodeSelection = 1000
 	})
 
+	network.on('oncontext', (params) => {
+		console.log(editMode.value)
+		params.event.preventDefault()
+		let coordClick = params.pointer.DOM
+		if (editMode.value === true) {
+			showRadial.value = true
+			radial.style.left = coordClick.x - 60 + 'px'
+			radial.style.top = coordClick.y - 60 + 'px'
+		} else {
+			rect.style.left = coordClick.x + 5 + 'px'
+			rect.style.top = coordClick.y + 5 + 'px'
+			showRect.value = true
+			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
+			if (currentNode !== undefined) {
+				info.setCurrentNode(currentNode)
+			}
+		}
+		})
+
 	network.on('afterDrawing', function (ctx) {
-		let and = nodes
-			.filter((e) => e.StartCondition === 1)
-			.map((item) => {
-				return item.id
-			})
-		and.forEach((e) => {
-			let bb = network.getBoundingBox(e)
+		nodes.forEach((node) => {
 			const color = 'blue'
-			drawAnd(ctx, bb, color)
-		})
-
-		let or = nodes
-			.filter((e) => e.StartCondition === 2)
-			.map((item) => {
-				return item.id
-			})
-		or.forEach((e) => {
-			let bb = network.getBoundingBox(e)
-			const color = 'blue'
+			let bb = network.getBoundingBox(node.id)
+			if (node.StartCondition === 1) {
+				drawAnd(ctx, bb, color)
+			}
+			if (node.StartCondition === 2) {
 			drawOr(ctx, bb, color)
-		})
-
-		let complex = nodes
-			.filter((e) => e.StartCondition === 3)
-			.map((item) => {
-				return item.id
-			})
-		complex.forEach((e) => {
-			let bb = network.getBoundingBox(e)
-			const color = 'blue'
+			}
+			if (node.StartCondition === 3) {
 			drawComplex(ctx, bb, color)
+			}
 		})
-
-		let exclude = nodes
-			.filter((e) => e.include === false && e.first !== true && e.last !== true)
-			.map((item) => {
-				return item.id
-			})
-
-		exclude.forEach((e) => {
-			let bb = network.getBoundingBox(e)
+		nodes.forEach((node) => {
+			let bb = network.getBoundingBox(node.id)
+			if (node.active !== true && node.first !== true && node.last !== true) {
 			drawDisable(ctx, bb)
+			}
 		})
 	})
-	watch(info.nodes, (value, oldvalue) => {
+	watch(info.nodes, (value) => {
 		if (value) {
 			network.redraw()
 		}
 	})
 
-	return network
+	return { network, nodes }
 }
 
 export { initNetwork }

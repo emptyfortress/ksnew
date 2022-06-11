@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watchEffect, watch } from 'vue'
-import { Network } from 'vis-network/standalone' //this import supports types
+import { Network, DataSet } from 'vis-network/standalone' //this import supports types
 
 import SvgIcon from '@/components/SvgIcon.vue'
 import SvgRadial from '@/components/SvgRadial.vue'
@@ -57,12 +57,7 @@ import Panel from '@/components/Panel.vue'
 import ContextMenu from '@/components/ContextMenu.vue'
 import Legend from '@/components/Legend.vue'
 
-import { nodes as nod1, edges as edg1 } from '@/stores/json1'
-import { nodes as nod, edges as edg } from '@/stores/json'
-
-// import { useGraph } from '@/stores/graph'
 import { useInfo } from '@/stores/info'
-import { nanoid } from 'nanoid'
 import { options } from '@/stores/options'
 import { initNetwork } from '@/utils/init'
 
@@ -73,52 +68,27 @@ const showRadial = ref(false)
 const showRect = ref(false)
 const showInfo = ref(false)
 
-// const net = useGraph()
 const info = useInfo()
 
 let network: Network
 
 const detail = ref(true)
 
+const nodes = new DataSet(info.nodes)
+const edges = new DataSet(info.edges)
+
 const data = {
-	nodes: nod1,
-	edges: edg1,
-}
-const data1 = {
-	nodes: nod,
-	edges: edg,
+	nodes: nodes,
+	edges: edges,
 }
 
 onMounted(() => {
 	const container = document.getElementById('mynetwork')!
+	const radial = document.getElementById('radial')!
+	const rect = document.getElementById('rectmenu')!
 	network = new Network(container, data, options)
 
-	initNetwork(network)
-
-	network.on('oncontext', (params) => {
-		params.event.preventDefault()
-		let coordClick = params.pointer.DOM
-		if (editMode.value === true) {
-			showRadial.value = true
-			let radial = document.getElementById('radial')!
-			radial.style.left = coordClick.x - 60 + 'px'
-			radial.style.top = coordClick.y - 60 + 'px'
-		} else {
-			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
-			if (currentNode !== undefined) {
-				info.setCurrentNode(currentNode)
-				let rect = document.getElementById('rectmenu')!
-				rect.style.left = coordClick.x + 5 + 'px'
-				rect.style.top = coordClick.y + 5 + 'px'
-				showRect.value = true
-			} else {
-				let rect = document.getElementById('rectmenu')!
-				rect.style.left = coordClick.x + 5 + 'px'
-				rect.style.top = coordClick.y + 5 + 'px'
-				showRect.value = true
-			}
-		}
-	})
+	initNetwork(network, nodes, editMode, showRadial, radial, showRect, rect)
 })
 
 const closeMenu = () => {
@@ -131,35 +101,11 @@ const closeMenu = () => {
 const refresh = () => {
 	network.destroy()
 	const container = document.getElementById('mynetwork')!
-	network = new Network(container, data1, options)
-	if (detail.value === true) {
-		network.setData(data)
-	}
+	const radial = document.getElementById('radial')!
+	const rect = document.getElementById('rectmenu')!
+	network = new Network(container, data, options)
 
-	network.on('oncontext', (params) => {
-		params.event.preventDefault()
-		let coordClick = params.pointer.DOM
-		if (editMode.value === true) {
-			showRadial.value = true
-			let radial = document.getElementById('radial')!
-			radial.style.left = coordClick.x - 60 + 'px'
-			radial.style.top = coordClick.y - 60 + 'px'
-		} else {
-			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
-			if (currentNode !== undefined) {
-				info.setCurrentNode(currentNode)
-				let rect = document.getElementById('rectmenu')!
-				rect.style.left = coordClick.x + 5 + 'px'
-				rect.style.top = coordClick.y + 5 + 'px'
-				showRect.value = true
-			} else {
-				let rect = document.getElementById('rectmenu')!
-				rect.style.left = coordClick.x + 5 + 'px'
-				rect.style.top = coordClick.y + 5 + 'px'
-				showRect.value = true
-			}
-		}
-	})
+	initNetwork(network, nodes, editMode, showRadial, radial, showRect, rect)
 }
 
 const toggleMagnet = () => {

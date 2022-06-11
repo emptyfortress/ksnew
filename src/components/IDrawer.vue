@@ -37,12 +37,9 @@ q-drawer(v-model="info.infoDrawer"
 <script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
 import { useInfo } from '@/stores/info'
-// import { useGraph } from '@/stores/graph'
 import Selector from '@/components/common/Selector.vue'
-// import { nodes } from '@/stores/json1'
 
 const info = useInfo()
-// const graph = useGraph()
 
 const options = ['Длинный маршрут для договоров', 'Маршрут 1', 'Маршрут 2']
 
@@ -53,7 +50,7 @@ const items = computed(() => {
 })
 
 let start = items.value
-	.filter((e) => e.include === true)
+	.filter((e) => e.active === true)
 	.map((item) => {
 		return item.id
 	})
@@ -63,8 +60,8 @@ const selection = ref(start)
 watchEffect(() => {
 	info.nodes.forEach((item) => {
 		if (selection.value.includes(item.id)) {
-			item.include = true
-		} else item.include = false
+			item.active = true
+		} else item.active = false
 	})
 })
 

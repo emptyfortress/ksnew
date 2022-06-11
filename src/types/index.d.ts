@@ -12,7 +12,12 @@ interface Edge {
 
 interface MyNode {
 	id: number
+	active: boolean
 	label: string
+	title?: string
+	first: boolean
+	last: boolean
+	StartCondition: number
 	group: string
 	level?: number
 }

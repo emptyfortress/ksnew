@@ -219,7 +219,7 @@ const toggleDetails = () => {
 		align-items: center;
 		color: #aaa;
 		background: #feffff;
-		background: linear-gradient(to bottom, #feffff 0%, #b6dcfb 50%, #feffff 100%);
+		background: linear-gradient(-45deg, #e9f5fe, #aad7fd, #e9f5fe);
 		&.edit {
 			border-color: var(--q-primary);
 			background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAKZJREFUKFNNUNsNhDAMs0UZ4GCG4/ZfATaBLQDJJyfhwUdJU8ePcF4PAQJJ+FMddY2Ge1zWXdPQIJ4AGgwXCEIJiCqAh6axQThBtGB9aHhLJOPYx3yIKy1kWb034+MvXFozBy0tgPO26/exNOAA0fSjgVIJ8PLYXVopV6QZJhm4bLu+Q5+PPgIUdFWXkznCOG2tRP6/hio4vfBptPQJyvu8Rnzvbu9/N7pfWZyGdmEAAAAASUVORK5CYII=)

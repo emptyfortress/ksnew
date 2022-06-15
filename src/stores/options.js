@@ -45,7 +45,7 @@ const options = {
 			x: 2,
 			y: 2,
 		},
-		chosen: true,
+		chosen: false,
 		selfReference: {
 			size: 18,
 			angle: 6.2,

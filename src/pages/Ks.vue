@@ -7,7 +7,7 @@
 				#radial(v-show="showRadial" v-click-away="closeRadial")
 					SvgRadial
 				#rectmenu(v-show="showRect" v-click-away="closeMenu")
-					ContextMenu(@toggle="toggleDetails")
+					ContextMenu()
 				.icons.legend
 					q-btn(round unelevated @click="showInfo = !showInfo")
 						q-icon(name="mdi-close" v-if="showInfo")
@@ -124,7 +124,7 @@ const toggleMagnet = () => {
 	}
 }
 
-const splitterModel = ref(400)
+const splitterModel = ref(430)
 
 const closeRadial = () => {
 	if (showRadial.value === true) {
@@ -134,13 +134,13 @@ const closeRadial = () => {
 
 const toggleDetails = () => {
 	showRect.value = false
-	if (detail.value === true) {
-		network.setData(data1)
-		detail.value = false
-	} else {
-		network.setData(data)
-		detail.value = true
-	}
+	// if (detail.value === true) {
+	// 	network.setData(data1)
+	// 	detail.value = false
+	// } else {
+	// 	network.setData(data)
+	// 	detail.value = true
+	// }
 }
 </script>
 

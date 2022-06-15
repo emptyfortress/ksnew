@@ -13,10 +13,10 @@ q-card
 					q-item-section(side)
 						q-toggle(:model-value="currentNode"  @click="toggleNode")
 				q-separator
-			q-item(clickable )
-				q-item-section Показать доработки
-			q-item(clickable )
-				q-item-section Отрицательный исход
+				q-item(clickable )
+					q-item-section Показать доработки
+				q-item(clickable )
+					q-item-section Отрицательный исход
 </template>
 
 <script setup lang="ts">

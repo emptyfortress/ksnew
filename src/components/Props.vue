@@ -1,52 +1,64 @@
 <template lang="pug">
+q-toggle(:model-value="active" label="Активен" @update:model-value="toggleNode")
 q-list
 	.custom-expansions-item.flat
 		q-expansion-item(v-model="panels[0]" expand-separator label="Общие" switch-toggle-side)
 			q-card(flat)
 				q-card-section
+					.grid
+						div
+							.label Название
+							.editable.text-body1(contenteditable) {{ info.selectedNode.label }}
+						div
+							.label Описание
+							.editable.text-body1(contenteditable)
+				q-card-section
 					.rowgap
 						component(:is="Selector" :val="tip" label="Тип этапа" :options="tipOptions" @click="setTip")
 						component(:is="Selector" :val="shablon" label="Шаблон этапа" :options="shablonOptions" @click="setShablon")
-				q-card-section
-					.grid
-						div
-							.label Отображаемое название
-							.editable.text-body1(contenteditable) Плановый отдел
-						div
-							.label Полное название
-							.editable.text-body1(contenteditable) Плановый отдел параллельный
-					q-card-section.q-px-none.column
-						q-checkbox(dense label="Разрешить исключать этап из маршрута" v-model="check1")
-						q-checkbox(dense label="Разрешить редактирование инициатору" v-model="check2" disable)
-						q-checkbox(dense label="Требуется конслолидация после завершения" v-model="check3")
+				q-card-section.column
+					q-checkbox(dense label="Разрешить исключать этап из маршрута" v-model="check1" disable)
+					q-checkbox(dense label="Разрешить редактирование инициатору" v-model="check2" disable)
+					q-checkbox(dense label="Требуется конслолидация после завершения" v-model="check3" disable)
 		.actionBt
 			q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="toggle")
 	.custom-expansions-item.flat
 		q-expansion-item(v-model="panels[1]" expand-separator label="Условие старта" switch-toggle-side)
-			q-card
+			q-card.sog
 				q-list(dense)
-					q-item And: { Этап 3 } завершился положительно
-					q-item And: { Этап 2 } завершился нейтрально
-					q-item Or: { Этап 2 } завершился отрицательно
-					q-item Not: { Этап 2 } завершился отрицательно
+					q-item(v-for="item in info.selectedNode.start")
+						q-item-section(avatar)
+							q-img(src="@/assets/img/cond-and.svg" v-if="item.icon === 0" width="36px")
+							q-img(src="@/assets/img/cond-or.svg" v-if="item.icon === 1" width="36px")
+						q-item-section {{ item.title }}
 	.custom-expansions-item.flat
 		q-expansion-item(v-model="panels[2]" expand-separator label="Список согласующих" switch-toggle-side)
 			q-card
-				q-card-section Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique. Augue neque, gravida in fermentum et, sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor.
+				q-card-section Rhoncus aenean
 	.custom-expansions-item.flat
 		q-expansion-item(v-model="panels[3]" expand-separator label="Служебные" switch-toggle-side)
 			q-card
-				q-card-section Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique. Augue neque, gravida in fermentum et, sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor.
+				q-card-section Rhoncus aenean
 		q-expansion-item(v-model="panels[4]" expand-separator label="Связанные маршруты" switch-toggle-side)
 			q-card
-				q-card-section Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique. Augue neque, gravida in fermentum et, sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor.
+				q-card-section Rhoncus aenean
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useInfo } from '@/stores/info'
 import Selector from '@/components/common/Selector.vue'
 
-let panels = ref([true, true, false, false, false])
+const info = useInfo()
+const active = computed(() => {
+	return info.selectedNode.active
+})
+
+const toggleNode = () => {
+	info.toggleNode()
+}
+
+let panels = ref([false, true, false, false, false])
 const toggle = () => {
 	const fal = (item: boolean) => item === false
 	panels.value.some(fal)
@@ -54,8 +66,8 @@ const toggle = () => {
 		: (panels.value = panels.value.map((item) => (item = false)))
 }
 
-const check1 = ref(false)
-const check2 = ref(true)
+const check1 = ref(true)
+const check2 = ref(false)
 const check3 = ref(false)
 const tip = ref('Этап')
 const shablon = ref('Простой')
@@ -119,5 +131,10 @@ const setShablon = (e: string) => {
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 2rem;
+}
+.sog {
+	margin: 0 0 1rem 0;
+	// border: 1px solid #ccc;
+	// box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 }
 </style>

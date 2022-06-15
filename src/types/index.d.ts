@@ -15,6 +15,7 @@ interface MyNode {
 	active: boolean
 	label: string
 	title?: string
+	desc?: string
 	first: boolean
 	last: boolean
 	StartCondition: number

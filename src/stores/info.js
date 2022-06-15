@@ -4,8 +4,8 @@ import { nodes, edges } from '@/stores/json1'
 export const useInfo = defineStore({
 	id: 'info',
 	state: () => ({
-		infoDrawer: false,
-		ksDrawer: false,
+		infoDrawer: true,
+		ksDrawer: true,
 		etaps: [],
 		nodeSelection: 1000,
 		edgeSelection: [],
@@ -15,6 +15,9 @@ export const useInfo = defineStore({
 	getters: {
 		selected() {
 			return this.nodeSelection !== 1000
+		},
+		selectedNode() {
+			return this.nodes[this.nodeSelection]
 		},
 	},
 	actions: {
@@ -36,6 +39,9 @@ export const useInfo = defineStore({
 		},
 		setCurrentNode(e) {
 			this.nodeSelection = e
+		},
+		toggleNode() {
+			this.nodes[this.nodeSelection].active = !this.nodes[this.nodeSelection].active
 		},
 	},
 })

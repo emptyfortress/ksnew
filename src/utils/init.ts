@@ -45,12 +45,12 @@ const initNetwork = (
 			let currentNode = network.getNodeAt({ x: coordClick.x, y: coordClick.y })
 			if (currentNode !== undefined) {
 				info.setCurrentNode(currentNode)
+				rect.style.left = coordClick.x + 5 + 'px'
+				rect.style.top = coordClick.y + 5 + 'px'
+				showRect.value = true
 			}
-			rect.style.left = coordClick.x + 5 + 'px'
-			rect.style.top = coordClick.y + 5 + 'px'
-			showRect.value = true
 		}
-		})
+	})
 
 	network.on('afterDrawing', function (ctx) {
 		nodes.forEach((node) => {
@@ -60,16 +60,16 @@ const initNetwork = (
 				drawAnd(ctx, bb, color)
 			}
 			if (node.StartCondition === 2) {
-			drawOr(ctx, bb, color)
+				drawOr(ctx, bb, color)
 			}
 			if (node.StartCondition === 3) {
-			drawComplex(ctx, bb, color)
+				drawComplex(ctx, bb, color)
 			}
 		})
 		nodes.forEach((node) => {
 			let bb = network.getBoundingBox(node.id)
 			if (node.active !== true && node.first !== true && node.last !== true) {
-			drawDisable(ctx, bb)
+				drawDisable(ctx, bb)
 			}
 		})
 	})

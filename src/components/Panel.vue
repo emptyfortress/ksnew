@@ -16,16 +16,19 @@
 		q-card(flat)
 			q-card-section
 				.text-h6
-					q-icon(name="mdi-map-marker-outline" size="md").q-mr-md
+					q-icon(name="mdi-map-marker-path" size="md").q-mr-md
 					span Информация по маршруту
 			q-card-section
 				q-markup-table(flat dense)
 					tbody
+						tr
+							td Название
+							td.text-bold {{ info.nodes[0].title }}
 						tr(v-for="row in table")
 							td {{ row.label }}
-							td(:class="{'text-bold' : row.bold}") {{ row.value }}
+							td {{ row.value }}
 			q-card-section
-				p Маршрут используется для согласования общих договоров с подписанием.
+				p {{ info.nodes[0].desc}}
 		.empty Выберите узел или переход,<br>чтобы просмотреть его свойства.
 
 </template>
@@ -40,7 +43,7 @@ const info = useInfo()
 const tab = ref('props')
 
 const table = [
-	{ label: 'Название', value: 'Согласование договоров общее (делопроизводство)', bold: true },
+	// { label: 'Название', value: 'Согласование договоров общее (делопроизводство)', bold: true },
 	{ label: 'Создано', value: '2021-10-15' },
 	{ label: 'Автор', value: 'Орлов П.С.' },
 	{ label: 'Утверждено', value: 'Птичкина А.П.' },

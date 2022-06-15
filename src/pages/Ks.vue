@@ -7,7 +7,7 @@
 				#radial(v-show="showRadial" v-click-away="closeRadial")
 					SvgRadial
 				#rectmenu(v-show="showRect" v-click-away="closeMenu")
-					ContextMenu()
+					ContextMenu(@toggle="load")
 				.icons.legend
 					q-btn(round unelevated @click="showInfo = !showInfo")
 						q-icon(name="mdi-close" v-if="showInfo")
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watchEffect, watch } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import { Network, DataSet } from 'vis-network/standalone' //this import supports types
 
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -60,6 +60,7 @@ import Legend from '@/components/Legend.vue'
 import { useInfo } from '@/stores/info'
 import { options } from '@/stores/options'
 import { initNetwork } from '@/utils/init'
+import { nodes2, edges2 } from '@/stores/json2'
 
 const editMode = ref(false)
 const magnetMode = ref(true)
@@ -71,8 +72,6 @@ const showInfo = ref(false)
 const info = useInfo()
 
 let network: Network
-
-const detail = ref(true)
 
 const nodes = new DataSet(info.nodes)
 const edges = new DataSet(info.edges)
@@ -88,7 +87,7 @@ onMounted(() => {
 	const rect = document.getElementById('rectmenu')!
 	network = new Network(container, data, options)
 
-	initNetwork(network, nodes, editMode, showRadial, radial, showRect, rect)
+	initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
 })
 
 const closeMenu = () => {
@@ -105,7 +104,7 @@ const refresh = () => {
 	const rect = document.getElementById('rectmenu')!
 	network = new Network(container, data, options)
 
-	initNetwork(network, nodes, editMode, showRadial, radial, showRect, rect)
+	initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
 }
 
 const toggleMagnet = () => {
@@ -132,15 +131,33 @@ const closeRadial = () => {
 	}
 }
 
-const toggleDetails = () => {
-	showRect.value = false
-	// if (detail.value === true) {
-	// 	network.setData(data1)
-	// 	detail.value = false
-	// } else {
-	// 	network.setData(data)
-	// 	detail.value = true
+const load = (e: number) => {
+	if (e === 1) {
+		network.destroy()
+		const container = document.getElementById('mynetwork')!
+		const radial = document.getElementById('radial')!
+		const rect = document.getElementById('rectmenu')!
+		network = new Network(container, data, options)
+
+		initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
+		info.setNodes1()
+	}
+	if (e === 2) {
+		network.destroy()
+		const container = document.getElementById('mynetwork')!
+		const radial = document.getElementById('radial')!
+		const rect = document.getElementById('rectmenu')!
+		network = new Network(container, { nodes: nodes2, edges: edges2 }, options)
+
+		initNetwork(network, nodes2, editMode, showRadial, radial, showRect, rect)
+		info.setNodes2()
+	}
+	// if (e === 3) {
+	// 	network.setData(data3)
+	// 	info.setNodes(data3)
 	// }
+
+	showRect.value = false
 }
 </script>
 

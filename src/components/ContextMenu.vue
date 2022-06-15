@@ -2,8 +2,10 @@
 q-card
 	q-list
 		template(v-if="info.nodeSelection === 1000")
-			q-item(clickable @click="toggle")
-				q-item-section Переключить детализацию
+			q-item(clickable @click="toggle(1)")
+				q-item-section Маршрут 1
+			q-item(clickable @click="toggle(2)")
+				q-item-section Маршрут 2
 		template(v-else)
 			q-item(clickable)
 				q-item-section {{info.nodeSelection}}
@@ -35,8 +37,8 @@ const toggleNode = () => {
 	emit('close')
 }
 
-const toggle = () => {
-	emit('toggle')
+const toggle = (e: number) => {
+	emit('toggle', e)
 }
 </script>
 

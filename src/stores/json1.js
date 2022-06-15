@@ -1,4 +1,4 @@
-const nodes = [
+const nodes1 = [
 	{
 		id: 0,
 		active: true,
@@ -114,25 +114,25 @@ const nodes = [
 	},
 ]
 
-const edges = [
-	{ id: undefined, from: 0, to: 1, semantic: 8, title: 'Любой исход' },
-	{ from: 0, to: 2, semantic: 8, title: 'Любой исход' },
-	{ from: 1, to: 3, semantic: 8, title: 'Любой исход', endPointOffset: { to: 10 } },
-	{ from: 3, to: 5, semantic: 8, title: 'Любой исход' },
-	{ from: 2, to: 4, semantic: 8, color: 'blue', title: 'Кроме негативного' },
+const edges1 = [
+	{ id: undefined, from: 0, to: 1, semantics: 8, title: 'Любой исход' },
+	{ from: 0, to: 2, semantics: 8, title: 'Любой исход' },
+	{ from: 1, to: 3, semantics: 8, title: 'Любой исход', endPointOffset: { to: 10 } },
+	{ from: 3, to: 5, semantics: 8, title: 'Любой исход' },
+	{ from: 2, to: 4, semantics: 8, color: 'blue', title: 'Кроме негативного' },
 	{
 		from: 2,
 		to: 6,
-		semantic: 8,
+		semantics: 8,
 		color: 'grey',
 		title: 'Нейтральный исход',
 		endPointOffset: { to: 10 },
 	},
-	{ from: 5, to: 8, semantic: 8, color: 'green', title: 'Позитивный исход' },
+	{ from: 5, to: 8, semantics: 8, color: 'green', title: 'Позитивный исход' },
 	{
 		from: 5,
 		to: 5,
-		semantic: 8,
+		semantics: 8,
 		color: 'red',
 		label: '2',
 		title: 'Циклы',
@@ -145,25 +145,25 @@ const edges = [
 	{
 		from: 4,
 		to: 6,
-		semantic: 8,
+		semantics: 8,
 		color: 'green',
 		title: 'Позитивный исход',
 		endPointOffset: { to: 10 },
 	},
-	{ from: 6, to: 8, semantic: 8, color: 'green', title: 'Позитивный исход' },
-	{ from: 6, to: 3, semantic: 8, color: 'red', title: 'Негативный исход' },
+	{ from: 6, to: 8, semantics: 8, color: 'green', title: 'Позитивный исход' },
+	{ from: 6, to: 3, semantics: 8, color: 'red', title: 'Негативный исход' },
 
-	{ from: 9, to: 3, semantic: 8, color: 'blue', title: 'Кроме негативного' },
-	{ from: 2, to: 12, semantic: 8, color: 'grey', title: 'Нейтральный исход' },
-	// { from: 4, to: 3, semantic: 8 },
-	{ from: 2, to: 10, semantic: 8, color: 'red', title: 'Негативный исход' },
-	{ from: 4, to: 10, semantic: 8, color: 'red', title: 'Негативный исход' },
-	{ from: 7, to: 2, semantic: 8, dashes: true, title: 'Возврат' },
-	{ from: 7, to: 4, semantic: 8, dashes: true, title: 'Возврат' },
-	// { from: 6, to: 3, semantic: 8, color: 'red' },
-	{ from: 10, to: 7, semantic: 8, color: 'blue', title: 'Кроме негативного' },
-	{ from: 11, to: 8, semantic: 8, title: 'Любой исход' },
-	{ from: 12, to: 6, semantic: 8, title: 'Любой исход' },
+	{ from: 9, to: 3, semantics: 8, color: 'blue', title: 'Кроме негативного' },
+	{ from: 2, to: 12, semantics: 8, color: 'grey', title: 'Нейтральный исход' },
+	// { from: 4, to: 3, semantics: 8 },
+	{ from: 2, to: 10, semantics: 8, color: 'red', title: 'Негативный исход' },
+	{ from: 4, to: 10, semantics: 8, color: 'red', title: 'Негативный исход' },
+	{ from: 7, to: 2, semantics: 8, dashes: true, title: 'Возврат' },
+	{ from: 7, to: 4, semantics: 8, dashes: true, title: 'Возврат' },
+	// { from: 6, to: 3, semantics: 8, color: 'red' },
+	{ from: 10, to: 7, semantics: 8, color: 'blue', title: 'Кроме негативного' },
+	{ from: 11, to: 8, semantics: 8, title: 'Любой исход' },
+	{ from: 12, to: 6, semantics: 8, title: 'Любой исход' },
 ]
 
-export { nodes, edges }
+export { nodes1, edges1 }

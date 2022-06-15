@@ -6,8 +6,8 @@ interface Node {
 
 interface Edge {
 	id?: undefined
-	from: number
-	to: number
+	from: number | string
+	to: number | string
 }
 
 interface MyNode {

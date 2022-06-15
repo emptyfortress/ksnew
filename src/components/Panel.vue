@@ -23,7 +23,7 @@
 					tbody
 						tr
 							td Название
-							td.text-bold {{ info.nodes[0].title }}
+							td.text-bold {{ tit }}
 						tr(v-for="row in table")
 							td {{ row.label }}
 							td {{ row.value }}
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useInfo } from '@/stores/info'
 import Props from '@/components/Props.vue'
 
@@ -48,6 +48,10 @@ const table = [
 	{ label: 'Автор', value: 'Орлов П.С.' },
 	{ label: 'Утверждено', value: 'Птичкина А.П.' },
 ]
+
+const tit = computed(() => {
+	return info.nodes[0].title
+})
 </script>
 
 <style scoped lang="scss">

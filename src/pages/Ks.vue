@@ -96,6 +96,10 @@ onMounted(() => {
 	network = new Network(container, data, options)
 
 	initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
+
+	watch(info.nodes, () => {
+		network.redraw()
+	})
 })
 
 const closeMenu = () => {
@@ -164,8 +168,8 @@ const load = (e: number) => {
 		Object.assign(data, data2)
 		network = new Network(container, data, options)
 		initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
-		info.setNodes2()
 		showRect.value = false
+		info.setNodes2()
 	}
 	if (e === 3) {
 		network.destroy()
@@ -176,15 +180,10 @@ const load = (e: number) => {
 		Object.assign(data, data3)
 		network = new Network(container, data, options)
 		initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
-		info.setNodes2()
+		info.setNodes3()
 		showRect.value = false
 	}
 }
-watch(info.nodes, (value) => {
-	if (value) {
-		network.redraw()
-	}
-})
 </script>
 
 <style scoped lang="scss">

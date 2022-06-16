@@ -73,11 +73,6 @@ const initNetwork = (
 			}
 		})
 	})
-	// watch(info.nodes, (value) => {
-	// 	if (value) {
-	// 		network.redraw()
-	// 	}
-	// })
 
 	return { network, nodes }
 }

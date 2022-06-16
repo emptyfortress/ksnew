@@ -57,8 +57,10 @@ const options = {
 		},
 		chosen: {
 			node: (values) => {
-				values.shadowSize = 8
-				values.borderWidth = 2
+				values.shadowX = 4
+				values.shadowY = 8
+				values.shadowColor = 'rgba(0,0,0,0.7)'
+				values.borderWidth = 3
 			},
 			label: true,
 		},

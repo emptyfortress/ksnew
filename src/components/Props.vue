@@ -34,20 +34,21 @@ q-list
 	.custom-expansions-item.flat
 		q-expansion-item(v-model="panels[2]" expand-separator label="Список согласующих" switch-toggle-side)
 			q-card
-				q-card-section Rhoncus aenean
+				SoglTable
 	.custom-expansions-item.flat
 		q-expansion-item(v-model="panels[3]" expand-separator label="Служебные" switch-toggle-side)
 			q-card
-				q-card-section Rhoncus aenean
+				q-card-section Служебная информация
 		q-expansion-item(v-model="panels[4]" expand-separator label="Связанные маршруты" switch-toggle-side)
 			q-card
-				q-card-section Rhoncus aenean
+				q-card-section Связанные маршруты
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useInfo } from '@/stores/info'
 import Selector from '@/components/common/Selector.vue'
+import SoglTable from '@/components/common/SoglTable.vue'
 
 const info = useInfo()
 const active = computed(() => {
@@ -58,7 +59,7 @@ const toggleNode = () => {
 	info.toggleNode()
 }
 
-let panels = ref([false, true, false, false, false])
+let panels = ref([false, false, true, false, false])
 const toggle = () => {
 	const fal = (item: boolean) => item === false
 	panels.value.some(fal)

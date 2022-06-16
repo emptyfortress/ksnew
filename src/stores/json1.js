@@ -96,10 +96,13 @@ const nodes1 = [
 		label: 'Доработка',
 		first: false,
 		last: false,
-		StartCondition: 0,
+		StartCondition: 2,
 		group: 'box',
 		level: 0.9,
-		start: [''],
+		start: [
+			{ icon: 1, title: '{Этап 2} завершен отрицательно' },
+			{ icon: 1, title: '{Этап 4} завершен отрицательно' },
+		],
 	},
 	{
 		id: 8,
@@ -120,6 +123,8 @@ const edges1 = [
 	{ from: 1, to: 3, semantics: 8, title: 'Любой исход', endPointOffset: { to: 10 } },
 	{ from: 3, to: 5, semantics: 8, title: 'Любой исход' },
 	{ from: 2, to: 4, semantics: 8, color: 'blue', title: 'Кроме негативного' },
+	// { from: 2, to: 7, semantics: 8, color: 'red', title: 'Негативный исход' },
+	// { from: 4, to: 7, semantics: 8, color: 'red', title: 'Негативный исход' },
 	{
 		from: 2,
 		to: 6,
@@ -153,17 +158,22 @@ const edges1 = [
 	{ from: 6, to: 8, semantics: 8, color: 'green', title: 'Позитивный исход' },
 	{ from: 6, to: 3, semantics: 8, color: 'red', title: 'Негативный исход' },
 
-	{ from: 9, to: 3, semantics: 8, color: 'blue', title: 'Кроме негативного' },
-	{ from: 2, to: 12, semantics: 8, color: 'grey', title: 'Нейтральный исход' },
-	// { from: 4, to: 3, semantics: 8 },
-	{ from: 2, to: 10, semantics: 8, color: 'red', title: 'Негативный исход' },
-	{ from: 4, to: 10, semantics: 8, color: 'red', title: 'Негативный исход' },
-	{ from: 7, to: 2, semantics: 8, dashes: true, title: 'Возврат' },
-	{ from: 7, to: 4, semantics: 8, dashes: true, title: 'Возврат' },
-	// { from: 6, to: 3, semantics: 8, color: 'red' },
-	{ from: 10, to: 7, semantics: 8, color: 'blue', title: 'Кроме негативного' },
-	{ from: 11, to: 8, semantics: 8, title: 'Любой исход' },
-	{ from: 12, to: 6, semantics: 8, title: 'Любой исход' },
+	{
+		from: 7,
+		to: 2,
+		semantics: 8,
+		dashes: true,
+		title: 'Возврат',
+		arrows: { from: true, to: true },
+	},
+	{
+		from: 7,
+		to: 4,
+		semantics: 8,
+		dashes: true,
+		title: 'Возврат',
+		arrows: { from: true, to: true },
+	},
 ]
 
 export { nodes1, edges1 }

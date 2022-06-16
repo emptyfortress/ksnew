@@ -6,6 +6,8 @@ q-card
 				q-item-section Маршрут 1
 			q-item(clickable @click="toggle(2)")
 				q-item-section Маршрут 2
+			q-item(clickable @click="toggle(3)")
+				q-item-section Маршрут 3
 		template(v-else)
 			q-item(clickable)
 				q-item-section {{info.nodeSelection}}

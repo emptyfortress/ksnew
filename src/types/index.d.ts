@@ -5,9 +5,11 @@ interface Node {
 }
 
 interface Edge {
-	id?: undefined
-	from: number | string
-	to: number | string
+	from: number
+	to: number
+	color: string
+	title?: string
+	semantics: number
 }
 
 interface MyNode {

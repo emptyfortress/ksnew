@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { nodes1, edges1 } from '@/stores/json1'
 import { nodes2, edges2 } from '@/stores/json2'
+import { nodes3, edges3 } from '@/stores/json3'
 
 export const useInfo = defineStore({
 	id: 'info',
@@ -51,6 +52,10 @@ export const useInfo = defineStore({
 		setNodes2() {
 			this.nodes = nodes2
 			this.edges = edges2
+		},
+		setNodes3() {
+			this.nodes = nodes3
+			this.edges = edges3
 		},
 	},
 })

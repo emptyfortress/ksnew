@@ -1,27 +1,27 @@
 <template lang="pug">
 div
-	.label {{ label }}
+	.label {{ props.label }}
 	.sel(:class="{'open' : menu }") {{ val }}
 		q-menu(v-model="menu").selector
 			q-list
-				q-item(clickable v-close-popup v-for="item in options" @click="clickHandle(item)")
+				q-item(clickable v-close-popup v-for="item in props.options" @click="clickHandle(item)")
 					q-item-section {{ item }}
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps<{
 	val: string
 	label?: string
 	options: string[]
 }>()
-const emit = defineEmits(['click'])
+const emit = defineEmits(['select'])
 
 const menu = ref(false)
 
 const clickHandle = (e: string) => {
-	emit('click', e)
+	emit('select', e)
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="info.infoDrawer"
+q-drawer(v-model="props.show"
 	overlay
 	side="right"
 	:width="420"
@@ -12,15 +12,14 @@ q-drawer(v-model="info.infoDrawer"
 			q-btn(round flat  @click="info.closeInfo")
 				q-icon(name="mdi-close" v-if="!info.ksDrawer")
 				q-icon(name="mdi-arrow-right" v-else)
-		component(:is="Selector" val="Длинный маршрут для договоров" :options="options").q-mt-md
+		component(:is="Selector" val="Маршрут 1" :options="options" @select="choose").q-mt-md
 	br
 	q-list
-		q-expansion-item(expand-separator v-for="(item, index) in items" :key="item.id" switch-toggle-side)
+		q-expansion-item(expand-separator v-for="item  in items" :key="item.id" switch-toggle-side)
 			template(v-slot:header)
-				.row.full-width.justify-between.items-center
-					div {{index + 1}}.&nbsp;&nbsp;{{item.label}}
-					div
-						q-toggle(v-model="selection" :val="item.id")
+				.mygrid
+					div {{item.label}}
+					q-toggle(v-model="selection" :val="item.id")
 			q-card-section
 				q-list
 					q-item(v-for="n in 4")
@@ -39,9 +38,16 @@ import { ref, computed, watchEffect } from 'vue'
 import { useInfo } from '@/stores/info'
 import Selector from '@/components/common/Selector.vue'
 
+const props = defineProps({
+	show: {
+		type: Boolean,
+		default: false,
+	},
+})
+
 const info = useInfo()
 
-const options = ['Длинный маршрут для договоров', 'Маршрут 1', 'Маршрут 2']
+const options = ['Маршрут 1', 'Маршрут 2', 'Маршрут 3']
 
 const items = computed(() => {
 	const filt = (e: any) => e.first !== true && e.last !== true
@@ -57,13 +63,17 @@ let start = items.value
 
 const selection = ref(start)
 
-watchEffect(() => {
-	info.nodes.forEach((item) => {
-		if (selection.value.includes(item.id)) {
-			item.active = true
-		} else item.active = false
-	})
-})
+const choose = (e: string) => {
+	console.log(e)
+}
+
+// watchEffect(() => {
+// 	info.nodes.forEach((item) => {
+// 		if (selection.value.includes(item.id)) {
+// 			item.active = true
+// 		} else item.active = false
+// 	})
+// })
 
 const toggleks = () => {
 	info.toggleks()
@@ -83,5 +93,14 @@ const closeAll = () => {
 	top: 1rem;
 	right: 1rem;
 	z-index: 1000;
+}
+.mygrid {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 1rem;
+	div {
+		align-self: center;
+	}
 }
 </style>

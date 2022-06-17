@@ -49,7 +49,6 @@ const initNetwork = (
 			let bb = network.getBoundingBox(node.id)
 			if (!!node.repeat) {
 				drawCycle(ctx, bb)
-				console.log('repeat ' + node.id)
 			}
 		})
 	})

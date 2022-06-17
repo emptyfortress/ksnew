@@ -16,6 +16,9 @@ const options = {
 			gravitationalConstant: -4000,
 		},
 		minVelocity: 0.75,
+		hierarchicalRepulsion: {
+			avoidOverlap: 0.3,
+		},
 	},
 	layout: {
 		improvedLayout: true,

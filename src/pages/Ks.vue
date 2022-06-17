@@ -7,7 +7,7 @@
 				#radial(v-show="showRadial" v-click-away="closeRadial")
 					SvgRadial
 				#rectmenu(v-show="showRect" v-click-away="closeMenu")
-					ContextMenu(@toggle="load")
+					ContextMenu(@toggle="load" @redraw="redraw")
 				.icons.legend
 					q-btn(round unelevated @click="showInfo = !showInfo")
 						q-icon(name="mdi-close" v-if="showInfo")
@@ -34,7 +34,7 @@
 
 		template(v-slot:after)
 			.props
-				Panel
+				Panel(@redraw="redraw")
 
 	.send
 		q-btn(flat color="primary" unelevated  @click="info.closeAll") Отмена
@@ -97,9 +97,7 @@ onMounted(() => {
 
 	initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
 
-	watch(info.nodes, () => {
-		network.redraw()
-	})
+	// watch(info.nodes, network.redraw())
 })
 
 const closeMenu = () => {
@@ -135,6 +133,10 @@ const toggleMagnet = () => {
 	}
 }
 
+const redraw = () => {
+	network.redraw()
+}
+
 const splitterModel = ref(430)
 
 const closeRadial = () => {
@@ -168,8 +170,8 @@ const load = (e: number) => {
 		Object.assign(data, data2)
 		network = new Network(container, data, options)
 		initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
-		showRect.value = false
 		info.setNodes2()
+		showRect.value = false
 	}
 	if (e === 3) {
 		network.destroy()

@@ -1,4 +1,3 @@
-import { watch } from 'vue'
 import { Network, DataSet } from 'vis-network/standalone'
 import { drawDisable, drawOr, drawAnd, drawComplex } from '@/utils/ctx'
 import { useInfo } from '@/stores/info'

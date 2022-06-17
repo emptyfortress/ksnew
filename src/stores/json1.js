@@ -98,7 +98,7 @@ const nodes1 = [
 		last: false,
 		StartCondition: 2,
 		group: 'box',
-		level: 0.9,
+		level: 1,
 		start: [
 			{ icon: 1, title: '{Этап 2} завершен отрицательно' },
 			{ icon: 1, title: '{Этап 4} завершен отрицательно' },

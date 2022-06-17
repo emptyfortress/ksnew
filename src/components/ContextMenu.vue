@@ -27,7 +27,7 @@ q-card
 import { computed } from 'vue'
 import { useInfo } from '@/stores/info'
 
-const emit = defineEmits(['toggle', 'close'])
+const emit = defineEmits(['toggle', 'redraw'])
 
 const info = useInfo()
 
@@ -36,7 +36,7 @@ const currentNode = computed(() => {
 })
 const toggleNode = () => {
 	info.toggleNode()
-	emit('close')
+	emit('redraw')
 }
 
 const toggle = (e: number) => {

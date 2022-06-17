@@ -7,7 +7,7 @@
 			q-tab(name="links" label="Переходы")
 		q-tab-panels(v-model="tab" animated)
 			q-tab-panel(name="props")
-				component(:is="Props")
+				component(:is="Props" @redraw="redraw")
 			q-tab-panel(name="logs")
 				h2 logs
 			q-tab-panel(name="links")
@@ -37,6 +37,7 @@
 import { ref, computed } from 'vue'
 import { useInfo } from '@/stores/info'
 import Props from '@/components/Props.vue'
+const emit = defineEmits(['redraw'])
 
 const info = useInfo()
 
@@ -52,6 +53,9 @@ const table = [
 const tit = computed(() => {
 	return info.nodes[0].title
 })
+const redraw = () => {
+	emit('redraw')
+}
 </script>
 
 <style scoped lang="scss">

@@ -50,6 +50,8 @@ import { useInfo } from '@/stores/info'
 import Selector from '@/components/common/Selector.vue'
 import SoglTable from '@/components/common/SoglTable.vue'
 
+const emit = defineEmits(['redraw'])
+
 const info = useInfo()
 const active = computed(() => {
 	return info.selectedNode.active
@@ -57,9 +59,10 @@ const active = computed(() => {
 
 const toggleNode = () => {
 	info.toggleNode()
+	emit('redraw')
 }
 
-let panels = ref([false, false, true, false, false])
+let panels = ref([false, true, false, false, false])
 const toggle = () => {
 	const fal = (item: boolean) => item === false
 	panels.value.some(fal)

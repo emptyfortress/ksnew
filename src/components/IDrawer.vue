@@ -37,7 +37,7 @@ q-drawer(v-model="props.show"
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUpdated } from 'vue'
+import { ref, computed, onMounted, onUpdated, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 
 import { useInfo } from '@/stores/info'
@@ -65,7 +65,9 @@ const toggle = (e: number) => {
 	found.active = !found.active
 }
 
-const selectorValue = ref('Маршрут 1')
+const selectorValue = ref()
+
+watchEffect(() => (selectorValue.value = `Маршрут ${info.marsh}`))
 
 const choose = (s: string, n: number) => {
 	info.setMarsh(n + 1)

@@ -165,6 +165,7 @@ const load = (e: number) => {
 		initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
 		info.setNodes1()
 		showRect.value = false
+		info.setMarsh(1)
 	}
 	if (e === 2) {
 		network.destroy()
@@ -177,6 +178,7 @@ const load = (e: number) => {
 		initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
 		info.setNodes2()
 		showRect.value = false
+		info.setMarsh(2)
 	}
 	if (e === 3) {
 		network.destroy()
@@ -189,6 +191,7 @@ const load = (e: number) => {
 		initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
 		info.setNodes3()
 		showRect.value = false
+		info.setMarsh(3)
 	}
 }
 </script>

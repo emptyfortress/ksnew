@@ -1,16 +1,9 @@
 import { Network, DataSet } from 'vis-network/standalone'
-import { drawDisable, drawOr, drawAnd, drawComplex } from '@/utils/ctx'
+import { drawDisable, drawOr, drawAnd, drawComplex, drawCycle } from '@/utils/ctx'
 import { useInfo } from '@/stores/info'
 import type { Ref } from 'vue'
 
 // import { nodes } from '@/stores/json1'
-
-// enum StartCondition {
-// 	'None' = 0,
-// 	'And',
-// 	'Or',
-// 	'Complex',
-// }
 
 const initNetwork = (
 	network: Network,
@@ -49,6 +42,16 @@ const initNetwork = (
 			rect.style.top = coordClick.y + 5 + 'px'
 			showRect.value = true
 		}
+	})
+
+	network.on('beforeDrawing', function (ctx) {
+		nodes.forEach((node) => {
+			let bb = network.getBoundingBox(node.id)
+			if (!!node.repeat) {
+				drawCycle(ctx, bb)
+				console.log('repeat ' + node.id)
+			}
+		})
 	})
 
 	network.on('afterDrawing', function (ctx) {

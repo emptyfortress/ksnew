@@ -46,6 +46,7 @@ const nodes1 = [
 		StartCondition: 2,
 		group: 'box',
 		level: 2,
+		repeat: 2,
 		start: [
 			{ icon: 1, title: '{Этап 1} завершен' },
 			{ icon: 1, title: '{Этап 6} негативный исход' },
@@ -74,6 +75,7 @@ const nodes1 = [
 		StartCondition: 0,
 		group: 'box',
 		level: 3,
+		repeat: 2,
 		start: [{ icon: 0, title: '{Этап 3} завершен' }],
 	},
 	{
@@ -134,19 +136,19 @@ const edges1 = [
 		endPointOffset: { to: 10 },
 	},
 	{ from: 5, to: 8, semantics: 8, color: 'green', title: 'Позитивный исход' },
-	{
-		from: 5,
-		to: 5,
-		semantics: 8,
-		color: 'red',
-		label: '2',
-		title: 'Циклы',
-		arrows: { from: true, to: false },
-		endPointOffset: { from: 6 },
-		font: {
-			background: 'yellow',
-		},
-	},
+	// {
+	// 	from: 5,
+	// 	to: 5,
+	// 	semantics: 8,
+	// 	color: 'red',
+	// 	label: '2',
+	// 	title: 'Циклы',
+	// 	arrows: { from: false, to: false },
+	// 	endPointOffset: { from: 6 },
+	// 	font: {
+	// 		background: 'yellow',
+	// 	},
+	// },
 	{
 		from: 4,
 		to: 6,

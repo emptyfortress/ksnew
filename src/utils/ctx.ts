@@ -12,23 +12,6 @@ function setCoord(e: BoundingBox) {
 	return { width, centerX, centerY }
 }
 
-const drawCycle = (ctx: any, bb: BoundingBox, color: string) => {
-	ctx.lineWidth = 1
-	ctx.beginPath()
-	ctx.arc(bb.right, bb.top, 12, (Math.PI / 180) * 180, (Math.PI / 180) * 90, false)
-	ctx.strokeStyle = color
-	ctx.stroke()
-
-	ctx.beginPath()
-	ctx.moveTo(bb.right - 13, bb.top + 2) //center
-	ctx.lineTo(bb.right - 14, bb.top - 7)
-	ctx.lineTo(bb.right - 7, bb.top - 5)
-	ctx.fillStyle = color
-	ctx.fill()
-	ctx.font = '13px Arial'
-	ctx.fillText('2', bb.right - 3, bb.top + 3)
-}
-
 const drawOr = (ctx: any, bb: BoundingBox, color: string) => {
 	const { centerX, centerY } = setCoord(bb)
 	ctx.translate(centerX, centerY)
@@ -147,4 +130,17 @@ const drawComplex = (ctx: any, bb: BoundingBox, color?: string) => {
 	ctx.stroke()
 }
 
-export { drawDisable, drawOr, drawAnd, drawComplex }
+const drawCycle = (ctx: any, bb: BoundingBox) => {
+	let shift = 3
+	ctx.beginPath()
+	ctx.arc(bb.right - shift, bb.top + shift, 9, 0, Math.PI * 2, true)
+	ctx.closePath()
+	ctx.fillStyle = '#279FF7'
+	ctx.fill()
+
+	ctx.font = '13px Arial'
+	ctx.fillStyle = 'white'
+	ctx.fillText('2', bb.right - 7, bb.top + 7)
+}
+
+export { drawDisable, drawOr, drawAnd, drawComplex, drawCycle }

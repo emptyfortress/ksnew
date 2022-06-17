@@ -23,4 +23,5 @@ interface MyNode {
 	StartCondition: number
 	group: string
 	level?: number
+	repeat?: number
 }

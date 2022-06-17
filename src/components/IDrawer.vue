@@ -19,7 +19,7 @@ q-drawer(v-model="props.show"
 			template(v-slot:header)
 				.mygrid
 					div {{item.label}}
-					q-toggle(v-model="selection" :val="item.id" @update:model-value="toggle(item.id)")
+					q-toggle(:model-value="info.activeEtaps" :val="item.id" @update:model-value="toggle(item.id)")
 					//- q-toggle(:model-value="selection" :val="item.id" @update:model-value="toggle(item.id)")
 			q-card-section
 				q-list
@@ -61,6 +61,7 @@ const items = computed(() => {
 })
 
 const toggle = (e: number) => {
+	// console.log(e)
 	let found = info.nodes.find((item) => item.id === e)!
 	found.active = !found.active
 }

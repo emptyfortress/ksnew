@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watchEffect, watch } from 'vue'
 import { Network, DataSet } from 'vis-network/standalone' //this import supports types
 
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -97,7 +97,11 @@ onMounted(() => {
 
 	initNetwork(network, data.nodes, editMode, showRadial, radial, showRect, rect)
 
-	// watch(info.nodes, network.redraw())
+	watchEffect(() => {
+		if (info.activeEtaps.length) {
+			network.redraw()
+		}
+	})
 })
 
 const closeMenu = () => {

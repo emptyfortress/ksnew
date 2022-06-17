@@ -4,7 +4,7 @@ div
 	.sel(:class="{'open' : menu }") {{ val }}
 		q-menu(v-model="menu").selector
 			q-list
-				q-item(clickable v-close-popup v-for="item in props.options" @click="clickHandle(item)")
+				q-item(clickable v-close-popup v-for="(item, index) in props.options" @click="clickHandle(item, index)")
 					q-item-section {{ item }}
 </template>
 
@@ -20,8 +20,8 @@ const emit = defineEmits(['select'])
 
 const menu = ref(false)
 
-const clickHandle = (e: string) => {
-	emit('select', e)
+const clickHandle = (s: string, n: number) => {
+	emit('select', s, n)
 }
 </script>
 

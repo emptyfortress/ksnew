@@ -12,14 +12,15 @@ q-drawer(v-model="props.show"
 			q-btn(round flat  @click="info.closeInfo")
 				q-icon(name="mdi-close" v-if="!info.ksDrawer")
 				q-icon(name="mdi-arrow-right" v-else)
-		component(:is="Selector" val="Маршрут 1" :options="options" @select="choose").q-mt-md
+		component(:is="Selector" :val="selectorValue" :options="options" @select="choose").q-mt-md
 	br
 	q-list
 		q-expansion-item(expand-separator v-for="item  in items" :key="item.id" switch-toggle-side)
 			template(v-slot:header)
 				.mygrid
 					div {{item.label}}
-					q-toggle(v-model="selection" :val="item.id")
+					q-toggle(v-model="selection" :val="item.id" @update:model-value="toggle(item.id)")
+					//- q-toggle(:model-value="selection" :val="item.id" @update:model-value="toggle(item.id)")
 			q-card-section
 				q-list
 					q-item(v-for="n in 4")
@@ -30,11 +31,15 @@ q-drawer(v-model="props.show"
 		q-btn(unelevated label="Отмена" @click="closeAll")
 		q-space
 		q-btn(unelevated color="primary" label="Старт согласования" )
-	p {{ selection }}
+
+	p {{selection}}
+
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import type { Ref } from 'vue'
+
 import { useInfo } from '@/stores/info'
 import Selector from '@/components/common/Selector.vue'
 
@@ -45,6 +50,7 @@ const props = defineProps({
 	},
 })
 
+const selection: Ref<Number[]> = ref([])
 const info = useInfo()
 
 const options = ['Маршрут 1', 'Маршрут 2', 'Маршрут 3']
@@ -52,19 +58,19 @@ const options = ['Маршрут 1', 'Маршрут 2', 'Маршрут 3']
 const items = computed(() => {
 	const filt = (e: any) => e.first !== true && e.last !== true
 	return info.nodes.filter(filt)
-	// return nodes.filter(filt)
 })
 
-let start = items.value
-	.filter((e) => e.active === true)
-	.map((item) => {
-		return item.id
-	})
+const toggle = (e: number) => {
+	let found = info.nodes.find((item) => item.id === e)!
+	found.active = !found.active
+}
 
-const selection = ref(start)
+const selectorValue = ref('Маршрут 1')
 
-const choose = (e: string) => {
-	console.log(e)
+const choose = (s: string, n: number) => {
+	console.log(s, n)
+	info.setMarsh(n + 1)
+	selectorValue.value = s
 }
 
 // watchEffect(() => {
@@ -81,6 +87,14 @@ const toggleks = () => {
 const closeAll = () => {
 	info.closeAll()
 }
+onMounted(() => {
+	selection.value = info.nodes
+		.filter((e) => e.first !== true && e.last !== true)
+		.filter((e) => e.active === true)
+		.map((item) => {
+			return item.id
+		})
+})
 </script>
 
 <style scoped lang="scss">

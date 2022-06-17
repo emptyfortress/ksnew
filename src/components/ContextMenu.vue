@@ -36,7 +36,8 @@ const currentNode = computed(() => {
 })
 const toggleNode = () => {
 	info.toggleNode()
-	emit('redraw')
+	console.log(currentNode.value)
+	// emit('redraw')
 }
 
 const toggle = (e: number) => {

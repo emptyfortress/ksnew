@@ -14,7 +14,7 @@ const nodes1 = [
 	},
 	{
 		id: 1,
-		active: true,
+		active: false,
 		label: 'Этап 1',
 		first: false,
 		last: false,

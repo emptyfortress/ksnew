@@ -84,17 +84,17 @@ export const useInfo = defineStore({
 		setMarsh(e) {
 			this.marsh = e
 		},
-		// setNodes1() {
-		// 	this.nodes = nodes1
-		// 	this.edges = edges1
-		// },
-		// setNodes2() {
-		// 	this.nodes = nodes2
-		// 	this.edges = edges2
-		// },
-		// setNodes3() {
-		// 	this.nodes = nodes3
-		// 	this.edges = edges3
-		// },
+		setNodes1() {
+			this.nodes = nodes1
+			this.edges = edges1
+		},
+		setNodes2() {
+			this.nodes = nodes2
+			this.edges = edges2
+		},
+		setNodes3() {
+			this.nodes = nodes3
+			this.edges = edges3
+		},
 	},
 })

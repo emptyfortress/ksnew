@@ -71,15 +71,25 @@ const choose = (s: string, n: number) => {
 	console.log(s, n)
 	info.setMarsh(n + 1)
 	selectorValue.value = s
+	switch (n + 1) {
+		case 1:
+			info.setNodes1()
+			reset()
+			return
+		case 2:
+			info.setNodes2()
+			reset()
+			return
+		case 3:
+			info.setNodes3()
+			reset()
+			return
+		default:
+			info.setNodes1()
+			reset()
+			return
+	}
 }
-
-// watchEffect(() => {
-// 	info.nodes.forEach((item) => {
-// 		if (selection.value.includes(item.id)) {
-// 			item.active = true
-// 		} else item.active = false
-// 	})
-// })
 
 const toggleks = () => {
 	info.toggleks()
@@ -87,14 +97,15 @@ const toggleks = () => {
 const closeAll = () => {
 	info.closeAll()
 }
-onMounted(() => {
+const reset = () => {
 	selection.value = info.nodes
 		.filter((e) => e.first !== true && e.last !== true)
 		.filter((e) => e.active === true)
 		.map((item) => {
 			return item.id
 		})
-})
+}
+onMounted(() => reset())
 </script>
 
 <style scoped lang="scss">

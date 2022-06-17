@@ -102,6 +102,7 @@ onMounted(() => {
 			network.redraw()
 		}
 	})
+	watchEffect(() => load(info.marsh))
 })
 
 const closeMenu = () => {

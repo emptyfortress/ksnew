@@ -37,7 +37,7 @@ q-drawer(v-model="props.show"
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUpdated } from 'vue'
 import type { Ref } from 'vue'
 
 import { useInfo } from '@/stores/info'
@@ -61,7 +61,6 @@ const items = computed(() => {
 })
 
 const toggle = (e: number) => {
-	// console.log(e)
 	let found = info.nodes.find((item) => item.id === e)!
 	found.active = !found.active
 }
@@ -69,7 +68,6 @@ const toggle = (e: number) => {
 const selectorValue = ref('Маршрут 1')
 
 const choose = (s: string, n: number) => {
-	console.log(s, n)
 	info.setMarsh(n + 1)
 	selectorValue.value = s
 	switch (n + 1) {
@@ -107,6 +105,7 @@ const reset = () => {
 		})
 }
 onMounted(() => reset())
+onUpdated(() => reset())
 </script>
 
 <style scoped lang="scss">

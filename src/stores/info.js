@@ -33,30 +33,6 @@ export const useInfo = defineStore({
 					return item.id
 				})
 		},
-		// nodes() {
-		// 	switch (this.marsh) {
-		// 		case 1:
-		// 			return nodes1
-		// 		case 2:
-		// 			return nodes2
-		// 		case 3:
-		// 			return nodes3
-		// 		default:
-		// 			return nodes1
-		// 	}
-		// },
-		// edges() {
-		// 	switch (this.marsh) {
-		// 		case 1:
-		// 			return edges1
-		// 		case 2:
-		// 			return edges2
-		// 		case 3:
-		// 			return edges3
-		// 		default:
-		// 			return edges1
-		// 	}
-		// },
 	},
 	actions: {
 		closeAll() {

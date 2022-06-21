@@ -6,8 +6,8 @@ import { nodes3, edges3 } from '@/stores/json3'
 export const useInfo = defineStore({
 	id: 'info',
 	state: () => ({
-		infoDrawer: true,
-		ksDrawer: false,
+		infoDrawer: false,
+		ksDrawer: true,
 		etaps: [],
 		nodeSelection: 1000,
 		edgeSelection: [],
@@ -16,14 +16,13 @@ export const useInfo = defineStore({
 		edges: edges1,
 	}),
 	getters: {
-		test() {
-			return 'fuck'
-		},
 		selected() {
 			return this.nodeSelection !== 1000
+			// return 1
 		},
 		selectedNode() {
 			return this.nodes[this.nodeSelection]
+			// return this.nodes[1]
 		},
 		activeEtaps() {
 			return this.nodes

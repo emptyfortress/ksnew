@@ -21,6 +21,7 @@ const nodes1 = [
 		StartCondition: 0,
 		group: 'box',
 		level: 1,
+		startcheck: true,
 		start: [{ icon: 0, title: 'Старт согласования' }],
 	},
 	{
@@ -32,6 +33,7 @@ const nodes1 = [
 		StartCondition: 2,
 		group: 'box',
 		level: 1,
+		startcheck: true,
 		start: [
 			{ icon: 1, title: 'Старт согласования' },
 			{ icon: 1, title: '{Доработка} возврат' },
@@ -47,6 +49,7 @@ const nodes1 = [
 		group: 'box',
 		level: 2,
 		repeat: 2,
+		startcheck: false,
 		start: [
 			{ icon: 1, title: '{Этап 1} завершен' },
 			{ icon: 1, title: '{Этап 6} негативный исход' },
@@ -61,6 +64,7 @@ const nodes1 = [
 		StartCondition: 2,
 		group: 'box',
 		level: 2,
+		startcheck: false,
 		start: [
 			{ icon: 1, title: '{Этап 2} завершен не негативно' },
 			{ icon: 1, title: '{Доработка} возврат' },
@@ -76,6 +80,7 @@ const nodes1 = [
 		group: 'box',
 		level: 3,
 		repeat: 2,
+		startcheck: false,
 		start: [{ icon: 0, title: '{Этап 3} завершен' }],
 	},
 	{
@@ -87,6 +92,7 @@ const nodes1 = [
 		StartCondition: 1,
 		group: 'box',
 		level: 3,
+		startcheck: false,
 		start: [
 			{ icon: 0, title: '{Этап 2} завершен нейтрально' },
 			{ icon: 0, title: '{Этап 4} завершен положительно' },
@@ -101,6 +107,7 @@ const nodes1 = [
 		StartCondition: 2,
 		group: 'box',
 		level: 1,
+		startcheck: false,
 		start: [
 			{ icon: 1, title: '{Этап 2} завершен отрицательно' },
 			{ icon: 1, title: '{Этап 4} завершен отрицательно' },
@@ -115,6 +122,7 @@ const nodes1 = [
 		StartCondition: 2,
 		group: 'stop',
 		level: 4,
+		startcheck: false,
 		start: [''],
 	},
 ]

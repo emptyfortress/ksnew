@@ -128,6 +128,7 @@ const edges3 = [
 		semantics: 3,
 		from: 1,
 		to: 2,
+		color: 'grey',
 	},
 	{
 		from: 0,
@@ -141,76 +142,80 @@ const edges3 = [
 		semantics: 1,
 		from: 1,
 		to: 2,
+		color: 'green',
 	},
 	{
 		semantics: 1,
 		from: 10,
 		to: 3,
+		color: 'green',
 	},
 	{
 		semantics: 3,
 		from: 10,
 		to: 3,
+		color: 'grey',
 	},
 	{
 		semantics: 1,
 		from: 3,
 		to: 4,
+		color: 'green',
 	},
 	{
 		semantics: 2,
 		from: 1,
 		to: 5,
+		color: 'red',
 	},
 	{
 		semantics: 2,
 		from: 7,
 		to: 6,
+		color: 'red',
 	},
 	{
 		semantics: 3,
 		from: 2,
 		to: 7,
+		color: 'grey',
 	},
 	{
 		semantics: 1,
 		from: 7,
 		to: 8,
+		color: 'green',
 	},
 	{
 		semantics: 3,
 		from: 7,
 		to: 8,
+		color: 'grey',
 	},
 	{
 		semantics: 3,
 		from: 8,
 		to: 9,
+		color: 'grey',
 	},
 	{
 		semantics: 1,
 		from: 8,
 		to: 10,
+		color: 'green',
 	},
 	{
 		semantics: 1,
 		from: 9,
 		to: 10,
+		color: 'green',
 	},
 	{
 		semantics: 1,
 		from: 2,
 		to: 10,
+		color: 'green',
 	},
-	// my own
-	// {
-	// 	from: 5,
-	// 	to: 1,
-	// },
-	// {
-	// 	from: 6,
-	// 	to: 7,
-	// },
 ]
 
 export { nodes3, edges3 }

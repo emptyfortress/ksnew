@@ -2,14 +2,14 @@
 .proper
 	template(v-if="info.selected")
 		q-tabs(v-model="tab" inline-label indicator-color="primary" align="left").tab
-			q-tab(name="props" label="Свойства")
+			q-tab(name="props" label="Этап")
 			q-tab(name="logs" label="Журнал")
 			q-tab(name="links" label="Переходы")
 		q-tab-panels(v-model="tab" animated)
 			q-tab-panel(name="props")
 				component(:is="Props" @redraw="redraw")
 			q-tab-panel(name="logs")
-				h2 logs
+				component(:is="SoglTable")
 			q-tab-panel(name="links")
 				h2 links
 	template(v-else)
@@ -37,6 +37,8 @@
 import { ref, computed } from 'vue'
 import { useInfo } from '@/stores/info'
 import Props from '@/components/Props.vue'
+import SoglTable from '@/components/common/SoglTable.vue'
+
 const emit = defineEmits(['redraw'])
 
 const info = useInfo()

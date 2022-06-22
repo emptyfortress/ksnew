@@ -40,9 +40,9 @@ q-list
 						q-item-section {{ item.title }}
 	.custom-expansions-item.flat
 		q-expansion-item(v-model="panels[2]" expand-separator label="Список согласующих" switch-toggle-side)
-			SoglRule
+			component(:is="SoglRule")
 	.custom-expansions-item.flat
-		q-expansion-item(v-model="panels[3]" expand-separator label="Служебные" switch-toggle-side)
+		q-expansion-item(v-model="panels[3]" expand-separator label="Настройки заданий" switch-toggle-side)
 			q-card
 				q-card-section Служебная информация
 		q-expansion-item(v-model="panels[4]" expand-separator label="Связанные маршруты" switch-toggle-side)
@@ -163,7 +163,8 @@ const setShablon = (e: string) => {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 1px solid #ccc;
+	// border-bottom: 1px solid #ccc;
+	margin: 0 1rem;
 	margin-bottom: 0.5rem;
 	justify-content: space-between;
 }

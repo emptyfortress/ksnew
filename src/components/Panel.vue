@@ -13,7 +13,7 @@
 			q-tab-panel(name="links")
 				h2 links
 	template(v-else)
-		q-card(flat)
+		q-card(flat).trans
 			q-card-section
 				.text-h6
 					q-icon(name="mdi-map-marker-path" size="md").q-mr-md
@@ -65,14 +65,15 @@ const redraw = () => {
 
 .proper {
 	background: var(--bg-drawer);
-	background: white;
+	// background: white;
 	width: 100%;
 	height: 100%;
-	border: 1px solid var(--my-border-color);
+	// border: 1px solid var(--my-border-color);
+	border: 1px solid #bbb;
 	box-sizing: border-box;
 }
 .tab {
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid $primary;
 }
 .q-tab-panel {
 	padding: 1rem;
@@ -86,5 +87,11 @@ const redraw = () => {
 	border-top: 1px solid var(--my-border-color);
 	padding-bottom: 1rem;
 	padding-top: 1rem;
+}
+.trans {
+	background: transparent;
+	.q-markup-table {
+		background: transparent;
+	}
 }
 </style>

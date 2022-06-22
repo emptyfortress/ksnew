@@ -20,7 +20,6 @@ q-drawer(v-model="props.show"
 				.mygrid
 					div {{item.label}}
 					q-toggle(:model-value="info.activeEtaps" :val="item.id" @update:model-value="toggle(item.id)")
-					//- q-toggle(:model-value="selection" :val="item.id" @update:model-value="toggle(item.id)")
 			q-card-section
 				q-list
 					q-item(v-for="n in 4")
@@ -31,9 +30,6 @@ q-drawer(v-model="props.show"
 		q-btn(unelevated label="Отмена" @click="closeAll")
 		q-space
 		q-btn(unelevated color="primary" label="Старт согласования" )
-
-	p {{selection}}
-
 </template>
 
 <script setup lang="ts">

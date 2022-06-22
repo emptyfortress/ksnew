@@ -1,7 +1,7 @@
 <template lang="pug">
 template(v-if="info.selected")
 	q-tabs(v-model="tab" inline-label indicator-color="primary" align="left").tab
-		q-tab(name="props" label="Этап")
+		q-tab(name="props" label="Свойства этапа")
 		q-tab(name="logs" label="Журнал")
 		q-tab(name="links" label="Переходы")
 	q-tab-panels(v-model="tab" animated)
@@ -26,8 +26,34 @@ template(v-else)
 					tr(v-for="row in table")
 						td {{ row.label }}
 						td {{ row.value }}
+		.text-caption.q-mx-md {{ info.nodes[0].desc}}
 		q-card-section
-			p {{ info.nodes[0].desc}}
+			.row.justify-between
+				.text-subtitle1.text-center.text-weight-bold Текущее состояние
+				.text-subtitle1.text-center.text-weight-bold {{formattedString}}
+			q-markup-table(flat dense)
+				tbody
+					tr
+						td Документ
+						td Рабочий
+					tr(v-for="row in table1")
+						td {{ row.label }}
+						td {{ row.value }}
+		q-card-section
+			.row.justify-between
+				.text-subtitle1.text-center.text-weight-bold Файлы для согласования
+				.text-subtitle1.text-center.text-weight-bold 2
+			q-markup-table(flat dense)
+				tbody
+					tr
+						td.link Договор с ООО "Ромашка"
+						td.link Текущая версия
+					tr
+						td.link Приложение к договору
+						td.link Текущая версия
+
+
+
 	.empty Выберите узел или переход,<br>чтобы просмотреть его свойства.
 
 </template>
@@ -37,6 +63,10 @@ import { ref, computed } from 'vue'
 import { useInfo } from '@/stores/info'
 import Props from '@/components/Props.vue'
 import SoglTable from '@/components/common/SoglTable.vue'
+import { date } from 'quasar'
+
+const timestamp = Date.now()
+const formattedString = date.formatDate(timestamp, 'DD MMMM YY')
 
 const emit = defineEmits(['redraw'])
 
@@ -45,10 +75,15 @@ const info = useInfo()
 const tab = ref('props')
 
 const table = [
-	// { label: 'Название', value: 'Согласование договоров общее (делопроизводство)', bold: true },
 	{ label: 'Создано', value: '2021-10-15' },
 	{ label: 'Автор', value: 'Орлов П.С.' },
 	{ label: 'Утверждено', value: 'Птичкина А.П.' },
+]
+const table1 = [
+	{ label: 'Инициатор', value: 'Сорокина Г.А.' },
+	{ label: 'Контрольный срок', value: '15 августа 22' },
+	{ label: 'Активный этап', value: '3' },
+	{ label: 'Цикл', value: '1' },
 ]
 
 const tit = computed(() => {
@@ -83,5 +118,9 @@ const redraw = () => {
 	.q-markup-table {
 		background: transparent;
 	}
+}
+.q-markup-table .q-table tbody td.link {
+	color: var(--q-link);
+	cursor: pointer;
 }
 </style>

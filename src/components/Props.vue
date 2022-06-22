@@ -10,10 +10,10 @@ q-list
 			q-card(flat)
 				q-card-section
 					.grid
-						div
+						.field
 							.label Название
 							.editable.text-body1(contenteditable) {{ info.selectedNode.label }}
-						div
+						.field
 							.label Описание
 							.editable.text-body1(contenteditable)
 				.rowgap.q-mx-md
@@ -43,8 +43,7 @@ q-list
 			component(:is="SoglRule")
 	.custom-expansions-item.flat
 		q-expansion-item(v-model="panels[3]" expand-separator label="Настройки заданий" switch-toggle-side)
-			q-card
-				q-card-section Служебная информация
+			component(:is="Rules")
 		q-expansion-item(v-model="panels[4]" expand-separator label="Связанные маршруты" switch-toggle-side)
 			q-card
 				q-card-section Связанные маршруты
@@ -55,6 +54,7 @@ import { ref, computed } from 'vue'
 import { useInfo } from '@/stores/info'
 import Selector from '@/components/common/Selector.vue'
 import SoglRule from '@/components/common/SoglRule.vue'
+import Rules from '@/components/common/Rules.vue'
 
 const emit = defineEmits(['redraw'])
 
@@ -68,7 +68,7 @@ const toggleNode = () => {
 	emit('redraw')
 }
 
-let panels = ref([false, false, true, false, false])
+let panels = ref([false, false, false, true, false])
 const toggle = () => {
 	const fal = (item: boolean) => item === false
 	panels.value.some(fal)
@@ -116,19 +116,6 @@ const setShablon = (e: string) => {
 	border-radius: 4px;
 	cursor: pointer;
 }
-.label {
-	font-size: 0.7rem;
-	color: grey;
-}
-.editable {
-	border-bottom: 1px dotted var(--q-link);
-	border-radius: 1px;
-	&:focus {
-		outline: 2px solid orange;
-		outline-offset: 2px;
-		border: none;
-	}
-}
 .grid {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -143,8 +130,6 @@ const setShablon = (e: string) => {
 }
 .sog {
 	margin: 0 0 1rem 0;
-	// border: 1px solid #ccc;
-	// box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 }
 .dlit {
 	display: inline-block;
@@ -163,7 +148,6 @@ const setShablon = (e: string) => {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	// border-bottom: 1px solid #ccc;
 	margin: 0 1rem;
 	margin-bottom: 0.5rem;
 	justify-content: space-between;

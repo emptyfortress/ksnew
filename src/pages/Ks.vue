@@ -226,10 +226,13 @@ const load = (e: number) => {
 	}
 }
 .props {
-	padding-left: 0.25rem;
+	margin-left: 0.25rem;
 	height: 100%;
 	z-index: -20;
 	position: relative;
+	background: var(--bg-drawer);
+	border: 1px solid #bbb;
+	overflow: auto;
 }
 #radial {
 	position: absolute;

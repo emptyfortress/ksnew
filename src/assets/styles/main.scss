@@ -353,3 +353,61 @@ a:hover:not(.q-link) {
 .table th {
 	font-size: 10px;
 }
+.field {
+	.label {
+		font-size: 0.7rem;
+		color: grey;
+	}
+	.editable {
+		border-bottom: 1px dotted var(--q-link);
+		border-radius: 1px;
+		&:focus {
+			outline: 2px solid orange;
+			outline-offset: 2px;
+			border: none;
+		}
+	}
+}
+
+.dragtable {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #bbb;
+	th {
+		background: #dedede;
+		font-size: 0.7rem;
+		font-weight: 400;
+		text-align: left;
+		padding: 3px 10px;
+		&:not(:last-of-type) {
+			border-right: 1px solid white;
+		}
+	}
+	th,
+	td {
+		padding: 5px 10px;
+	}
+	td {
+		font-size: 0.85rem;
+		height: 42px;
+		background: #fff;
+	}
+	tr {
+		border-bottom: 1px solid #bbb;
+		position: relative;
+		height: 100%;
+		.bt {
+			cursor: pointer;
+			position: absolute;
+			right: 3px;
+			top: 50%;
+			transform: translateY(-50%);
+			display: none;
+		}
+		&:hover {
+			.bt {
+				display: block;
+			}
+		}
+	}
+}

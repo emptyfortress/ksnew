@@ -56,7 +56,7 @@ const kill = (e: any) => {
 }
 const sel = ref(1)
 const typ = ref('')
-const typOptions = ['Поисковое слово', 'Группа', 'Роль', 'Должность']
+const typOptions = ['Поисковые слова', 'Группа', 'Роль', 'Должность']
 const val = ref('')
 const chose = ref('')
 const valOptions = ['Инициатор', 'Согласующий по документу', 'Консолидатор']
@@ -73,48 +73,6 @@ const add = () => {
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
-.dragtable {
-	width: 100%;
-	border-collapse: collapse;
-	border: 1px solid #bbb;
-	th {
-		background: #dedede;
-		font-size: 0.7rem;
-		font-weight: 400;
-		text-align: left;
-		padding: 3px 10px;
-		&:not(:last-of-type) {
-			border-right: 1px solid white;
-		}
-	}
-	th,
-	td {
-		padding: 5px 10px;
-	}
-	td {
-		font-size: 0.85rem;
-		height: 42px;
-	}
-	tr {
-		background: #fff;
-		border-bottom: 1px solid #bbb;
-		position: relative;
-		height: 100%;
-		.bt {
-			cursor: pointer;
-			position: absolute;
-			right: 3px;
-			top: 50%;
-			transform: translateY(-50%);
-			display: none;
-		}
-		&:hover {
-			.bt {
-				display: block;
-			}
-		}
-	}
-}
 .dialog {
 	width: 640px;
 }

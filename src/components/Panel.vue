@@ -1,35 +1,34 @@
 <template lang="pug">
-.proper
-	template(v-if="info.selected")
-		q-tabs(v-model="tab" inline-label indicator-color="primary" align="left").tab
-			q-tab(name="props" label="Этап")
-			q-tab(name="logs" label="Журнал")
-			q-tab(name="links" label="Переходы")
-		q-tab-panels(v-model="tab" animated)
-			q-tab-panel(name="props")
-				component(:is="Props" @redraw="redraw")
-			q-tab-panel(name="logs")
-				component(:is="SoglTable")
-			q-tab-panel(name="links")
-				h2 links
-	template(v-else)
-		q-card(flat).trans
-			q-card-section
-				.text-h6
-					q-icon(name="mdi-map-marker-path" size="md").q-mr-md
-					span Информация по маршруту
-			q-card-section
-				q-markup-table(flat dense)
-					tbody
-						tr
-							td Название
-							td.text-bold {{ tit }}
-						tr(v-for="row in table")
-							td {{ row.label }}
-							td {{ row.value }}
-			q-card-section
-				p {{ info.nodes[0].desc}}
-		.empty Выберите узел или переход,<br>чтобы просмотреть его свойства.
+template(v-if="info.selected")
+	q-tabs(v-model="tab" inline-label indicator-color="primary" align="left").tab
+		q-tab(name="props" label="Этап")
+		q-tab(name="logs" label="Журнал")
+		q-tab(name="links" label="Переходы")
+	q-tab-panels(v-model="tab" animated)
+		q-tab-panel(name="props")
+			component(:is="Props" @redraw="redraw")
+		q-tab-panel(name="logs")
+			component(:is="SoglTable")
+		q-tab-panel(name="links")
+			h2 links
+template(v-else)
+	q-card(flat).trans
+		q-card-section
+			.text-h6
+				q-icon(name="mdi-map-marker-path" size="md").q-mr-md
+				span Информация по маршруту
+		q-card-section
+			q-markup-table(flat dense)
+				tbody
+					tr
+						td Название
+						td.text-bold {{ tit }}
+					tr(v-for="row in table")
+						td {{ row.label }}
+						td {{ row.value }}
+		q-card-section
+			p {{ info.nodes[0].desc}}
+	.empty Выберите узел или переход,<br>чтобы просмотреть его свойства.
 
 </template>
 
@@ -63,15 +62,6 @@ const redraw = () => {
 <style scoped lang="scss">
 // @import '@/assets/styles/theme.scss';
 
-.proper {
-	background: var(--bg-drawer);
-	// background: white;
-	width: 100%;
-	height: 100%;
-	// border: 1px solid var(--my-border-color);
-	border: 1px solid #bbb;
-	box-sizing: border-box;
-}
 .tab {
 	border-bottom: 1px solid $primary;
 }

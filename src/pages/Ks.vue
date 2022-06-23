@@ -34,7 +34,7 @@
 
 		template(v-slot:after)
 			.props
-				Panel(@redraw="redraw")
+				component(:is="Panel" @redraw="redraw" @select="select")
 
 	.send
 		q-btn(flat color="primary" unelevated  @click="info.closeAll") Отмена
@@ -194,6 +194,10 @@ const load = (e: number) => {
 		info.setMarsh(3)
 	}
 }
+const select = (e: any) => {
+	network.selectNodes([e])
+	info.setCurrentNode(e)
+}
 </script>
 
 <style scoped lang="scss">
@@ -202,6 +206,7 @@ const load = (e: number) => {
 .ks {
 	background: var(--bg-light);
 	position: relative;
+	height: 100%;
 }
 .editor {
 	width: 100%;

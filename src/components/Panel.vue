@@ -3,58 +3,77 @@ template(v-if="info.selected")
 	q-tabs(v-model="tab" inline-label indicator-color="primary" align="left").tab
 		q-tab(name="props" label="Свойства этапа")
 		q-tab(name="logs" label="Журнал")
-		q-tab(name="links" label="Переходы")
+		//- q-tab(name="links" label="Переходы")
 	q-tab-panels(v-model="tab" animated)
 		q-tab-panel(name="props")
 			component(:is="Props" @redraw="redraw")
 		q-tab-panel(name="logs")
 			component(:is="Journal")
-		q-tab-panel(name="links")
-			h2 links
+		//- q-tab-panel(name="links")
+		//- 	h2 links
 template(v-else)
 	q-card(flat).trans
 		q-card-section
 			.text-h6
 				q-icon(name="mdi-map-marker-path" size="md").q-mr-md
 				span Информация по маршруту
+		.text-caption.q-mx-md {{ info.nodes[0].desc}}
 		q-card-section
 			q-markup-table(flat dense)
 				tbody
 					tr
 						td Название
 						td.text-bold {{ tit }}
-					tr(v-for="row in table")
+					tr(v-for="row in table" v-once :key="row.label")
 						td {{ row.label }}
 						td {{ row.value }}
-		.text-caption.q-mx-md {{ info.nodes[0].desc}}
-		q-card-section
-			.row.justify-between
-				.text-subtitle1.text-center.text-weight-bold Текущее состояние
-				.text-subtitle1.text-center.text-weight-bold {{formattedString}}
-			q-markup-table(flat dense)
-				tbody
-					tr
-						td Документ
-						td Рабочий
-					tr(v-for="row in table1")
-						td {{ row.label }}
-						td {{ row.value }}
-		q-card-section
-			.row.justify-between
-				.text-subtitle1.text-center.text-weight-bold Файлы для согласования
-				.text-subtitle1.text-center.text-weight-bold 2
-			q-markup-table(flat dense)
-				tbody
-					tr
-						td.link Договор с ООО "Ромашка"
-						td.link Текущая версия
-					tr
-						td.link Приложение к договору
-						td.link Текущая версия
+		q-tabs(v-model="tab1" inline-label indicator-color="primary" align="left").tab
+			q-tab(name="common" label="Общие")
+			q-tab(name="validate" label="Валидация")
+		q-tab-panels(v-model="tab1" animated)
+			q-tab-panel(name="common")
+				q-card-section
+					.row.justify-between
+						.text-subtitle1.text-center.text-weight-bold Текущее состояние
+						.text-subtitle1.text-center.text-weight-bold(v-once) {{formattedString}}
+					q-markup-table(flat dense)
+						tbody
+							tr
+								td Документ
+								td Рабочий
+							tr(v-for="row in table1" v-once :key="row.label")
+								td {{ row.label }}
+								td {{ row.value }}
+				q-card-section
+					.row.justify-between
+						.text-subtitle1.text-center.text-weight-bold Файлы для согласования
+						.text-subtitle1.text-center.text-weight-bold 2
+					q-markup-table(flat dense)
+						tbody
+							tr
+								td.link Договор с ООО "Ромашка"
+								td.link Текущая версия
+							tr
+								td.link Приложение к договору
+								td.link Текущая версия
+			q-tab-panel(name="validate")
+				q-card-section
+					.row.justify-between
+						.text-subtitle1.text-center.text-weight-bold Проблемы с этапами
+						.text-subtitle1.text-center.text-weight-bold 3
+					q-list(separate)
+						q-item(clickable @click="select(3)").text-red.text-weight-bold
+							q-item-section Этап 3
+							q-item-section(side).text-red Бесконечный цикл
+						q-item(clickable @click="select(4)").text-red.text-weight-bold
+							q-item-section Этап 4
+							q-item-section(side).text-red Список согласующих пуст
+						q-item(clickable @click="select(5)").text-orange.text-weight-bold
+							q-item-section Этап 5
+							q-item-section(side).text-orange Не настроено условие завершения
+				q-btn(label="Validate" color="primary" outline icon="mdi-refresh")
 
-
-
-	.empty Выберите узел или переход,<br>чтобы просмотреть его свойства.
+	.empty Выберите узел,<br>чтобы просмотреть его свойства.
 
 </template>
 
@@ -68,11 +87,12 @@ import { date } from 'quasar'
 const timestamp = Date.now()
 const formattedString = date.formatDate(timestamp, 'DD MMMM YY')
 
-const emit = defineEmits(['redraw'])
+const emit = defineEmits(['redraw', 'select'])
 
 const info = useInfo()
 
 const tab = ref('props')
+const tab1 = ref('common')
 
 const table = [
 	{ label: 'Создано', value: '2021-10-15' },
@@ -91,6 +111,9 @@ const tit = computed(() => {
 })
 const redraw = () => {
 	emit('redraw')
+}
+const select = (e: number) => {
+	emit('select', e)
 }
 </script>
 

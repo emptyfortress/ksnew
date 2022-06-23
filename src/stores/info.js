@@ -7,7 +7,7 @@ export const useInfo = defineStore({
 	id: 'info',
 	state: () => ({
 		infoDrawer: false,
-		ksDrawer: true,
+		ksDrawer: false,
 		etaps: [],
 		nodeSelection: 1000,
 		edgeSelection: [],

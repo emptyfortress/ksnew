@@ -68,7 +68,7 @@ const toggleNode = () => {
 	emit('redraw')
 }
 
-let panels = ref([false, false, false, true, false])
+let panels = ref([true, false, false, false, false])
 const toggle = () => {
 	const fal = (item: boolean) => item === true
 	panels.value.some(fal)

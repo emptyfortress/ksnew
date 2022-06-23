@@ -1,6 +1,6 @@
 <template lang="pug">
 .grid
-	component(:is="Selector" label="Вид" val="На консолидацию")
+	component(:is="Selector" label="Вид" val="На консолидацию" :options="vidOptions")
 	.field
 		.label Название
 		.editable.text-body1(contenteditable) Надо бы доделать
@@ -32,7 +32,7 @@ q-input(v-model="text" outlined autogrow dense bg-color="white")
 		q-radio(v-model="dlit" label="этапа" dense val="one").q-mr-md
 		q-radio(v-model="dlit" label="задания" dense val="two")
 .q-my-md
-	q-checkbox(label="Автоматически завершать задание по истечении срока" dense v-model="podch")
+	q-checkbox(label="Автоматическое завершение по истечении срока" dense v-model="podch")
 	div(style="width: 200px").q-pb-md.q-mt-md
 		component(:is="Selector" :val="sem" label="Семнатика завершения" :options="semOptions")
 
@@ -49,6 +49,7 @@ const notadd = ref(false)
 const sem = ref('Положительная')
 const dlit = ref('one')
 const cols = ['Название', 'Семантика', 'Иконка', 'Метка']
+const vidOptions = ['На консолидацию', 'На согласование', 'На исполнение']
 const semOptions = [
 	'Положительно',
 	'Условно-положительное',

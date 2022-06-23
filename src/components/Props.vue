@@ -50,15 +50,27 @@ q-list
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useInfo } from '@/stores/info'
+import { useQuasar } from 'quasar'
 import Selector from '@/components/common/Selector.vue'
 import SoglRule from '@/components/common/SoglRule.vue'
 import Rules from '@/components/common/Rules.vue'
 
 const emit = defineEmits(['redraw'])
-
+const $q = useQuasar()
 const info = useInfo()
+
+const panels = ref(info.panels)
+const value = $q.localStorage.getItem('panels')
+if (value) {
+	panels.value = value._value
+}
+
+watchEffect(() => {
+	$q.localStorage.set('panels', panels)
+})
+
 const active = computed(() => {
 	return info.selectedNode.active
 })
@@ -68,7 +80,6 @@ const toggleNode = () => {
 	emit('redraw')
 }
 
-let panels = ref([true, false, false, false, false])
 const toggle = () => {
 	const fal = (item: boolean) => item === true
 	panels.value.some(fal)

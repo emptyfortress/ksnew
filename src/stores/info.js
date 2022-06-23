@@ -14,6 +14,7 @@ export const useInfo = defineStore({
 		marsh: 1,
 		nodes: nodes1,
 		edges: edges1,
+		panels: [true, false, false, false, false],
 	}),
 	getters: {
 		selected() {

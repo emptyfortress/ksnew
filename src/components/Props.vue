@@ -64,11 +64,11 @@ const info = useInfo()
 const panels = ref(info.panels)
 const value = $q.localStorage.getItem('panels')
 if (value) {
-	panels.value = value._value
+	panels.value = Object.values(value)
 }
 
 watchEffect(() => {
-	$q.localStorage.set('panels', panels)
+	$q.localStorage.set('panels', Object.assign({}, panels.value))
 })
 
 const active = computed(() => {

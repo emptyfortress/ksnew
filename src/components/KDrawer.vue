@@ -17,10 +17,7 @@ import { ref, computed } from 'vue'
 import Ks from '@/pages/Ks.vue'
 
 const props = defineProps({
-	show: {
-		type: Boolean,
-		default: false,
-	},
+	show: Boolean,
 })
 
 const expand = computed(() => {

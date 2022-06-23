@@ -3,6 +3,7 @@ q-table(:rows="rows"
 	:columns="columns"
 	row-key="id"
 	hide-bottom
+	flat
 	).table
 	template(v-slot:body="props")
 		q-tr(:props="props" :class="calcClass(props.row)" @click="props.expand = !props.expand")
@@ -20,11 +21,11 @@ q-table(:rows="rows"
 				.text-left
 					span.text-bold.q-mr-md Файл замечаний:
 					span.link filename.txt
-br
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+import { useInfo } from '@/stores/info'
 
 interface SoglColumn {
 	name: string

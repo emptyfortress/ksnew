@@ -8,7 +8,7 @@ template(v-if="info.selected")
 		q-tab-panel(name="props")
 			component(:is="Props" @redraw="redraw")
 		q-tab-panel(name="logs")
-			component(:is="SoglTable")
+			component(:is="Journal")
 		q-tab-panel(name="links")
 			h2 links
 template(v-else)
@@ -62,7 +62,7 @@ template(v-else)
 import { ref, computed } from 'vue'
 import { useInfo } from '@/stores/info'
 import Props from '@/components/Props.vue'
-import SoglTable from '@/components/common/SoglTable.vue'
+import Journal from '@/components/common/Journal.vue'
 import { date } from 'quasar'
 
 const timestamp = Date.now()

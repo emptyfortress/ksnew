@@ -70,10 +70,10 @@ const toggleNode = () => {
 
 let panels = ref([false, false, false, true, false])
 const toggle = () => {
-	const fal = (item: boolean) => item === false
+	const fal = (item: boolean) => item === true
 	panels.value.some(fal)
-		? (panels.value = panels.value.map((item) => (item = true)))
-		: (panels.value = panels.value.map((item) => (item = false)))
+		? (panels.value = panels.value.map((item) => (item = false)))
+		: (panels.value = panels.value.map((item) => (item = true)))
 }
 
 const check1 = ref(true)

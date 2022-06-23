@@ -59,7 +59,7 @@ const semOptions = [
 ]
 const myArray = ref([
 	{ id: 0, name: 'Продолжить', semantic: 'Положительно' },
-	{ id: 1, name: 'На пересогласование', semantic: 'Возврать на предыдущий' },
+	{ id: 1, name: 'На пересогласование', semantic: 'Возврат на предыдущий' },
 	{ id: 2, name: 'Отменить согласование', semantic: 'Отмена' },
 ])
 const kill = (e: any) => {
@@ -67,7 +67,7 @@ const kill = (e: any) => {
 	const index = myArray.value.indexOf(e)
 	myArray.value.splice(index, 1)
 }
-const text = 'Вам поступило задание на согласование'
+const text = 'Вам поступило задание на консолидацию'
 </script>
 
 <style scoped lang="scss">

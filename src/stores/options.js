@@ -37,6 +37,9 @@ const options = {
 	},
 	edges: {
 		smooth: true,
+		font: {
+			face: 'arial',
+		},
 		arrows: {
 			to: { enabled: true, scaleFactor: 1, type: 'arrow' },
 		},

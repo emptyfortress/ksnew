@@ -133,8 +133,6 @@ const edges1 = [
 	{ from: 1, to: 3, semantics: 8, title: 'Любой исход', endPointOffset: { to: 10 } },
 	{ from: 3, to: 5, semantics: 8, title: 'Любой исход' },
 	{ from: 2, to: 4, semantics: 8, color: 'blue', title: 'Кроме негативного' },
-	// { from: 2, to: 7, semantics: 8, color: 'red', title: 'Негативный исход' },
-	// { from: 4, to: 7, semantics: 8, color: 'red', title: 'Негативный исход' },
 	{
 		from: 2,
 		to: 6,
@@ -144,19 +142,6 @@ const edges1 = [
 		endPointOffset: { to: 10 },
 	},
 	{ from: 5, to: 8, semantics: 8, color: 'green', title: 'Позитивный исход' },
-	// {
-	// 	from: 5,
-	// 	to: 5,
-	// 	semantics: 8,
-	// 	color: 'red',
-	// 	label: '2',
-	// 	title: 'Циклы',
-	// 	arrows: { from: false, to: false },
-	// 	endPointOffset: { from: 6 },
-	// 	font: {
-	// 		background: 'yellow',
-	// 	},
-	// },
 	{
 		from: 4,
 		to: 6,

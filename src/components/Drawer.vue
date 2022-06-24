@@ -22,9 +22,9 @@ export default {
 		const pages = [
 			{
 				id: 0,
-				title: 'Супер конструктор',
-				icon: 'mdi-crane',
-				url: '/ks',
+				title: 'Вертикальный борщ',
+				icon: 'mdi-allergy',
+				url: '/card',
 			},
 			// {
 			// 	id: 1,

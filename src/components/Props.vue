@@ -62,9 +62,9 @@ const $q = useQuasar()
 const info = useInfo()
 
 const panels = ref(info.panels)
-const value = $q.localStorage.getItem('panels')
-if (value) {
-	panels.value = Object.values(value)
+const stored = $q.localStorage.getItem('panels')
+if (stored) {
+	panels.value = Object.values(stored)
 }
 
 watchEffect(() => {

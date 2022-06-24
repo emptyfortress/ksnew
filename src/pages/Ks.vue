@@ -195,8 +195,8 @@ const load = (e: number) => {
 	}
 }
 const select = (e: any) => {
-	network.selectNodes([e])
 	info.setCurrentNode(e)
+	network.selectNodes([e])
 }
 </script>
 

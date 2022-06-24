@@ -59,7 +59,7 @@ template(v-else)
 			q-tab-panel(name="validate")
 				q-card-section
 					.row.justify-between
-						.text-subtitle1.text-center.text-weight-bold Проблемы с этапами
+						.text-subtitle1.text-center.text-weight-bold Проблемы
 						.text-subtitle1.text-center.text-weight-bold 3
 					q-list(separate)
 						q-item(clickable @click="select(3)").text-red.text-weight-bold

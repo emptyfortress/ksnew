@@ -32,7 +32,7 @@ q-input(v-model="text" outlined autogrow dense bg-color="white")
 		q-radio(v-model="dlit" label="этапа" dense val="one").q-mr-md
 		q-radio(v-model="dlit" label="задания" dense val="two")
 .q-my-md
-	q-checkbox(label="Автоматическое завершение по истечении срока" dense v-model="podch")
+	q-checkbox(label="Автоматическое завершение по истечении срока" dense v-model="auto")
 	div(style="width: 200px").q-pb-md.q-mt-md
 		component(:is="Selector" :val="sem" label="Семнатика завершения" :options="semOptions")
 
@@ -45,6 +45,7 @@ import Selector from '@/components/common/Selector.vue'
 
 const drag = ref(false)
 const podch = ref(false)
+const auto = ref(false)
 const notadd = ref(false)
 const sem = ref('Положительная')
 const dlit = ref('one')
